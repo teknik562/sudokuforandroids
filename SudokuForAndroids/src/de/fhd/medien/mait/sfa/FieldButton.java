@@ -11,6 +11,7 @@
 package de.fhd.medien.mait.sfa;
 import android.widget.Button;
 
-public class FieldButton extends Button{
+public class FieldButton{ //extends Button{  Konstruktor muss vorher geschrieben werden, erst dann kommentierung entfernen!
 
+	
 }
