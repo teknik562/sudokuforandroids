@@ -24,7 +24,6 @@ public class KeyPad extends Activity {
 		
 		setContentView(R.layout.keypad); //the layout- xml file is chosen
 		
-	
 	//the Button- objects are being instanciated in the following lines
 	Button cmd_1 = (Button)this.findViewById(R.id.cmd_1);
 	Button cmd_2 = (Button)this.findViewById(R.id.cmd_2);
@@ -45,6 +44,7 @@ public class KeyPad extends Activity {
 	
 	Button cmdAbort = (Button)this.findViewById(R.id.cmdAbort);
 	Button cmdClear = (Button)this.findViewById(R.id.cmdClear);
+	
 	
 	
 	
