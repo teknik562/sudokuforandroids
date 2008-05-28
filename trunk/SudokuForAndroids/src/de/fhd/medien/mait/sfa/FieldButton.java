@@ -15,27 +15,44 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 
-//constructor must be implemented before removing the following comment- marks
 public class FieldButton extends Button{ 
 
-	
-	/**
-	 * the constructor of a specialized Button needs three different parameters
-	 * which will be set by the runtime- environment automatically
-	 * @param _context s
-	 * @param _attrs
-	 * @param _inflateParams
-	 */
-	 public FieldButton(Context _context, AttributeSet _attrs, Map _inflateParams)
-	{
-		super(_context, _attrs, _inflateParams);
-		
-	}
-	
-	
 	private int value;			//the value, which will be processed by the algorithm
 	private int[] candidateValues = new int[6];  //the field's value- candidates 
 	
 	
+	/**
+	 * the constructor of a specialized Button needs three different parameters
+	 * which will be set by the runtime- environment automatically
+	 *
+	 * the constructor itself provides the following functionalities:
+	 * - setting the value to "0" (in this case nothing is shown in the field)
+	 * 
+	 * 
+	 * @param _context s
+	 * @param _attrs
+	 * @param _inflateParams
+	 */
+	public FieldButton(Context _context, AttributeSet _attrs, Map _inflateParams)
+	{
+		super(_context, _attrs, _inflateParams); //the super-constructor is called
+		this.value = 0;   //set the default- value to "0"
+	} //end constructor
 	
-}
+	
+	/**
+	 * This method sets the field-value to the passed int- value
+	 * @param _newValue the new value of the field
+	 */
+	public void setValue(int _newValue)
+	{
+		this.value = _newValue;
+	}
+	
+	
+	
+	
+	
+	
+	
+}//end class
