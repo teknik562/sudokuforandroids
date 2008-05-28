@@ -6,10 +6,9 @@
  * 			
  */
 
-
 package de.fhd.medien.mait.sfa;
-import java.util.Map;
 
+import java.util.Map;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
@@ -37,6 +36,7 @@ public class FieldButton extends Button{
 	{
 		super(_context, _attrs, _inflateParams); //the super-constructor is called
 		this.value = 0;   //set the default- value to "0"
+	
 	} //end constructor
 	
 	
@@ -47,6 +47,15 @@ public class FieldButton extends Button{
 	public void setValue(int _newValue)
 	{
 		this.value = _newValue;
+	}
+	
+	/**
+	 * this method returns the value stored in the field.
+	 * @return the value of the field
+	 */
+	public int getValue()
+	{
+		return this.value;
 	}
 	
 	
