@@ -45,7 +45,26 @@ public class KeyPad extends Activity {
 	Button cmdAbort = (Button)this.findViewById(R.id.cmdAbort);
 	Button cmdClear = (Button)this.findViewById(R.id.cmdClear);
 	
+	cmd_1.setBackground(android.R.drawable.btn_default_small);
+	cmd_2.setBackground(android.R.drawable.btn_default_small);
+	cmd_3.setBackground(android.R.drawable.btn_default_small);
+	cmd_4.setBackground(android.R.drawable.btn_default_small);
+	cmd_5.setBackground(android.R.drawable.btn_default_small);
+	cmd_6.setBackground(android.R.drawable.btn_default_small);
+	cmd_7.setBackground(android.R.drawable.btn_default_small);
+	cmd_8.setBackground(android.R.drawable.btn_default_small);
+	cmd_9.setBackground(android.R.drawable.btn_default_small);
 	
+	
+	candidate_1.setBackground(android.R.drawable.btn_default_small);
+	candidate_2.setBackground(android.R.drawable.btn_default_small);
+	candidate_3.setBackground(android.R.drawable.btn_default_small);
+	candidate_4.setBackground(android.R.drawable.btn_default_small);
+	candidate_5.setBackground(android.R.drawable.btn_default_small);
+	candidate_6.setBackground(android.R.drawable.btn_default_small);
+	
+	cmdAbort.setBackground(android.R.drawable.btn_default_small);
+	cmdClear.setBackground(android.R.drawable.btn_default_small);
 	
 	
 	
