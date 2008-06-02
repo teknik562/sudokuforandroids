@@ -18,6 +18,10 @@ import android.widget.Button;
 
 public class KeyPad extends Activity {
 
+	Button cmd_1, cmd_2, cmd_3, cmd_4, cmd_5, cmd_6, cmd_7, cmd_8, cmd_9;
+	candidateButton candidate_1, candidate_2, candidate_3, candidate_4, candidate_5, candidate_6;
+	Button cmdAbort, cmdClear;
+	
 	//this is some kind of constructor within android. This Method is called when the activity is launched
 	protected void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -25,25 +29,25 @@ public class KeyPad extends Activity {
 		setContentView(R.layout.keypad); //the layout- xml file is chosen
 		
 	//the Button- objects are being instanciated in the following lines
-	Button cmd_1 = (Button)this.findViewById(R.id.cmd_1);
-	Button cmd_2 = (Button)this.findViewById(R.id.cmd_2);
-	Button cmd_3 = (Button)this.findViewById(R.id.cmd_3);
-	Button cmd_4 = (Button)this.findViewById(R.id.cmd_4);
-	Button cmd_5 = (Button)this.findViewById(R.id.cmd_5);
-	Button cmd_6 = (Button)this.findViewById(R.id.cmd_6);
-	Button cmd_7 = (Button)this.findViewById(R.id.cmd_7);
-	Button cmd_8 = (Button)this.findViewById(R.id.cmd_8);
-	Button cmd_9 = (Button)this.findViewById(R.id.cmd_9);
+	cmd_1 = (Button)this.findViewById(R.id.cmd_1);
+	cmd_2 = (Button)this.findViewById(R.id.cmd_2);
+	cmd_3 = (Button)this.findViewById(R.id.cmd_3);
+	cmd_4 = (Button)this.findViewById(R.id.cmd_4);
+	cmd_5 = (Button)this.findViewById(R.id.cmd_5);
+	cmd_6 = (Button)this.findViewById(R.id.cmd_6);
+	cmd_7 = (Button)this.findViewById(R.id.cmd_7);
+	cmd_8 = (Button)this.findViewById(R.id.cmd_8);
+	cmd_9 = (Button)this.findViewById(R.id.cmd_9);
 	
-	Button candidate_1 = (Button)this.findViewById(R.id.candidate_1);
-	Button candidate_2 = (Button)this.findViewById(R.id.candidate_2);
-	Button candidate_3 = (Button)this.findViewById(R.id.candidate_3);
-	Button candidate_4 = (Button)this.findViewById(R.id.candidate_4);
-	Button candidate_5 = (Button)this.findViewById(R.id.candidate_5);
-	Button candidate_6 = (Button)this.findViewById(R.id.candidate_6);
+	candidate_1 = (candidateButton)this.findViewById(R.id.candidate_1);
+	candidate_2 = (candidateButton)this.findViewById(R.id.candidate_2);
+	candidate_3 = (candidateButton)this.findViewById(R.id.candidate_3);
+	candidate_4 = (candidateButton)this.findViewById(R.id.candidate_4);
+	candidate_5 = (candidateButton)this.findViewById(R.id.candidate_5);
+	candidate_6 = (candidateButton)this.findViewById(R.id.candidate_6);
 	
-	Button cmdAbort = (Button)this.findViewById(R.id.cmdAbort);
-	Button cmdClear = (Button)this.findViewById(R.id.cmdClear);
+	cmdAbort = (Button)this.findViewById(R.id.cmdAbort);
+	cmdClear = (Button)this.findViewById(R.id.cmdClear);
 	
 	cmd_1.setBackground(android.R.drawable.btn_default_small);
 	cmd_2.setBackground(android.R.drawable.btn_default_small);
