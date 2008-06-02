@@ -11,16 +11,19 @@
 
 package de.fhd.medien.mait.sfa;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 
 public class KeyPad extends Activity {
 
-	Button cmd_1, cmd_2, cmd_3, cmd_4, cmd_5, cmd_6, cmd_7, cmd_8, cmd_9;
-	candidateButton candidate_1, candidate_2, candidate_3, candidate_4, candidate_5, candidate_6;
-	Button cmdAbort, cmdClear;
+	valueButton[] value = new valueButton[9];
+	valueButton[] candidate = new valueButton[6];
+	Button cmdBack, cmdClear;
 	
 	//this is some kind of constructor within android. This Method is called when the activity is launched
 	protected void onCreate(Bundle icicle) {
@@ -28,50 +31,137 @@ public class KeyPad extends Activity {
 		
 		setContentView(R.layout.keypad); //the layout- xml file is chosen
 		
-	//the Button- objects are being instanciated in the following lines
-	cmd_1 = (Button)this.findViewById(R.id.cmd_1);
-	cmd_2 = (Button)this.findViewById(R.id.cmd_2);
-	cmd_3 = (Button)this.findViewById(R.id.cmd_3);
-	cmd_4 = (Button)this.findViewById(R.id.cmd_4);
-	cmd_5 = (Button)this.findViewById(R.id.cmd_5);
-	cmd_6 = (Button)this.findViewById(R.id.cmd_6);
-	cmd_7 = (Button)this.findViewById(R.id.cmd_7);
-	cmd_8 = (Button)this.findViewById(R.id.cmd_8);
-	cmd_9 = (Button)this.findViewById(R.id.cmd_9);
-	
-	candidate_1 = (candidateButton)this.findViewById(R.id.candidate_1);
-	candidate_2 = (candidateButton)this.findViewById(R.id.candidate_2);
-	candidate_3 = (candidateButton)this.findViewById(R.id.candidate_3);
-	candidate_4 = (candidateButton)this.findViewById(R.id.candidate_4);
-	candidate_5 = (candidateButton)this.findViewById(R.id.candidate_5);
-	candidate_6 = (candidateButton)this.findViewById(R.id.candidate_6);
-	
-	cmdAbort = (Button)this.findViewById(R.id.cmdAbort);
-	cmdClear = (Button)this.findViewById(R.id.cmdClear);
-	
-	cmd_1.setBackground(android.R.drawable.btn_default_small);
-	cmd_2.setBackground(android.R.drawable.btn_default_small);
-	cmd_3.setBackground(android.R.drawable.btn_default_small);
-	cmd_4.setBackground(android.R.drawable.btn_default_small);
-	cmd_5.setBackground(android.R.drawable.btn_default_small);
-	cmd_6.setBackground(android.R.drawable.btn_default_small);
-	cmd_7.setBackground(android.R.drawable.btn_default_small);
-	cmd_8.setBackground(android.R.drawable.btn_default_small);
-	cmd_9.setBackground(android.R.drawable.btn_default_small);
-	
-	
-	candidate_1.setBackground(android.R.drawable.btn_default_small);
-	candidate_2.setBackground(android.R.drawable.btn_default_small);
-	candidate_3.setBackground(android.R.drawable.btn_default_small);
-	candidate_4.setBackground(android.R.drawable.btn_default_small);
-	candidate_5.setBackground(android.R.drawable.btn_default_small);
-	candidate_6.setBackground(android.R.drawable.btn_default_small);
-	
-	cmdAbort.setBackground(android.R.drawable.btn_default_small);
-	cmdClear.setBackground(android.R.drawable.btn_default_small);
-	
-	
-	
+		//the Buttons of the keypads are being assigned and initialized
+		initializeButtons();
+		
 	} //end onCreate
+	
+	private void initializeButtons()
+	{
+		//the Button- objects are being instanciated in the following lines
+		value[0] = (valueButton)this.findViewById(R.id.cmd_1);
+		value[1] = (valueButton)this.findViewById(R.id.cmd_2);
+		value[2] = (valueButton)this.findViewById(R.id.cmd_3);
+		value[3] = (valueButton)this.findViewById(R.id.cmd_4);
+		value[4] = (valueButton)this.findViewById(R.id.cmd_5);
+		value[5] = (valueButton)this.findViewById(R.id.cmd_6);
+		value[6] = (valueButton)this.findViewById(R.id.cmd_7);
+		value[7] = (valueButton)this.findViewById(R.id.cmd_8);
+		value[8] = (valueButton)this.findViewById(R.id.cmd_9);
+		
+		candidate[0] = (valueButton)this.findViewById(R.id.candidate_1);
+		candidate[1] = (valueButton)this.findViewById(R.id.candidate_2);
+		candidate[2] = (valueButton)this.findViewById(R.id.candidate_3);
+		candidate[3] = (valueButton)this.findViewById(R.id.candidate_4);
+		candidate[4] = (valueButton)this.findViewById(R.id.candidate_5);
+		candidate[5] = (valueButton)this.findViewById(R.id.candidate_6);
+		
+		cmdBack = (Button)this.findViewById(R.id.cmdBack);
+		cmdClear = (Button)this.findViewById(R.id.cmdClear);
+		
+
+		
+		for(int i = 0; i < value.length; i++)
+		{
+			value[i].setOnClickListener(cmdListener);
+			value[i].setValue(i+1);	
+		}
+		
+		
+
+
+		
+		for(valueButton v: candidate)
+		{
+			v.setBackground(android.R.drawable.btn_default_small);
+			v.setOnClickListener(candidateListener);
+		}
+			
+		
+		cmdBack.setBackground(android.R.drawable.btn_default_small);
+		cmdClear.setBackground(android.R.drawable.btn_default_small);
+
+	}
+	
+	OnClickListener candidateListener = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+			valueButton clickedCandidate = (valueButton)v;
+			
+			if(!clickedCandidate.isActive())
+				clickedCandidate.activate();
+			
+			else
+				clickedCandidate.deactivate();
+			
+		}
+		
+	};
+	
+	
+	
+	/**
+	 * this onclicklistener returns the value of the pressed Button back to the
+	 * calling activity.
+	 * If a candidate- value is pressed before the value is written to this candidate 
+	 * instead.
+	 * 
+	 * In the first case the keypad is closed automatically.
+	 */
+	OnClickListener cmdListener = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+			 valueButton clickedButton = (valueButton)v;
+			
+			//if there is no active candidate
+			if(!anyActiveCandidate()) 
+			{
+				KeyPad.this.setResult(RESULT_OK, Integer.toString(clickedButton.value()));
+				KeyPad.this.finish();
+			}
+			
+			else
+			{
+				valueButton activeCandidate = findActiveCandidate();
+				activeCandidate.setValue(clickedButton.value());
+				activeCandidate.deactivate();
+			}
+				
+			
+		}
+		
+	};
+	
+	private valueButton findActiveCandidate()
+	{
+		
+		for(valueButton v: candidate)
+			if(v.isActive())
+				return v;
+		
+		return null;
+	}
+	
+	
+	private boolean anyActiveCandidate()
+	{
+		boolean returnValue = false;
+		
+		for(valueButton v: candidate)
+			if(v.isActive())
+				returnValue = false;
+			else
+				returnValue = true;
+		
+		return returnValue;
+	}
 	
 }//end class
