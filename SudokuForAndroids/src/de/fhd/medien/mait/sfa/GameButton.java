@@ -18,13 +18,29 @@ public class GameButton extends Button{
 	static final int StateFocused = 1;
 	static final int StatePressed = 2;
 
+	// Define the colors
+	static final int fillDefault = 0x00000000;
+	static final int textDefault = 0x00000000;
+	
+	static final int fillPressed = 0;
+	static final int textPressed = 0;
+	
+	static final int fillFocused = 0;
+	static final int textFocused = 0;
+	
+	static final int fillOriginal = 0;
+	static final int textOriginal = 0;
+	
+	static final int fillCandidate = 0;
+	
 	private int mState = StateDefault;
 	
 	private Bitmap defaultBitmap;
 	private Bitmap focusedBitmap;
 	private Bitmap pressedBitmap;
 	
-	private int size;
+	private int height;
+	private int width;
 	private int lineSize;
 	private int textSize;
 	private int[] candidateValues = new int[6];
@@ -52,7 +68,7 @@ public class GameButton extends Button{
 		// The Path is needed to 'guide' the brush
 	    Path path = new Path(); 
 	    // Now we specify a Rect/RoundRect
-	    RectF r = new RectF(1, 1, size-1, size-1);
+	    RectF r = new RectF(1, 1, width-1, height-1);
 	    path.addRoundRect(r, 5, 5, Direction.CCW);
 
 	    // draw path on Canvas with the defined "brush"
@@ -72,12 +88,11 @@ public class GameButton extends Button{
 	    paintText.setTextSize(textSize);
 	    paintText.setTextAlign(Paint.Align.CENTER);
 	    paintText.setColor(color);  // white
-	   	
-	    int normalizedSize = size - lineSize;
 	   
 	    // Here we calculate the xPos of the text with the help of getTextWidths()
 	    // which gives us the width in px of a certain text
-	    float textXPos = (size-paintText.getTextWidths(value, new float[1]) ) / 2;
+	    // We need to add 1 and lineSize because of FILL_AND_STROKE
+	    float textXPos = lineSize + 1 + ((width-paintText.getTextWidths(value, new float[value.length()]) ) / 2);
 	    float textYPos = (paintText.descent()-paintText.ascent()) ;
 	    
 	    // draw Text
@@ -86,16 +101,18 @@ public class GameButton extends Button{
 	
 	/**
 	 * 
-	 * @param context Ist im besten Fall immer 'this'
-	 * @param _value Inhalt der nachher angezeigt wird
-	 * @param _size Da es ein Quadrat ist, die Seitenlänge in px
-	 * @param _lineSize Breite des Pinsels. 2 hat sich als normal erwiesen
-	 * @param _textSize Textgröße. 10 ~ 25
+	 * @param context in best case 'this'
+	 * @param _value value to be displayed
+	 * @param _width width of the button
+	 * @param _height height of the button
+	 * @param _lineSize Width of the brush. '2' is best.
+	 * @param _textSize Size of the text. 10 ~ 25 is best.
 	 */
-	public GameButton(Context context, String _value, int _size, int _lineSize, int _textSize) {
+	public GameButton(Context context, String _value, int _width, int _height, int _lineSize, int _textSize) {
 		super(context);
 		value = _value;
-	    size = _size;
+	    width = _width;
+	    height = _height;
 	    lineSize = _lineSize;
 	    textSize = _textSize;
 	    
@@ -106,11 +123,11 @@ public class GameButton extends Button{
 		
 		// We now need to reset all steps of a button
 		// 1) default
-		defaultBitmap = Bitmap.createBitmap(size, size, true);
+		defaultBitmap = Bitmap.createBitmap(width, height, true);
 		// 2) fucused
-		focusedBitmap = Bitmap.createBitmap(size, size, true);
+		focusedBitmap = Bitmap.createBitmap(width, height, true);
 		// 3) pressed
-		pressedBitmap = Bitmap.createBitmap(size, size, true);
+		pressedBitmap = Bitmap.createBitmap(width, height, true);
 
 	    this.drawEmptyBitmap(defaultBitmap, 0xffffffff);
 	    this.drawTextInBitmap(defaultBitmap, 0xff0000ff);
@@ -178,5 +195,3 @@ public class GameButton extends Button{
 	}
 	
    } 
-
-
