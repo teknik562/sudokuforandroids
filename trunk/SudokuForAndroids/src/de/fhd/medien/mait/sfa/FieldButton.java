@@ -20,7 +20,7 @@ public class FieldButton extends GameButton{
 	
 	/**
 	 * 
-	 * @param index index of the requestes index
+	 * @param index index of the requested Candidate
 	 * @return The candidate at the specified index
 	 */
 	public int getCandidate(int index){
