@@ -143,8 +143,9 @@ public class GameButton extends Button{
 	   
 	    // Here we calculate the xPos of the text with the help of measureText()
 	    // which gives us the width in px of a certain text
+	    // Help measuring the text height: http://java.sun.com/docs/books/tutorial/figures/2d/font-metrics.GIF
 	    float textXPos = ((width-paintText.measureText(caption) ) / 2);
-	    float textYPos = (paintText.descent()-paintText.ascent()) ;
+	    float textYPos = (height - (paintText.ascent() + paintText.descent()) ) / 2;
 	    
 	    // draw Text
 	    canvas.drawText(caption, textXPos, textYPos, paintText);
