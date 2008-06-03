@@ -139,7 +139,6 @@ public class GameButton extends Button{
 	    Paint paintText = new Paint();
 	    paintText.setAntiAlias(true);
 	    paintText.setTextSize(textSize);
-	    paintText.setTextAlign(Paint.Align.CENTER);
 	    paintText.setColor(color);
 	   
 	    // Here we calculate the xPos of the text with the help of measureText()
