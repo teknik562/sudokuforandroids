@@ -43,8 +43,8 @@ public class GameButton extends Button{
 	private int width;
 	private int lineSize;
 	private int textSize;
-	private int[] candidateValues = new int[6];
-	private String value;
+
+	private String caption;
 
 	
 	private void drawEmptyBitmap(Bitmap current, int color){
@@ -92,25 +92,25 @@ public class GameButton extends Button{
 	    // Here we calculate the xPos of the text with the help of getTextWidths()
 	    // which gives us the width in px of a certain text
 	    // We need to add 1 and lineSize because of FILL_AND_STROKE
-	    float textXPos = lineSize + 1 + ((width-paintText.getTextWidths(value, new float[value.length()]) ) / 2);
+	    float textXPos = lineSize + 1 + ((width-paintText.getTextWidths(caption, new float[caption.length()]) ) / 2);
 	    float textYPos = (paintText.descent()-paintText.ascent()) ;
 	    
 	    // draw Text
-	    canvas.drawText(value, textXPos, textYPos, paintText);
+	    canvas.drawText(caption, textXPos, textYPos, paintText);
 	}
 	
 	/**
 	 * 
 	 * @param context in best case 'this'
-	 * @param _value value to be displayed
+	 * @param _caption caption to be displayed
 	 * @param _width width of the button
 	 * @param _height height of the button
 	 * @param _lineSize Width of the brush. '2' is best.
 	 * @param _textSize Size of the text. 10 ~ 25 is best.
 	 */
-	public GameButton(Context context, String _value, int _width, int _height, int _lineSize, int _textSize) {
+	public GameButton(Context context, String _caption, int _width, int _height, int _lineSize, int _textSize) {
 		super(context);
-		value = _value;
+		caption = _caption;
 	    width = _width;
 	    height = _height;
 	    lineSize = _lineSize;
@@ -182,16 +182,9 @@ public class GameButton extends Button{
 		}
 	};
 	
-	public int getValue(){
-		return Integer.parseInt(this.value);
+	public String getCaption(){
+		return this.caption;
 	}
 	
-	public int getCandidate(int index){
-		return candidateValues[index];
-	}
-	
-	public int[] getCandidates(){
-		return candidateValues;
-	}
 	
    } 
