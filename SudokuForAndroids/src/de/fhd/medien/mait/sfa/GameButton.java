@@ -89,10 +89,10 @@ public class GameButton extends Button{
 	    paintText.setTextAlign(Paint.Align.CENTER);
 	    paintText.setColor(color);  // white
 	   
-	    // Here we calculate the xPos of the text with the help of getTextWidths()
+	    // Here we calculate the xPos of the text with the help of measureText()
 	    // which gives us the width in px of a certain text
 	    // We need to add 1 and lineSize because of FILL_AND_STROKE
-	    float textXPos = lineSize + 1 + ((width-paintText.getTextWidths(caption, new float[caption.length()]) ) / 2);
+	    float textXPos = ((width-paintText.measureText(caption) ) / 2);
 	    float textYPos = (paintText.descent()-paintText.ascent()) ;
 	    
 	    // draw Text
