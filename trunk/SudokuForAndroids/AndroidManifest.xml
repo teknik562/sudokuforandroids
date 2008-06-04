@@ -3,6 +3,8 @@
     package="de.fhd.medien.mait.sfa">
     <application android:icon="@drawable/icon">
         <activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="@string/app_name"/>
+        <activity android:name=".UserList" android:label="@string/app_name"/>
+        <activity android:name=".CreateUser" android:label="@string/app_name"/>
         <activity android:name=".SudokuMain" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
