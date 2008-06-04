@@ -8,12 +8,25 @@ public class FieldButton extends GameButton{
 	
 	private int[] candidateValues = new int[maxNrCandidates];
 	
-	// colors that are only used by a FieldButton
-	static final int fillNoChange = 0;	// background color of Buttons with non-changeable content
-	static final int textNoChange = 0;  // text color of Buttons with non-changeable content
+	// colors that are only used by Candidate Buttons
+	static final int fillDefaultCandidate = 0xa097C024; 
+	static final int textDefaultCandidate = 0xffffffff; 
 	
-	static final int fillCandidate = 0; // background color of Buttons with candidate(s)
-	static final int textCandidate = 0; // text color of Buttons with candidate(s)
+	static final int fillFocusedCandidate = 0xa097C024; 
+	static final int textFocusedCandidate = 0xffffffff;
+	
+	static final int fillPressedCandidate = 0xa097C024; 
+	static final int textPressedCandidate = 0xffffffff;
+	
+	// colors that are only used by Not Changeable Buttons
+	static final int fillDefaultNoChange = 0xa00534a9; 
+	static final int textDefaultNoChange = 0xffffffff; 
+	
+	static final int fillFocusedNoChange = 0xa03463d7; 
+	static final int textFocusedNoChange = 0xffffffff;
+	
+	static final int fillPressedNoChange = 0xa03463d7; 
+	static final int textPressedNoChange = 0xffffffff;
 	
 	/**
 	 * Creates a more complex Button which is used for the Game
@@ -28,19 +41,14 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
-	 * Makes the Button identify itself as a Button having at least one candidate
+	 * Makes the Button look like a Button having at least one candidate
 	 */
-	public void setHasCandidate(){
-		// Create new Bitmaps for this Button
-		// 1) default
-	    this.drawEmptyBitmap(defaultBitmap, fillCandidate);
-	    this.drawTextInBitmap(defaultBitmap, textCandidate);
-	    // 2) focused
-	    this.drawEmptyBitmap(focusedBitmap, fillCandidate);
-	    this.drawTextInBitmap(focusedBitmap, textCandidate);
-	    // 3) pressed
-	    this.drawEmptyBitmap(pressedBitmap, fillCandidate);
-	    this.drawTextInBitmap(pressedBitmap, textCandidate);
+	public void setAsCandidate(){
+		redraw(fillDefaultCandidate, textDefaultCandidate, fillFocusedCandidate, textFocusedCandidate, fillPressedCandidate, textPressedCandidate);
+	}
+	
+	public void setAsNoChange(){
+		
 	}
 	
 	/**
@@ -61,13 +69,18 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
-	 * 
-	 * @return Value of the Button
+	 * Returns the value of this button
+	 * @return value of the Button
 	 */
 	public int getValue(){
 		return Integer.parseInt(getCaption());
 	}
 	
-	
+	/**
+	 * Clears the caption of this button
+	 */
+	public void clearCaption(){
+		setCaption("");
+	}
 	
 }
