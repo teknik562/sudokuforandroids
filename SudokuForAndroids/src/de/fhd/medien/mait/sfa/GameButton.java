@@ -173,7 +173,7 @@ public class GameButton extends Button{
 	
 	private OnClickListener onClickListener =
 		new OnClickListener() {
-		@Override
+		//@Override
 		public void onClick(View v) {
 			
 		}
