@@ -179,7 +179,7 @@ public class GameButton extends Button{
 		}
 	};
 	
-	public void reDraw(){
+	private void reDraw(){
 		// Create new Bitmaps for this Button
 		// 1) default
 	    this.drawEmptyBitmap(defaultBitmap, 0xffffffff);
@@ -200,6 +200,10 @@ public class GameButton extends Button{
 		return this.caption;
 	}
 	
+	/**
+	 * Automagically sets a new Caption and reDraws the Button
+	 * @param newCapt New caption for the Button
+	 */
 	public void setCaption(String newCapt){
 		caption = newCapt;
 		reDraw();
