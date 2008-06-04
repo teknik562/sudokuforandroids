@@ -20,7 +20,7 @@ public class GameButton extends Button{
 
 	// Define the colors
 	static final int fillDefault = 0x00000000;
-	static final int textDefault = 0x00000000;
+	static final int textDefault = 0xff000000;
 	
 	static final int fillPressed = 0;
 	static final int textPressed = 0;
