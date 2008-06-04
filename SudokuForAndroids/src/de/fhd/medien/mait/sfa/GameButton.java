@@ -19,14 +19,14 @@ public class GameButton extends Button{
 	static final int statePressed = 2;
 
 	// Define the colors
-	static final int fillDefault = 0x00000000;
-	static final int textDefault = 0xff000000;
+	static final int fillDefault = 0xefffffff;		// white
+	static final int textDefault = 0xff000000;		// black
 	
-	static final int fillPressed = 0;
-	static final int textPressed = 0;
+	static final int fillPressed = 0xa0f70B49;		// red
+	static final int textPressed = 0xffffffff;		// white
 	
-	static final int fillFocused = 0;
-	static final int textFocused = 0;
+	static final int fillFocused = 0xa0bdbbbc;		// grey
+	static final int textFocused = 0xffffffff;		// white
 	
 	// This variable defines the status of the Button
 	private int mState = stateDefault;
@@ -75,7 +75,16 @@ public class GameButton extends Button{
 		// 3) pressed
 		pressedBitmap = Bitmap.createBitmap(width, height, true);
 		
-		reDraw();
+		// Create new Bitmaps for this Button
+		// 1) default
+	    this.drawEmptyBitmap(defaultBitmap, fillDefault);
+	    this.drawTextInBitmap(defaultBitmap, textDefault);
+	    // 2) focused
+	    this.drawEmptyBitmap(focusedBitmap, fillFocused);
+	    this.drawTextInBitmap(focusedBitmap, textFocused);
+	    // 3) pressed
+	    this.drawEmptyBitmap(pressedBitmap, fillPressed);
+	    this.drawTextInBitmap(pressedBitmap, textPressed);
 	    
 	    // define OnClickListener for the Button
 	    setOnClickListener(onClickListener);
@@ -86,7 +95,7 @@ public class GameButton extends Button{
 	 * @param current The status of the Button that should be redrawn
 	 * @param color Button is filled with this color 
 	 */
-	protected void drawEmptyBitmap(Bitmap current, int color){
+	protected void drawEmptyBitmap(Bitmap current, int color){		
 		// We need the Canvas object to draw on a Bitmap
 		Canvas canvas = new Canvas();
 		
@@ -173,23 +182,50 @@ public class GameButton extends Button{
 	
 	private OnClickListener onClickListener =
 		new OnClickListener() {
-		//@Override
+		
 		public void onClick(View v) {
 			
 		}
 	};
 	
-	private void reDraw(){
+	/**
+	 * Redraws the Button as a normal Button with 3 states
+	 */
+	public void redraw(){
+		redraw(fillDefault,textDefault,fillFocused,textFocused,fillPressed,textPressed);
+	}
+	
+	/**
+	 * Redraws the Button with the given attributes
+	 * @param _fillDefault
+	 * @param _textDefault
+	 * @param _fillFocused
+	 * @param _textFocused
+	 * @param _fillPressed
+	 * @param _textPressed
+	 */
+	public void redraw(int _fillDefault, int _textDefault, int _fillFocused, int _textFocused, int _fillPressed, int _textPressed){
+		// We now need to reset all steps of a button
+		defaultBitmap = null;
+		focusedBitmap = null;
+		pressedBitmap = null;
+		// 1) default
+		defaultBitmap = Bitmap.createBitmap(width, height, true);
+		// 2) focused
+		focusedBitmap = Bitmap.createBitmap(width, height, true);
+		// 3) pressed
+		pressedBitmap = Bitmap.createBitmap(width, height, true);
+		
 		// Create new Bitmaps for this Button
 		// 1) default
-	    this.drawEmptyBitmap(defaultBitmap, 0xffffffff);
-	    this.drawTextInBitmap(defaultBitmap, textDefault);
+	    this.drawEmptyBitmap(defaultBitmap, _fillDefault);
+	    this.drawTextInBitmap(defaultBitmap, _textDefault);
 	    // 2) focused
-	    this.drawEmptyBitmap(focusedBitmap, 0xff97C024);
-	    this.drawTextInBitmap(focusedBitmap, 0xffffffff);
+	    this.drawEmptyBitmap(focusedBitmap, _fillFocused);
+	    this.drawTextInBitmap(focusedBitmap, _textFocused);
 	    // 3) pressed
-	    this.drawEmptyBitmap(pressedBitmap, 0xff97C024);
-	    this.drawTextInBitmap(pressedBitmap, 0xffffffff);
+	    this.drawEmptyBitmap(pressedBitmap, _fillPressed);
+	    this.drawTextInBitmap(pressedBitmap, _textPressed);
 	}
 	
 	/**
@@ -200,14 +236,10 @@ public class GameButton extends Button{
 		return this.caption;
 	}
 	
-	/**
-	 * Automagically sets a new Caption and reDraws the Button
-	 * @param newCapt New caption for the Button
-	 */
 	public void setCaption(String newCapt){
 		caption = newCapt;
-		reDraw();
+		redraw();
 	}
-	
+
 	
    } 
