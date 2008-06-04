@@ -98,7 +98,7 @@ public class KeyPad extends Activity {
 	OnClickListener candidateListener = new OnClickListener()
 	{
 
-		@Override
+		//@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
@@ -127,7 +127,7 @@ public class KeyPad extends Activity {
 	OnClickListener cmdListener = new OnClickListener()
 	{
 
-		@Override
+		//@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
