@@ -14,24 +14,16 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-public class valueButton  extends Button{
+public class valueButton  extends GameButton{
 	
 	private int value;
 	private boolean isActive;
 
-	public valueButton(Context _context)
+	public valueButton(Context context, int _value, String _caption, int _width, int _height, int _lineSize, int _textSize)
 	{
-		super(_context);
-		this.value = 0;
-		this.isActive = false; //this variable is used by the candidate- Buttons
+		super(context, _caption, _width, _height, _lineSize, _textSize);
+		this.value = _value;
 	}
-	
-	public valueButton(Context _context, AttributeSet _attrs, Map _inflateParams)
-	{
-		super(_context, _attrs, _inflateParams); //the super-constructor is called
-		this.value = 0;   //set the default- value to "0"
-	
-	} //end constructor
 	
 	public void activate()
 	{
@@ -58,6 +50,8 @@ public class valueButton  extends Button{
 	{
 		this.value = _newValue;
 		this.setText(Integer.toString(this.value));
+		super.setText(Integer.toString(this.value));
+		
 	}
 	
 	public int value()
