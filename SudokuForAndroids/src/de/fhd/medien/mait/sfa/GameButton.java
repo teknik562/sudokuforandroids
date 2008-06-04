@@ -78,7 +78,7 @@ public class GameButton extends Button{
 		// Create new Bitmaps for this Button
 		// 1) default
 	    this.drawEmptyBitmap(defaultBitmap, 0xffffffff);
-	    this.drawTextInBitmap(defaultBitmap, 0xff0000ff);
+	    this.drawTextInBitmap(defaultBitmap, textDefault);
 	    // 2) focused
 	    this.drawEmptyBitmap(focusedBitmap, 0xff97C024);
 	    this.drawTextInBitmap(focusedBitmap, 0xffffffff);
