@@ -10,6 +10,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
+
+/**
+ * Activity that displays the List of Users.
+ * If not allready exists this class will create the usertable.
+ * The usertable contains two columns ("user_id" & "user_name")
+ * 
+ * @author dac-xp
+ *
+ */
 public class UserList extends ListActivity
   {
     private final String DB_NAME = "sudokuForAndroids";
@@ -23,7 +32,9 @@ public class UserList extends ListActivity
         {
           super.onCreate(icicle);
           
+          // Create empty database-object
           SQLiteDatabase db = null;
+          // Arraylist that will contain user-names
           ArrayList<String> results = new ArrayList<String>();
           
           try
@@ -38,20 +49,25 @@ public class UserList extends ListActivity
                           "( user_id INT PRIMARY KEY, " +
                           "user_name VARCHAR)");
               
+              // Create a Cursor with all user-names from the database
               Cursor c = db.rawQuery("SELECT user_name FROM "+DB_USERTABLE, null);
               
-              int nameColumn = c.getColumnIndex("user_name");
-              
+              // get the column-index of the user-name-column
+              int nameColumnIndex = c.getColumnIndex("user_name");
+
+              // check if the database-cursor references not to "null"
               if(c != null)
                 {
+                  // check if the database-cursor is not empty
                   if(c.first())
                     {
                       int i = 0;
-                      
+
+                      // write user-names to the array-list 
                       do
                         {
                           i++;
-                          String user_name = c.getString(nameColumn);
+                          String user_name = c.getString(nameColumnIndex);
                           results.add(user_name);
                         }while(c.next());
                     }
@@ -70,8 +86,8 @@ public class UserList extends ListActivity
                 }
             }
           
-          this.setListAdapter(new ArrayAdapter<String>(this,
-              android.R.layout.simple_list_item_1, results)); 
+          // write user-names to view
+          this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results)); 
             
         }
   }
