@@ -75,16 +75,7 @@ public class GameButton extends Button{
 		// 3) pressed
 		pressedBitmap = Bitmap.createBitmap(width, height, true);
 		
-		// Create new Bitmaps for this Button
-		// 1) default
-	    this.drawEmptyBitmap(defaultBitmap, 0xffffffff);
-	    this.drawTextInBitmap(defaultBitmap, textDefault);
-	    // 2) focused
-	    this.drawEmptyBitmap(focusedBitmap, 0xff97C024);
-	    this.drawTextInBitmap(focusedBitmap, 0xffffffff);
-	    // 3) pressed
-	    this.drawEmptyBitmap(pressedBitmap, 0xff97C024);
-	    this.drawTextInBitmap(pressedBitmap, 0xffffffff);
+		reDraw();
 	    
 	    // define OnClickListener for the Button
 	    setOnClickListener(onClickListener);
@@ -188,12 +179,30 @@ public class GameButton extends Button{
 		}
 	};
 	
+	public void reDraw(){
+		// Create new Bitmaps for this Button
+		// 1) default
+	    this.drawEmptyBitmap(defaultBitmap, 0xffffffff);
+	    this.drawTextInBitmap(defaultBitmap, textDefault);
+	    // 2) focused
+	    this.drawEmptyBitmap(focusedBitmap, 0xff97C024);
+	    this.drawTextInBitmap(focusedBitmap, 0xffffffff);
+	    // 3) pressed
+	    this.drawEmptyBitmap(pressedBitmap, 0xff97C024);
+	    this.drawTextInBitmap(pressedBitmap, 0xffffffff);
+	}
+	
 	/**
 	 * Returns the caption of the Button
 	 * @return
 	 */
 	public String getCaption(){
 		return this.caption;
+	}
+	
+	public void setCaption(String newCapt){
+		caption = newCapt;
+		reDraw();
 	}
 	
 	
