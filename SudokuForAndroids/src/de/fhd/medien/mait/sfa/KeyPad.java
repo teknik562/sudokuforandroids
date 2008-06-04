@@ -14,22 +14,33 @@ package de.fhd.medien.mait.sfa;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsoluteLayout;
+import android.widget.AbsoluteLayout.LayoutParams;
 
 
 public class KeyPad extends Activity {
 
+	
 	valueButton[] value = new valueButton[9];
 	valueButton[] candidate = new valueButton[6];
-	Button cmdBack, cmdClear;
+	GameButton cmdBack, cmdClear;
+	AbsoluteLayout absLayout = new AbsoluteLayout(this);
+	int digitButtonSize = 40;
+	int candidateButtonHeight = 40;
+	int candidateButtonWidth = (digitButtonSize*3)/6;
+	int cButtonTSize = candidateButtonWidth/2;
+	int digitButtonTextSize = digitButtonSize/2;
+	
 	
 	//this is some kind of constructor within android. This Method is called when the activity is launched
 	protected void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		
-		setContentView(R.layout.keypad); //the layout- xml file is chosen
+		setContentView(absLayout); //the layout- xml file is chosen
+		
+		absLayout.setLayoutParams(new AbsoluteLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 0, 0));
 		
 		//the Buttons of the keypads are being assigned and initialized
 		initializeButtons();
@@ -38,50 +49,42 @@ public class KeyPad extends Activity {
 	
 	private void initializeButtons()
 	{
-		//the Button- objects are being instanciated in the following lines
-		value[0] = (valueButton)this.findViewById(R.id.cmd_1);
-		value[1] = (valueButton)this.findViewById(R.id.cmd_2);
-		value[2] = (valueButton)this.findViewById(R.id.cmd_3);
-		value[3] = (valueButton)this.findViewById(R.id.cmd_4);
-		value[4] = (valueButton)this.findViewById(R.id.cmd_5);
-		value[5] = (valueButton)this.findViewById(R.id.cmd_6);
-		value[6] = (valueButton)this.findViewById(R.id.cmd_7);
-		value[7] = (valueButton)this.findViewById(R.id.cmd_8);
-		value[8] = (valueButton)this.findViewById(R.id.cmd_9);
-		
-		candidate[0] = (valueButton)this.findViewById(R.id.candidate_1);
-		candidate[1] = (valueButton)this.findViewById(R.id.candidate_2);
-		candidate[2] = (valueButton)this.findViewById(R.id.candidate_3);
-		candidate[3] = (valueButton)this.findViewById(R.id.candidate_4);
-		candidate[4] = (valueButton)this.findViewById(R.id.candidate_5);
-		candidate[5] = (valueButton)this.findViewById(R.id.candidate_6);
-		
-		cmdBack = (Button)this.findViewById(R.id.cmdBack);
-		cmdClear = (Button)this.findViewById(R.id.cmdClear);
-		
 
+		//the digit- buttons are being created
+		for(int i = 0; i < value.length; i++)
+		{
+			value[i] = new valueButton(this, i+1, Integer.toString(i+1), this.digitButtonSize, this.digitButtonSize, 3, this.digitButtonTextSize );
+		}
 		
+		absLayout.addView(value[0],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*0 , this.candidateButtonHeight));
+		absLayout.addView(value[1],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight));
+		absLayout.addView(value[2],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight));
+		absLayout.addView(value[3],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*0 , this.candidateButtonHeight + this.digitButtonSize ));
+		absLayout.addView(value[4],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight + this.digitButtonSize));
+		absLayout.addView(value[5],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight + this.digitButtonSize));
+		absLayout.addView(value[6],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*0 , this.candidateButtonHeight + 2*this.digitButtonSize));
+		absLayout.addView(value[7],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight + 2*this.digitButtonSize));
+		absLayout.addView(value[8],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight + 2*this.digitButtonSize));
+		
+		
+		for(int i= 0; i <candidate.length; i++)
+		{
+			candidate[i] = new valueButton(this, 0, "C" + Integer.toString(i+1), this.candidateButtonWidth, this.candidateButtonHeight, 2, this.cButtonTSize);
+			absLayout.addView(candidate[i], new AbsoluteLayout.LayoutParams(this.candidateButtonWidth, this.candidateButtonHeight, i* this.candidateButtonWidth , 0));
+			candidate[i].setOnClickListener(candidateListener);
+		}
+		
+		
+		
+		
+		//sets the onclicklistener and the values for the digit- buttons
 		for(int i = 0; i < value.length; i++)
 		{
 			value[i].setOnClickListener(cmdListener);
-			value[i].setValue(i+1);	
-		}
-		
-		
-
-
-		
-		for(valueButton v: candidate)
-		{
-			v.setBackground(android.R.drawable.btn_default_small);
-			v.setOnClickListener(candidateListener);
-		}
 			
+		}
 		
-		cmdBack.setBackground(android.R.drawable.btn_default_small);
-		cmdClear.setBackground(android.R.drawable.btn_default_small);
-
-	}
+	} //end initialize Buttons
 	
 	OnClickListener candidateListener = new OnClickListener()
 	{
@@ -119,7 +122,7 @@ public class KeyPad extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
-			 valueButton clickedButton = (valueButton)v;
+			valueButton clickedButton = (valueButton)v;
 			
 			//if there is no active candidate
 			if(!anyActiveCandidate()) 
@@ -134,8 +137,7 @@ public class KeyPad extends Activity {
 				activeCandidate.setValue(clickedButton.value());
 				activeCandidate.deactivate();
 			}
-				
-			
+						
 		}
 		
 	};

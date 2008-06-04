@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.fhd.medien.mait.sfa">
     <application android:icon="@drawable/icon">
-        <activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="@string/app_name"/>
+        <activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
         <activity android:name=".UserList" android:label="@string/app_name"/>
         <activity android:name=".CreateUser" android:label="@string/app_name"/>
         <activity android:name=".SudokuMain" android:label="@string/app_name">
