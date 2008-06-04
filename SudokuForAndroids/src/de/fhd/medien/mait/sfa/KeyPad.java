@@ -32,6 +32,10 @@ public class KeyPad extends Activity {
 	int candidateButtonWidth = (digitButtonSize*3)/6;
 	int cButtonTSize = candidateButtonWidth/2;
 	int digitButtonTextSize = digitButtonSize/2;
+	int cmdBtnWidth = (digitButtonSize * 3 )/2;
+	int cmdBtnHeight = 30;
+	int cmdBtnTsize = cmdBtnHeight /2;
+	
 	
 	
 	//this is some kind of constructor within android. This Method is called when the activity is launched
@@ -74,6 +78,11 @@ public class KeyPad extends Activity {
 			candidate[i].setOnClickListener(candidateListener);
 		}
 		
+		cmdBack = new GameButton(this, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
+		absLayout.addView(cmdBack, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, 0, this.candidateButtonHeight + 3* this.digitButtonSize));
+		
+		cmdClear = new GameButton(this, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
+		absLayout.addView(cmdClear, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, this.cmdBtnWidth, this.candidateButtonHeight + 3* this.digitButtonSize));
 		
 		
 		
