@@ -12,10 +12,10 @@ public class FieldButton extends GameButton{
 	static final int fillDefaultCandidate = 0xa097C024; 
 	static final int textDefaultCandidate = 0xffffffff; 
 	
-	static final int fillFocusedCandidate = 0xa097C024; 
+	static final int fillFocusedCandidate = 0xa0bdde5f; 
 	static final int textFocusedCandidate = 0xffffffff;
 	
-	static final int fillPressedCandidate = 0xa097C024; 
+	static final int fillPressedCandidate = 0xa0f70B49; 
 	static final int textPressedCandidate = 0xffffffff;
 	
 	// colors that are only used by Not Changeable Buttons
@@ -44,11 +44,15 @@ public class FieldButton extends GameButton{
 	 * Makes the Button look like a Button having at least one candidate
 	 */
 	public void setAsCandidate(){
+		deleteCaption();
 		redraw(fillDefaultCandidate, textDefaultCandidate, fillFocusedCandidate, textFocusedCandidate, fillPressedCandidate, textPressedCandidate);
 	}
 	
+	/**
+	 * 
+	 */
 	public void setAsNoChange(){
-		
+		redraw(fillDefaultNoChange, textDefaultNoChange, fillFocusedNoChange, textFocusedNoChange, fillPressedNoChange, textPressedNoChange);
 	}
 	
 	/**
@@ -74,13 +78,6 @@ public class FieldButton extends GameButton{
 	 */
 	public int getValue(){
 		return Integer.parseInt(getCaption());
-	}
-	
-	/**
-	 * Clears the caption of this button
-	 */
-	public void clearCaption(){
-		setCaption("");
 	}
 	
 }
