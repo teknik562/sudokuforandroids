@@ -29,12 +29,13 @@ public class Config {
 	public static int fieldStartXPos = 7;
 	/** Calculated y start position for the field */
 	public static int fieldStartYPos = 8;
-	
+	/** Calculated best font size for the FieldButtons */
+	public static int optFieldBtFontSize = 9;
 	
 	
 	public static void initiate(int _displayWidth, int _displayHeight, int _minScreenAttr,
 			int _optFieldBtSize, int _optFieldPadding, int _optFieldLine, int _fieldLength,
-			int _fieldStartXPos, int _fieldStartYPos){
+			int _fieldStartXPos, int _fieldStartYPos , int _optFieldBtFontSize){
 		displayWidth = _displayWidth;
 		displayHeight = _displayHeight;
 		minScreenAttr = _minScreenAttr;
@@ -44,6 +45,7 @@ public class Config {
 		fieldLength = _fieldLength;
 		fieldStartXPos = _fieldStartXPos;
 		fieldStartYPos = _fieldStartYPos;
+		optFieldBtFontSize = _optFieldBtFontSize;
 	}
 	
 }
