@@ -9,7 +9,6 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.graphics.Path.Direction;
-import android.view.View;
 import android.widget.Button;
 	
 public class GameButton extends Button{
@@ -41,7 +40,7 @@ public class GameButton extends Button{
 	private int width;
 	private int lineSize;
 	private int textSize;
-	private int radius;
+	//private int radius;
 	
 	private String caption;
 	
@@ -85,9 +84,7 @@ public class GameButton extends Button{
 	    // 3) pressed
 	    this.drawEmptyBitmap(pressedBitmap, fillPressed);
 	    this.drawTextInBitmap(pressedBitmap, textPressed);
-	    
-	    // define OnClickListener for the Button
-	    setOnClickListener(onClickListener);
+
    	}
 	
 	/**
@@ -180,14 +177,6 @@ public class GameButton extends Button{
 		invalidate();
 	}
 	
-	private OnClickListener onClickListener =
-		new OnClickListener() {
-		
-		public void onClick(View v) {
-			
-		}
-	};
-	
 	/**
 	 * Redraws the Button as a normal Button with 3 states
 	 */
@@ -236,9 +225,28 @@ public class GameButton extends Button{
 		return this.caption;
 	}
 	
+	/**
+	 * Sets the caption of this Button and automatically redraws it.
+	 * @param newCapt new Caption for this button
+	 */
 	public void setCaption(String newCapt){
 		caption = newCapt;
 		redraw();
+	}
+	
+	/**
+	 * Clears the caption of this button and automatically redraws it
+	 */
+	public void clearCaption(){
+		setCaption("");
+	}
+	
+	/**
+	 * Removes the caption info of this button but does not redraw it.
+	 * If you want to automatically redraw this button you may use clearCaption().
+	 */
+	public void deleteCaption(){
+		caption = "";
 	}
 
 	
