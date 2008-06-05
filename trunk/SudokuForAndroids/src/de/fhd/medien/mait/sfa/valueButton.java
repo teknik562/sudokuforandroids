@@ -17,7 +17,7 @@ import android.widget.Button;
 public class valueButton  extends GameButton{
 	
 	private int value;
-	private boolean isActive;
+	private boolean isActive = false;
 
 	public valueButton(Context context, int _value, String _caption, int _width, int _height, int _lineSize, int _textSize)
 	{
@@ -34,7 +34,7 @@ public class valueButton  extends GameButton{
 	public void deactivate()
 	{
 		this.isActive = false;
-		this.setBackground(android.R.drawable.btn_default_small);
+		this.setBackground(Color.TRANSPARENT);
 	}
 	
 	public boolean isActive()
@@ -49,8 +49,7 @@ public class valueButton  extends GameButton{
 	public void setValue(int _newValue)
 	{
 		this.value = _newValue;
-		this.setText(Integer.toString(this.value));
-		super.setText(Integer.toString(this.value));
+		this.setCaption(Integer.toString(value));
 		
 	}
 	
