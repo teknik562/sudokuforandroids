@@ -16,6 +16,16 @@ import android.widget.Button;
 
 public class valueButton  extends GameButton{
 	
+	// colors for activated Button
+	static final int fillDefaultActivated = 0xafF87698;
+	static final int textDefaultActivated = 0xff000000;
+	
+	static final int fillFocusedActivated = 0xa0f70B49;
+	static final int textFocusedActivated = 0xffffffff;
+	
+	static final int fillPressedActivated = 0x60f70B49;
+	static final int textPressedActivated = 0xffffffff;
+	
 	private int value;
 	private boolean isActive = false;
 
@@ -51,6 +61,13 @@ public class valueButton  extends GameButton{
 		this.value = _newValue;
 		this.setCaption(Integer.toString(value));
 		
+	}
+	
+	/**
+	 * Sets the Button active
+	 */
+	public void setAsActivated(){
+		redraw(fillDefaultActivated, textDefaultActivated, fillFocusedActivated, textFocusedActivated, fillPressedActivated, textPressedActivated);
 	}
 	
 	public int value()
