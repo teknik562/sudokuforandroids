@@ -24,10 +24,11 @@ public class KeyPad extends Activity {
 
 	
 	valueButton[] value = new valueButton[9];
-	valueButton[] candidate = new valueButton[6];
+	valueButton[] candidate = new valueButton[7];
 	GameButton cmdBack, cmdClear;
 	AbsoluteLayout absLayout = new AbsoluteLayout(this);
-	int digitButtonSize = 40;
+	
+	int digitButtonSize = 48;
 	int candidateButtonHeight = 40;
 	int candidateButtonWidth = (digitButtonSize*3)/6;
 	int cButtonTSize = candidateButtonWidth/2;
@@ -134,13 +135,13 @@ public class KeyPad extends Activity {
 			valueButton clickedButton = (valueButton)v;
 			
 			//if there is no active candidate
-			if(!anyActiveCandidate()) 
+			if(anyActiveCandidate() == false) 
 			{
 				KeyPad.this.setResult(RESULT_OK, Integer.toString(clickedButton.value()));
 				KeyPad.this.finish();
 			}
 			
-			else
+		else
 			{
 				valueButton activeCandidate = findActiveCandidate();
 				activeCandidate.setValue(clickedButton.value());
