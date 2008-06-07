@@ -24,7 +24,7 @@ public class KeyPad extends Activity {
 
 	
 	valueButton[] value = new valueButton[9];
-	valueButton[] candidate = new valueButton[7];
+	valueButton[] candidate = new valueButton[6];
 	GameButton cmdBack, cmdClear;
 	AbsoluteLayout absLayout = new AbsoluteLayout(this);
 	
@@ -96,9 +96,12 @@ public class KeyPad extends Activity {
 		
 	} //end initialize Buttons
 	
+	/**
+	 * this is the OnClickListener for the candidate- Buttons in the top of the Keypad
+	 * 
+	 */
 	OnClickListener candidateListener = new OnClickListener()
 	{
-
 		//@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -106,11 +109,24 @@ public class KeyPad extends Activity {
 			valueButton clickedCandidate = (valueButton)v;
 			
 			if(!clickedCandidate.isActive())
+			{
 				clickedCandidate.activate();
+				//ink all value buttons, to show, that the value of the candidate is changed
+				for(valueButton b : value)
+					b.activate();
+			}
+				
 			
 			else
+			{
+				
 				clickedCandidate.deactivate();
+				//set all value- buttons to the default look
+				for(valueButton b : value)
+					b.setAsDefault();
+			}
 			
+				
 		}
 		
 	};
@@ -141,11 +157,14 @@ public class KeyPad extends Activity {
 				KeyPad.this.finish();
 			}
 			
-		else
+			else if(anyActiveCandidate() == true)
 			{
 				valueButton activeCandidate = findActiveCandidate();
 				activeCandidate.setValue(clickedButton.value());
 				activeCandidate.deactivate();
+				//set all value- buttons to the default look
+				for(valueButton b : value)
+					b.deactivate();
 			}
 						
 		}
@@ -154,12 +173,15 @@ public class KeyPad extends Activity {
 	
 	private valueButton findActiveCandidate()
 	{
+		valueButton returnButton = candidate[0];
 		
-		for(valueButton v: candidate)
-			if(v.isActive())
-				return v;
-		
-		return null;
+			for(int i = 0; i < candidate.length; i++)
+			{
+				if(candidate[i].isActive())
+					returnButton = candidate[i];
+			}
+				
+		return returnButton;
 	}
 	
 	
@@ -167,12 +189,12 @@ public class KeyPad extends Activity {
 	{
 		boolean returnValue = false;
 		
-		for(valueButton v: candidate)
-			if(v.isActive())
-				returnValue = false;
-			else
+		for(int i = 0; i < candidate.length; i++)
+		{
+			if(candidate[i].isActive())
 				returnValue = true;
-		
+		}
+					
 		return returnValue;
 	}
 	
