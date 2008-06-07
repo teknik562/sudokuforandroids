@@ -38,13 +38,14 @@ public class valueButton  extends GameButton{
 	public void activate()
 	{
 		this.isActive = true;
-		this.setBackgroundColor(Color.GREEN);
+		this.setAsActivated();
+		
 	}
 	
 	public void deactivate()
 	{
 		this.isActive = false;
-		this.setBackground(Color.TRANSPARENT);
+		this.setAsDefault();
 	}
 	
 	public boolean isActive()
@@ -68,6 +69,11 @@ public class valueButton  extends GameButton{
 	 */
 	public void setAsActivated(){
 		redraw(fillDefaultActivated, textDefaultActivated, fillFocusedActivated, textFocusedActivated, fillPressedActivated, textPressedActivated);
+	}
+	
+	public void setAsDefault()
+	{
+		redraw();
 	}
 	
 	public int value()
