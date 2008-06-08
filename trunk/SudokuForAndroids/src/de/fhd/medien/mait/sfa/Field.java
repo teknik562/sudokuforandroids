@@ -10,15 +10,33 @@ import android.widget.LinearLayout.LayoutParams;
  * Here the Field will be displayed, a Sudoku puzzle will be requested...
  */
 public class Field extends Activity{
+	// Layout for the field
 	private AbsoluteLayout fieldLayout = new AbsoluteLayout(this);
 	private static final int length = 9;
 	private FieldButton[][] buttonField = new FieldButton[length][length];
+	int[][] testarray = {
+			{0, 0, 0, 4, 0, 0, 8, 3, 9},
+			{5, 0, 3, 4, 0, 0, 8, 0, 9},
+			{0, 0, 3, 4, 1, 7, 0, 3, 9},
+			{0, 0, 3, 0, 1, 0, 8, 0, 9},
+			{2, 0, 3, 4, 1, 7, 8, 3, 0},
+			{0, 0, 3, 4, 0, 7, 0, 3, 9},
+			{0, 0, 0, 0, 1, 7, 8, 3, 9},
+			{0, 0, 3, 4, 1, 7, 8, 0, 9},
+			{0, 0, 0, 4, 1, 7, 8, 3, 9}
+	};
+	
+	
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        
+    	
+         
+        
         // initiate the Layout
         fieldLayout.setLayoutParams(new AbsoluteLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 0, 0));
         
@@ -47,9 +65,15 @@ public class Field extends Activity{
         		countouter++;
         	for (int j = 0; j < length; j++){
         		// a new button is created at the given location
-        		buttonField[i][j] = new FieldButton(this, "2", Config.optFieldBtSize, 2, Config.FontSize);
+        		// testarray will be deleted soon
+        		String caption = "";
+        		if(testarray[i][j] != 0)
+        			caption = Integer.toString(testarray[i][j]);
+        		buttonField[i][j] = new FieldButton(this, caption, Config.optFieldBtSize, 2, Config.FontSize);
         		// when there's a ressource from the algo here will be a 
         		// decision whether the button is a normal button or a noChangeButton
+        		if(testarray[i][j] != 0)
+        			buttonField[i][j].setAsNoChange();
         		// horizontal padding is set
         		if(j%3 == 0 && j != 0)
         			countinner++;
