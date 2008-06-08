@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sudoku for Android(s)</string>
+    <string name="newGame">New Game</string>
+    <string name="contGame">Continue / Load</string>
+    <string name="settings">Settings</string>
+    <string name="highscore">Highscore</string>
+    <string name="help">Help</string>
+    <string name="credits">Credits</string>
+    <string name="end">End</string>
+    
+    <string name="helpTitle">Help</string>
+    <string name="helpText"><b>Sudoku for Android(s)</b> is played after the normal Sudoku rules 
+which are the following:\n
+1) Each row must have the numbers 1-9 occuring just once.\n
+2) Each column must have the numbers 1-9 occuring just once.\n
+3) The numbers 1-9 must occur just once in each of the 9 sub-boxes of the grid.\n\n
+</string>
+    
+    <string name="creditsTitle">Credits</string>
+    <string name="creditsText"><b>Sudoku for Android(s)</b> was developed by students of the
+    University of applied science in Düsseldorf(Germany) as their first computer science project.
+    \n\n<u>Participants:</u>\n
+Jan Monschke\n
+Abdelhak El-Boubsi\n
+Carsten Ruhr\n
+Dominik Lazarek\n\n
+<u>Professor:</u>\n
+Prof. Dr.-Ing. MSc. Markus Dahm
+    </string>
 </resources>
