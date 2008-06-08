@@ -47,7 +47,7 @@ public class Field extends Activity{
         		countouter++;
         	for (int j = 0; j < length; j++){
         		// a new button is created at the given location
-        		buttonField[i][j] = new FieldButton(this, "2", Config.optFieldBtSize, 2, Config.optFieldBtFontSize);
+        		buttonField[i][j] = new FieldButton(this, "2", Config.optFieldBtSize, 2, Config.FontSize);
         		// when there's a ressource from the algo here will be a 
         		// decision whether the button is a normal button or a noChangeButton
         		// horizontal padding is set
