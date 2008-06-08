@@ -45,7 +45,7 @@ public class SudokuMain extends Activity {
         // set the onClickListeners
         helpBt.setOnClickListener(helpClick);
         creditsBt.setOnClickListener(creditsClick);
-        
+        newGameBt.setOnClickListener(dummyNewGameClick);
         setContentView(absLayoutMenu);
         
         
@@ -119,6 +119,19 @@ public class SudokuMain extends Activity {
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
 					Config.optMenuBtHeight, Config.menutStartXPos, 10 + 5 * Config.optMenuBtHeight));
     }
+    
+    
+    OnClickListener dummyNewGameClick = new OnClickListener()
+    {
+
+		//@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+				Intent showKeyPad = new Intent(SudokuMain.this, KeyPad.class);
+				startActivity(showKeyPad);
+		}
+    	
+    };
     
     /** When clicked on Credits a new View is opened where the participants are shown */
     OnClickListener creditsClick = new OnClickListener(){
