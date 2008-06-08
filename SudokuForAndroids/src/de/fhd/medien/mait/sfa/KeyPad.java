@@ -13,9 +13,7 @@ package de.fhd.medien.mait.sfa;
 
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
@@ -100,12 +98,73 @@ public class KeyPad extends Activity {
 		
 		cmdBack = new GameButton(this, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
 		absLayout.addView(cmdBack, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, 0, this.candidateButtonHeight + 3* this.digitButtonSize));
+		cmdBack.setOnClickListener(backListener);
 		
 		cmdClear = new GameButton(this, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
 		absLayout.addView(cmdClear, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, this.cmdBtnWidth, this.candidateButtonHeight + 3* this.digitButtonSize));
-		
+		cmdClear.setOnClickListener(clearListener);
 			
 	} //end initialize Buttons
+	
+	
+	/**
+	 * this onclicklistener mangages clicks on the back- button
+	 */
+	OnClickListener backListener = new OnClickListener()
+	{
+		//@Override
+		public void onClick(View v) {
+			//if there are any active candidates, deactivate all candidates and deactivate all digit- buttons
+			if(anyActiveCandidate())
+			{
+				deactivateCandidates();
+				deactivateValueButtons();
+			}
+			
+			else
+			{
+				// the value " 10 " is the code for "abort"
+				KeyPad.this.setResult(RESULT_OK, Integer.toString(10));
+				KeyPad.this.finish();
+			}
+				
+			
+		}//end on Click()
+		
+	};//end onClickListener
+	
+	
+	/**
+	 * this is the onClickListener for the clear- button
+	 */
+	OnClickListener clearListener = new OnClickListener()
+	{
+
+		//@Override
+		public void onClick(View v) {
+			//decide, if a candidate is active
+			if(anyActiveCandidate())
+			{
+				valueButton actCandidate = findActiveCandidate();
+				actCandidate.setValue(0);
+				deactivateCandidates();
+				deactivateValueButtons();
+			}
+			
+			else
+			{
+				//the value "0" is the code for "clear field"
+				KeyPad.this.setResult(RESULT_OK, Integer.toString(0));
+				KeyPad.this.finish();
+			}
+				
+			
+		}
+		
+		
+	};
+	
+	
 	
 	/**
 	 * this is the OnClickListener for the candidate- Buttons in the top of the Keypad
@@ -126,11 +185,7 @@ public class KeyPad extends Activity {
 				clickedCandidate.activate();  //in this case: activate it!
 				deactivateOtherCandidates(clickedCandidate); //deactivate other active candidates
 				//ink all value buttons, to show, that the value of the candidate is changed
-				for(valueButton b : value)
-				{
-					b.activate(); //also activate all digit- buttons
-					//Log.v(TAG, "Ich bin bei button: " + Integer.toString(b.value()));
-				}
+				activateValueButtons();
 				
 			}
 				
@@ -140,8 +195,7 @@ public class KeyPad extends Activity {
 				//deactivate it
 				clickedCandidate.deactivate();
 				//deactivate the digit buttons
-				for(valueButton b : value)
-					b.deactivate();
+				deactivateValueButtons();
 			} //end else if
 			
 		} //end onClick()
@@ -185,8 +239,7 @@ public class KeyPad extends Activity {
 					activeCandidate.setValue(clickedButton.value());
 					activeCandidate.deactivate();
 					//set all value- buttons to the default look
-					for(valueButton b : value)
-						b.deactivate();
+					deactivateValueButtons();
 				}//end if
 					
 			}//end else if
@@ -250,4 +303,22 @@ public class KeyPad extends Activity {
 		return false;
 	}
 	
+	
+	private void activateValueButtons()
+	{
+		for(valueButton b : value)
+			b.activate();
+	}
+	
+	private void deactivateValueButtons()
+	{
+		for(valueButton b : value)
+			b.deactivate();
+	}
+	
+	private void deactivateCandidates()
+	{
+		for(valueButton b: candidate)
+			b.deactivate();
+	}
 }//end class
