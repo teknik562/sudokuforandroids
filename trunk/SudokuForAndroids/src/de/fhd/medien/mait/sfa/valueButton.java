@@ -27,10 +27,22 @@ public class valueButton  extends GameButton{
 	
 	private int value;
 	private boolean isActive = false;
-
+	private String label;
+	
+	/**
+	 * 
+	 * @param context immer "this"
+	 * @param _value value of the button
+	 * @param _caption the initial text of the Button
+	 * @param _width the width of the button
+	 * @param _height the height of the button
+	 * @param _lineSize the linesize
+	 * @param _textSize the textsize
+	 */
 	public valueButton(Context context, int _value, String _caption, int _width, int _height, int _lineSize, int _textSize)
 	{
 		super(context, _caption, _width, _height, _lineSize, _textSize);
+		this.label = _caption;
 		this.value = _value;
 	}
 	
@@ -60,13 +72,12 @@ public class valueButton  extends GameButton{
 		
 		this.value = _newValue;
 		
-		if(this.value != 0)
-			this.setCaption(Integer.toString(value));
+		if(this.value == 0)
+			this.setCaption(this.label);
 		
-		//else
-			//this.setCaption(newCapt)
-		
-		
+		else
+			this.setCaption(Integer.toString(_newValue));
+			
 		
 	}
 	
