@@ -2,14 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.fhd.medien.mait.sfa">
     <application android:icon="@drawable/icon">
-        <activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
-        <activity android:name=".UserList" android:label="@string/app_name"/>
-        <activity android:name=".CreateUser" android:label="@string/app_name"/>
-        <activity android:name=".SudokuMain" android:label="@string/app_name">
-            <intent-filter>
+    	<activity android:name=".SudokuMain" android:label="@string/app_name">
+    	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        <activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
+        <activity android:name=".UserList" android:label="@string/app_name"/>
+        <activity android:name=".CreateUser" android:label="@string/app_name"/>
+        <activity android:name="Credits" android:theme="@android:style/Theme.Dialog" android:label="@string/creditsTitle" />
+    	<activity android:name="Help" android:label="@string/helpTitle" android:theme="@android:style/Theme.Dialog" />
+            
         </activity>
     </application>
 </manifest> 
