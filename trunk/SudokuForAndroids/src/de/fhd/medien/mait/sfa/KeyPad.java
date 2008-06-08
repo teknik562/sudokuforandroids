@@ -25,26 +25,28 @@ public class KeyPad extends Activity {
 	
 	valueButton[] value = new valueButton[9];
 	valueButton[] candidate = new valueButton[6];
-	GameButton cmdBack, cmdClear;
+	valueButton cmdBack, cmdClear;
 	AbsoluteLayout absLayout = new AbsoluteLayout(this);
-	
+	 
 	private static final String TAG = "KeyPad ";
 	
-	int digitButtonSize = 48;
-	int candidateButtonHeight = 40;
-	int candidateButtonWidth = (digitButtonSize*3)/6;
-	int cButtonTSize = candidateButtonWidth/2;
-	int digitButtonTextSize = digitButtonSize/2;
-	int cmdBtnWidth = (digitButtonSize * 3 )/2;
-	int cmdBtnHeight = 30;
-	int cmdBtnTsize = cmdBtnHeight /2;
+	int digitButtonWidth;
+	int digitButtonHeight;
+	int candidateButtonHeight;
+	int candidateButtonWidth;
+	int cButtonTSize;
+	int digitButtonTextSize;
+	int cmdBtnWidth;
+	int cmdBtnHeight;
+	int cmdBtnTsize;
+	int offsetVert;
 	
 	
 	
 	//this is some kind of constructor within android. This Method is called when the activity is launched
 	protected void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		
+		initializeProperties();
 		setContentView(absLayout); //the layout- xml file is chosen
 		
 		absLayout.setLayoutParams(new AbsoluteLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 0, 0));
@@ -55,24 +57,60 @@ public class KeyPad extends Activity {
 		
 	} //end onCreate
 	
+	/**
+	 * this method assigns the sizes of the buttons and text relative to the size of the Display. The Mehtod
+	 * distinguishes between a Landscape and a Portrait- Display
+	 */
+	private void initializeProperties()
+	{
+		//is the Display Portrait?
+		if(Config.displayHeight > Config.displayWidth)
+		{
+			digitButtonWidth = Config.displayWidth/6;
+			digitButtonHeight = Config.displayHeight/8;
+			candidateButtonHeight = Config.displayHeight/13;
+			candidateButtonWidth = (digitButtonWidth*3)/6;
+			cButtonTSize = candidateButtonWidth/2;
+			digitButtonTextSize = digitButtonHeight/2;
+			cmdBtnWidth = (digitButtonWidth * 3 )/2;
+			cmdBtnHeight = Config.displayHeight/11;
+			cmdBtnTsize = cmdBtnHeight /2;
+			offsetVert = Config.displayHeight/120;
+		}
+		
+		else
+			
+		{
+			digitButtonWidth = Config.displayWidth/6;
+			digitButtonHeight = Config.displayHeight/7;
+			candidateButtonHeight = Config.displayHeight/10;
+			candidateButtonWidth = (digitButtonWidth*3)/6;
+			cButtonTSize = candidateButtonWidth/2;
+			digitButtonTextSize = digitButtonHeight/2;
+			cmdBtnWidth = (digitButtonWidth * 3 )/2;
+			cmdBtnHeight = Config.displayHeight/10;
+			cmdBtnTsize = cmdBtnHeight /2;
+			offsetVert = Config.displayHeight/50;
+		}
+	}
 	
 	private void initializeValueButtons()
 	{
 		//the digit- buttons are being created
 		for(int i = 0; i < value.length; i++)
 		{
-			value[i] = new valueButton(this, i+1, Integer.toString(i+1), this.digitButtonSize, this.digitButtonSize, 3, this.digitButtonTextSize );
+			value[i] = new valueButton(this, i+1, Integer.toString(i+1), this.digitButtonWidth, this.digitButtonHeight, 3, this.digitButtonTextSize );
 		}
 		
-		absLayout.addView(value[0],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*0 , this.candidateButtonHeight));
-		absLayout.addView(value[1],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight));
-		absLayout.addView(value[2],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight));
-		absLayout.addView(value[3],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*0 , this.candidateButtonHeight + this.digitButtonSize ));
-		absLayout.addView(value[4],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight + this.digitButtonSize));
-		absLayout.addView(value[5],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight + this.digitButtonSize));
-		absLayout.addView(value[6],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*0 , this.candidateButtonHeight + 2*this.digitButtonSize));
-		absLayout.addView(value[7],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight + 2*this.digitButtonSize));
-		absLayout.addView(value[8],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight + 2*this.digitButtonSize));
+		absLayout.addView(value[0],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*0 , this.candidateButtonHeight + offsetVert));
+		absLayout.addView(value[1],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*1 , this.candidateButtonHeight+ offsetVert));
+		absLayout.addView(value[2],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*2 , this.candidateButtonHeight+ offsetVert));
+		absLayout.addView(value[3],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*0 , this.candidateButtonHeight + this.digitButtonHeight+ offsetVert ));
+		absLayout.addView(value[4],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*1 , this.candidateButtonHeight + this.digitButtonHeight+ offsetVert));
+		absLayout.addView(value[5],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*2 , this.candidateButtonHeight + this.digitButtonHeight+ offsetVert));
+		absLayout.addView(value[6],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*0 , this.candidateButtonHeight + 2*this.digitButtonHeight+ offsetVert));
+		absLayout.addView(value[7],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*1 , this.candidateButtonHeight + 2*this.digitButtonHeight+ offsetVert));
+		absLayout.addView(value[8],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*2 , this.candidateButtonHeight + 2*this.digitButtonHeight+ offsetVert));
 		
 		//sets the onclicklistener and the values for the digit- buttons
 		for(int i = 0; i < value.length; i++)
@@ -96,12 +134,12 @@ public class KeyPad extends Activity {
 			candidate[i].setOnClickListener(candidateListener);
 		}
 		
-		cmdBack = new GameButton(this, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
-		absLayout.addView(cmdBack, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, 0, this.candidateButtonHeight + 3* this.digitButtonSize));
+		cmdBack = new valueButton(this, 0, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
+		absLayout.addView(cmdBack, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, 0, this.candidateButtonHeight + 3* this.digitButtonHeight+ 2*offsetVert));
 		cmdBack.setOnClickListener(backListener);
 		
-		cmdClear = new GameButton(this, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
-		absLayout.addView(cmdClear, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, this.cmdBtnWidth, this.candidateButtonHeight + 3* this.digitButtonSize));
+		cmdClear = new valueButton(this,0, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
+		absLayout.addView(cmdClear, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, this.cmdBtnWidth, this.candidateButtonHeight + 3* this.digitButtonHeight+ 2*offsetVert));
 		cmdClear.setOnClickListener(clearListener);
 			
 	} //end initialize Buttons
@@ -149,6 +187,7 @@ public class KeyPad extends Activity {
 				actCandidate.setValue(0);
 				deactivateCandidates();
 				deactivateValueButtons();
+				cmdClear.deactivate();
 			}
 			
 			else
@@ -186,6 +225,7 @@ public class KeyPad extends Activity {
 				deactivateOtherCandidates(clickedCandidate); //deactivate other active candidates
 				//ink all value buttons, to show, that the value of the candidate is changed
 				activateValueButtons();
+				cmdClear.activate();
 				
 			}
 				
@@ -196,6 +236,7 @@ public class KeyPad extends Activity {
 				clickedCandidate.deactivate();
 				//deactivate the digit buttons
 				deactivateValueButtons();
+				cmdClear.deactivate();
 			} //end else if
 			
 		} //end onClick()
@@ -240,6 +281,7 @@ public class KeyPad extends Activity {
 					activeCandidate.deactivate();
 					//set all value- buttons to the default look
 					deactivateValueButtons();
+					cmdClear.deactivate();
 				}//end if
 					
 			}//end else if

@@ -17,6 +17,9 @@ public class SudokuMain extends Activity {
 	// Main layout
 	AbsoluteLayout absLayoutMenu;
 	
+	
+	
+	
 	// Buttons
 	GameButton newGameBt;
 	GameButton contGameBt;
