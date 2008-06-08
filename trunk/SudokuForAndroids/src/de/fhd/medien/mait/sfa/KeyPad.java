@@ -13,7 +13,9 @@ package de.fhd.medien.mait.sfa;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
@@ -27,6 +29,8 @@ public class KeyPad extends Activity {
 	valueButton[] candidate = new valueButton[6];
 	GameButton cmdBack, cmdClear;
 	AbsoluteLayout absLayout = new AbsoluteLayout(this);
+	
+	private static final String TAG = "KeyPad ";
 	
 	int digitButtonSize = 48;
 	int candidateButtonHeight = 40;
@@ -50,11 +54,12 @@ public class KeyPad extends Activity {
 		//the Buttons of the keypads are being assigned and initialized
 		initializeButtons();
 		
+		
 	} //end onCreate
 	
-	private void initializeButtons()
+	
+	private void initializeValueButtons()
 	{
-
 		//the digit- buttons are being created
 		for(int i = 0; i < value.length; i++)
 		{
@@ -71,6 +76,20 @@ public class KeyPad extends Activity {
 		absLayout.addView(value[7],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*1 , this.candidateButtonHeight + 2*this.digitButtonSize));
 		absLayout.addView(value[8],new AbsoluteLayout.LayoutParams(this.digitButtonSize, this.digitButtonSize, this.digitButtonSize*2 , this.candidateButtonHeight + 2*this.digitButtonSize));
 		
+		//sets the onclicklistener and the values for the digit- buttons
+		for(int i = 0; i < value.length; i++)
+		{
+			value[i].setOnClickListener(cmdListener);
+			
+		}
+	}
+	
+	
+	private void initializeButtons()
+	{
+
+		initializeValueButtons();
+		
 		
 		for(int i= 0; i <candidate.length; i++)
 		{
@@ -85,15 +104,7 @@ public class KeyPad extends Activity {
 		cmdClear = new GameButton(this, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
 		absLayout.addView(cmdClear, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, this.cmdBtnWidth, this.candidateButtonHeight + 3* this.digitButtonSize));
 		
-		
-		
-		//sets the onclicklistener and the values for the digit- buttons
-		for(int i = 0; i < value.length; i++)
-		{
-			value[i].setOnClickListener(cmdListener);
 			
-		}
-		
 	} //end initialize Buttons
 	
 	/**
@@ -106,30 +117,36 @@ public class KeyPad extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
+			//initializeValueButtons();
 			valueButton clickedCandidate = (valueButton)v;
 			
-			if(!clickedCandidate.isActive())
+			//check, if the clicked candidate is not active yet.
+			if(clickedCandidate.isActive() == false)
 			{
-				clickedCandidate.activate();
+				clickedCandidate.activate();  //in this case: activate it!
+				deactivateOtherCandidates(clickedCandidate); //deactivate other active candidates
 				//ink all value buttons, to show, that the value of the candidate is changed
 				for(valueButton b : value)
-					b.activate();
+				{
+					b.activate(); //also activate all digit- buttons
+					//Log.v(TAG, "Ich bin bei button: " + Integer.toString(b.value()));
+				}
+				
 			}
 				
-			
-			else
+			//if the clicked candidate is already active
+			else if(clickedCandidate.isActive() == true)
 			{
-				
+				//deactivate it
 				clickedCandidate.deactivate();
-				//set all value- buttons to the default look
+				//deactivate the digit buttons
 				for(valueButton b : value)
-					b.setAsDefault();
-			}
+					b.deactivate();
+			} //end else if
 			
-				
-		}
+		} //end onClick()
 		
-	};
+	}; //end OnClickListener
 	
 	
 	
@@ -159,17 +176,24 @@ public class KeyPad extends Activity {
 			
 			else if(anyActiveCandidate() == true)
 			{
+				//find the active Candidate, in which the value should be written
 				valueButton activeCandidate = findActiveCandidate();
-				activeCandidate.setValue(clickedButton.value());
-				activeCandidate.deactivate();
-				//set all value- buttons to the default look
-				for(valueButton b : value)
-					b.deactivate();
-			}
+				
+				//check, if the candidate with this value is already stored
+				if(doesCandidateExist(clickedButton.value()) == false)
+				{
+					activeCandidate.setValue(clickedButton.value());
+					activeCandidate.deactivate();
+					//set all value- buttons to the default look
+					for(valueButton b : value)
+						b.deactivate();
+				}//end if
+					
+			}//end else if
 						
-		}
+		}//end onclick
 		
-	};
+	};//end cmdListener
 	
 	private valueButton findActiveCandidate()
 	{
@@ -196,6 +220,34 @@ public class KeyPad extends Activity {
 		}
 					
 		return returnValue;
+	}
+	
+	/**
+	 * this Method checks, if other candidates are active than the given one
+	 * @param _activeButton the Button, which shall remain active
+	 */
+	private void deactivateOtherCandidates(valueButton _activeButton)
+	{
+		for(valueButton v: candidate)
+		{
+			if(v != _activeButton && v.isActive())
+				v.deactivate();
+		}
+	}
+	
+	/**
+	 * this method checks, if the given value is already written in one of the other
+	 * candidates
+	 * @param _value value to be written
+	 * @return true for exists / false for exists not yet
+	 */
+	private boolean doesCandidateExist(int _value)
+	{
+		for(valueButton v: candidate)
+			if(v.value() == _value)
+				return true;
+		
+		return false;
 	}
 	
 }//end class

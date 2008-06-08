@@ -7,14 +7,13 @@
 
 package de.fhd.medien.mait.sfa;
 
-import java.util.Map;
-
 import android.content.Context;
 import android.graphics.Color;
-import android.util.AttributeSet;
-import android.widget.Button;
 
 public class valueButton  extends GameButton{
+	
+	//color for focused button
+	static final int activeButtonBckgrnd = Color.GREEN;
 	
 	// colors for activated Button
 	static final int fillDefaultActivated = 0xafF87698;
@@ -38,14 +37,13 @@ public class valueButton  extends GameButton{
 	public void activate()
 	{
 		this.isActive = true;
-		this.setAsActivated();
-		
+		this.setBackgroundColor(activeButtonBckgrnd);
 	}
 	
 	public void deactivate()
 	{
 		this.isActive = false;
-		this.setAsDefault();
+		this.setBackgroundColor(Color.TRANSPARENT);
 	}
 	
 	public boolean isActive()
@@ -59,8 +57,16 @@ public class valueButton  extends GameButton{
 	 */
 	public void setValue(int _newValue)
 	{
+		
 		this.value = _newValue;
-		this.setCaption(Integer.toString(value));
+		
+		if(this.value != 0)
+			this.setCaption(Integer.toString(value));
+		
+		//else
+			//this.setCaption(newCapt)
+		
+		
 		
 	}
 	
