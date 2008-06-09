@@ -56,6 +56,7 @@ public class SudokuMain extends Activity {
         /*
         Intent next = new Intent(this, CreateUser.class);
         next.putExtra("USERNAME", "Hans");
+>>>>>>> .r79
         
         this.startSubActivity(next, 0);
         
