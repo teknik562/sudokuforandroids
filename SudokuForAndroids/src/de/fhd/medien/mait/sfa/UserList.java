@@ -1,7 +1,9 @@
 package de.fhd.medien.mait.sfa;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -9,7 +11,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -28,6 +32,7 @@ public class UserList extends ListActivity
     private final String DB_USERTABLE = "sfa_user";
     // identifier of the subactivity with the input-form
     protected static final int INPUTFORM_ID = 4711; 
+    ArrayList<String> results = new ArrayList<String>();
     
       /**
        * This onCreate-Event creates the Database and nessecary Table (if not allready exists)
@@ -39,8 +44,6 @@ public class UserList extends ListActivity
           
           // Create empty database-object
           SQLiteDatabase db = null;
-          // Arraylist that will contain user-names
-          ArrayList<String> results = new ArrayList<String>();
           
           try
             {
@@ -55,7 +58,7 @@ public class UserList extends ListActivity
                           "user_name VARCHAR)");
               
               // Create a Cursor with all user-names from the database
-              Cursor c = db.rawQuery("SELECT user_name FROM "+DB_USERTABLE, null);
+              Cursor c = db.rawQuery("SELECT user_name FROM "+DB_USERTABLE+" ORDER BY user_name ASC", null);
               
               // get the column-index of the user-name-column
               int nameColumnIndex = c.getColumnIndex("user_name");
@@ -73,7 +76,7 @@ public class UserList extends ListActivity
                         {
                           i++;
                           String user_name = c.getString(nameColumnIndex);
-                          results.add(user_name);
+                          this.results.add(user_name);
                         }while(c.next());
                     }
                 }
@@ -91,7 +94,7 @@ public class UserList extends ListActivity
             }
           
           // write user-names to view
-          this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results)); 
+          this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.results)); 
             
         }
       
@@ -113,4 +116,58 @@ public class UserList extends ListActivity
             }
           return true;
         }
-  }
+      
+      protected void onActivityResult(int requestCode, int resultCode, String data, Bundle extras) 
+        {
+          super.onActivityResult(requestCode, resultCode, data, extras);
+          // Here We identify the subActivity we starte
+          if(requestCode == INPUTFORM_ID)
+            {
+              SQLiteDatabase db = null;
+              
+              try
+                {
+                  this.createDatabase(DB_NAME, 1, MODE_PRIVATE, null);
+                  
+                  // open database an give reference to "db"
+                  db = this.openDatabase(DB_NAME, null);
+                  
+                  // create table for userdatas if not already exists
+                  db.execSQL("CREATE TABLE IF NOT EXISTS " + DB_USERTABLE +
+                              "( user_id INT PRIMARY KEY, " +
+                              "user_name VARCHAR)");
+
+                  // create a date-object for user-id
+                  Date date = new Date();
+                  
+                  // insert new user in usertable
+                  db.execSQL("INSERT INTO "+DB_USERTABLE+" (user_id, user_name) VALUES ('"+(date.getTime() / 1000L)+"', '"+data+"')");
+                  // add new item to list
+                  this.results.add(data);
+                  // update list
+                  this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.results)); 
+                }
+              catch(FileNotFoundException e)
+                {} 
+              finally
+                {
+                  if (db != null)
+                    {
+                      db.close();
+                    }
+                }
+              
+            }
+        } 
+     
+      protected void onListItemClick(ListView l, View v, int position, long id) 
+        {
+          // get username of klicked listitem
+          String user = this.results.get(position);
+          
+          // create new intent with username as an extra
+          Intent next = new Intent(this, Field.class);
+          next.putExtra("userName", user);
+          
+          super.startSubActivity(next, 4712);
+    }  }
