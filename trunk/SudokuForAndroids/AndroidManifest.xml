@@ -11,6 +11,7 @@
       	<activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
         <activity android:name="Help" android:label="@string/helpTitle" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".UserList" android:label="@string/app_name"/>
+        <activity android:name=".UserForm" android:label="@string/app_name"/>
         <activity android:name=".CreateUser" android:label="@string/app_name"/>
         <activity android:name="Credits" android:theme="@android:style/Theme.Dialog" android:label="@string/creditsTitle" /> 	
     </application>
