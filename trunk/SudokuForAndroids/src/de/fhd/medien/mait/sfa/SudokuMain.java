@@ -56,7 +56,7 @@ public class SudokuMain extends Activity {
         /*
         Intent next = new Intent(this, CreateUser.class);
         next.putExtra("USERNAME", "Hans");
->>>>>>> .r79
+
         
         this.startSubActivity(next, 0);
         
@@ -189,7 +189,7 @@ public class SudokuMain extends Activity {
         		FBfontSize,						// FontSize
         		min / 8,						// optMenuBtHeight
         		min / 2,						// optMenuBtWidth
-        		min / 4							// menutStartXPos						
+        		(v.getWidth() / 2) - (min / 4)	// menutStartXPos						
         		);
     }
     
