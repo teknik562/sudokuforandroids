@@ -15,11 +15,19 @@ which are the following:\n
 1) Each row must have the numbers 1-9 occuring just once.\n
 2) Each column must have the numbers 1-9 occuring just once.\n
 3) The numbers 1-9 must occur just once in each of the 9 sub-boxes of the grid.\n\n
+By starting a game a field is created according to the selected difficulty level. The fields 
+that can't be changed are blue. All other Fields can be edited.\n
+Fields can be edited either by simply clicking a number or by clicking the submit button.\n
+After clicing the submit button a keypad is shown where the numbers can be chosen.
+Additionally, candidates for the fields can be chosen by clicking a candidate field on the keypad and afterwards clicking a number.\n
+Fields that contain candidates are displayed green.\n
+The game can be saved by choosing <i>Save Game</i> in the game menu and can be loaded by choosing <i>Load Game</i> in the main menu.\n\n
+The online highscore can be accessed via sudoku-for-androids.de.vu and can be submitted in the highscore menu.
 </string>
     
     <string name="creditsTitle">Credits</string>
     <string name="creditsText"><b>Sudoku for Android(s)</b> was developed by students of the
-    University of applied science in Düsseldorf(Germany) as their first computer science project.
+    University for applied science in Düsseldorf(Germany) as their first computer science project.
     \n\n<u>Participants:</u>\n
 Jan Monschke\n
 Abdelhak El-Boubsi\n
