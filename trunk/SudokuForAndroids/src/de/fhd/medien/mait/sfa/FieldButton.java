@@ -35,9 +35,10 @@ public class FieldButton extends GameButton{
 	 * @param _size size of the button (square)
 	 * @param _lineSize Width of the brush. '2' is best.
 	 * @param _textSize Size of the text. 10 ~ 25 is best.
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	public FieldButton(Context context, String _value, int _size, int _lineSize, int _textSize) {
-			super(context, _value, _size, _size, _lineSize, _textSize);
+	public FieldButton(Context context, String _value, int _size, int _lineSize, int _textSize, boolean _bold) {
+			super(context, _value, _size, _size, _lineSize, _textSize, _bold);
 	}
 	
 	/**
@@ -45,14 +46,14 @@ public class FieldButton extends GameButton{
 	 */
 	public void setAsCandidate(){
 		deleteCaption();
-		redraw(fillDefaultCandidate, textDefaultCandidate, fillFocusedCandidate, textFocusedCandidate, fillPressedCandidate, textPressedCandidate);
+		redraw(fillDefaultCandidate, textDefaultCandidate, fillFocusedCandidate, textFocusedCandidate, fillPressedCandidate, textPressedCandidate, false);
 	}
 	
 	/**
 	 * 
 	 */
 	public void setAsNoChange(){
-		redraw(fillDefaultNoChange, textDefaultNoChange, fillFocusedNoChange, textFocusedNoChange, fillPressedNoChange, textPressedNoChange);
+		redraw(fillDefaultNoChange, textDefaultNoChange, fillFocusedNoChange, textFocusedNoChange, fillPressedNoChange, textPressedNoChange, false);
 	}
 	
 	/**

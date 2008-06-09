@@ -52,8 +52,9 @@ public class GameButton extends Button{
 	 * @param _height height of the button
 	 * @param _lineSize Width of the brush. '2' is best.
 	 * @param _textSize Size of the text. 10 ~ 25 is best.
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	public GameButton(Context context, String _caption, int _width, int _height, int _lineSize, int _textSize) {
+	public GameButton(Context context, String _caption, int _width, int _height, int _lineSize, int _textSize, boolean _bold) {
 		super(context);
 		caption = _caption;
 	    width = _width;
@@ -77,13 +78,13 @@ public class GameButton extends Button{
 		// Create new Bitmaps for this Button
 		// 1) default
 	    this.drawEmptyBitmap(defaultBitmap, fillDefault);
-	    this.drawTextInBitmap(defaultBitmap, textDefault);
+	    this.drawTextInBitmap(defaultBitmap, textDefault, _bold);
 	    // 2) focused
 	    this.drawEmptyBitmap(focusedBitmap, fillFocused);
-	    this.drawTextInBitmap(focusedBitmap, textFocused);
+	    this.drawTextInBitmap(focusedBitmap, textFocused, _bold);
 	    // 3) pressed
 	    this.drawEmptyBitmap(pressedBitmap, fillPressed);
-	    this.drawTextInBitmap(pressedBitmap, textPressed);
+	    this.drawTextInBitmap(pressedBitmap, textPressed, _bold);
 
    	}
 	
@@ -124,8 +125,9 @@ public class GameButton extends Button{
 	 * Draws a text into a certain Button
 	 * @param current The status of the Button that should be redrawn
 	 * @param color Button is filled with this color 
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	protected void drawTextInBitmap(Bitmap current, int color){
+	protected void drawTextInBitmap(Bitmap current, int color, boolean _bold){
 		// We need the Canvas object to draw on a Bitmap
 		Canvas canvas = new Canvas();
 		
@@ -136,6 +138,7 @@ public class GameButton extends Button{
 	    Paint paintText = new Paint();
 	    paintText.setAntiAlias(true);
 	    paintText.setTextSize(textSize);
+	    paintText.setFakeBoldText(_bold);
 	    paintText.setColor(color);
 	   
 	    // Here we calculate the xPos of the text with the help of measureText()
@@ -180,8 +183,8 @@ public class GameButton extends Button{
 	/**
 	 * Redraws the Button as a normal Button with 3 states
 	 */
-	public void redraw(){
-		redraw(fillDefault,textDefault,fillFocused,textFocused,fillPressed,textPressed);
+	public void redraw(boolean _bold){
+		redraw(fillDefault,textDefault,fillFocused,textFocused,fillPressed,textPressed, _bold);
 	}
 	
 	/**
@@ -192,8 +195,9 @@ public class GameButton extends Button{
 	 * @param _textFocused
 	 * @param _fillPressed
 	 * @param _textPressed
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	public void redraw(int _fillDefault, int _textDefault, int _fillFocused, int _textFocused, int _fillPressed, int _textPressed){
+	public void redraw(int _fillDefault, int _textDefault, int _fillFocused, int _textFocused, int _fillPressed, int _textPressed, boolean _bold){
 		// We now need to reset all steps of a button
 		defaultBitmap = null;
 		focusedBitmap = null;
@@ -208,13 +212,13 @@ public class GameButton extends Button{
 		// Create new Bitmaps for this Button
 		// 1) default
 	    this.drawEmptyBitmap(defaultBitmap, _fillDefault);
-	    this.drawTextInBitmap(defaultBitmap, _textDefault);
+	    this.drawTextInBitmap(defaultBitmap, _textDefault, _bold);
 	    // 2) focused
 	    this.drawEmptyBitmap(focusedBitmap, _fillFocused);
-	    this.drawTextInBitmap(focusedBitmap, _textFocused);
+	    this.drawTextInBitmap(focusedBitmap, _textFocused, _bold);
 	    // 3) pressed
 	    this.drawEmptyBitmap(pressedBitmap, _fillPressed);
-	    this.drawTextInBitmap(pressedBitmap, _textPressed);
+	    this.drawTextInBitmap(pressedBitmap, _textPressed, _bold);
 	}
 	
 	/**
@@ -228,17 +232,19 @@ public class GameButton extends Button{
 	/**
 	 * Sets the caption of this Button and automatically redraws it.
 	 * @param newCapt new Caption for this button
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	public void setCaption(String newCapt){
+	public void setCaption(String newCapt, boolean _bold){
 		caption = newCapt;
-		redraw();
+		redraw(_bold);
 	}
 	
 	/**
 	 * Clears the caption of this button and automatically redraws it
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	public void clearCaption(){
-		setCaption("");
+	public void clearCaption(boolean _bold){
+		setCaption("", _bold);
 	}
 	
 	/**

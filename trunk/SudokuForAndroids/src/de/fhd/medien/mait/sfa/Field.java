@@ -69,7 +69,7 @@ public class Field extends Activity{
         		String caption = "";
         		if(testarray[i][j] != 0)
         			caption = Integer.toString(testarray[i][j]);
-        		buttonField[i][j] = new FieldButton(this, caption, Config.optFieldBtSize, 2, Config.FontSize);
+        		buttonField[i][j] = new FieldButton(this, caption, Config.optFieldBtSize, 2, Config.FontSize, false);
         		// when there's a ressource from the algo here will be a 
         		// decision whether the button is a normal button or a noChangeButton
         		if(testarray[i][j] != 0)
