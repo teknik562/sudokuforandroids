@@ -51,6 +51,7 @@ public class valueButton  extends GameButton{
 	{
 		this.isActive = true;
 		this.setBackgroundColor(activeButtonBckgrnd);
+		
 	}
 	
 	public void deactivate()

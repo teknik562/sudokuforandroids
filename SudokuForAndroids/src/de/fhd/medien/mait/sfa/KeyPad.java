@@ -267,6 +267,8 @@ public class KeyPad extends Activity {
 					cmdClear.deactivate();
 				}
 				
+				
+				
 				else if (!anyActiveCandidate()) 
 				{
 					KeyPad.this.setResult(RESULT_OK, codeV[1]);
@@ -282,6 +284,8 @@ public class KeyPad extends Activity {
 					deactivateValueButtons();
 					cmdClear.deactivate();
 				}
+				
+				
 				
 				else if (!anyActiveCandidate())
 				{
@@ -299,6 +303,8 @@ public class KeyPad extends Activity {
 					cmdClear.deactivate();
 				}
 				
+				
+				
 				else if (!anyActiveCandidate())
 				{
 					KeyPad.this.setResult(RESULT_OK, codeV[3]);
@@ -315,6 +321,7 @@ public class KeyPad extends Activity {
 					cmdClear.deactivate();
 				}
 				
+								
 				else if (!anyActiveCandidate())
 				{
 					KeyPad.this.setResult(RESULT_OK, codeV[4]);
@@ -330,6 +337,7 @@ public class KeyPad extends Activity {
 					deactivateValueButtons();
 					cmdClear.deactivate();
 				}
+				
 				
 				else if (!anyActiveCandidate())
 				{
@@ -348,6 +356,7 @@ public class KeyPad extends Activity {
 					cmdClear.deactivate();
 				}
 				
+				
 				else if (!anyActiveCandidate())
 				{
 					KeyPad.this.setResult(RESULT_OK, codeV[6]);
@@ -364,6 +373,7 @@ public class KeyPad extends Activity {
 					deactivateValueButtons();
 					cmdClear.deactivate();
 				}
+				
 				
 				else if (!anyActiveCandidate())
 				{
@@ -382,6 +392,8 @@ public class KeyPad extends Activity {
 					cmdClear.deactivate();
 				}
 				
+				
+				
 				else if (!anyActiveCandidate())
 				{
 					KeyPad.this.setResult(RESULT_OK, codeV[8]);
@@ -399,6 +411,7 @@ public class KeyPad extends Activity {
 					cmdClear.deactivate();
 				}
 				
+							
 				else if (!anyActiveCandidate())
 				{
 					KeyPad.this.setResult(RESULT_OK, codeV[9]);
@@ -549,5 +562,23 @@ public class KeyPad extends Activity {
 	{
 		for(valueButton b: candidate)
 			b.deactivate();
+	}
+	
+	private boolean anyFocusedCandidate()
+	{
+		for(valueButton v: candidate)
+			if(v.hasFocus())
+				return true;
+		
+		return false;
+	}
+	
+	private valueButton getFocusedCandidate()
+	{
+		for(valueButton v: candidate)
+			if(v.hasFocus())
+				return v;
+		
+		return null;
 	}
 }//end class
