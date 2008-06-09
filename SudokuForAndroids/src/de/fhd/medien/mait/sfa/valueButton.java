@@ -38,10 +38,11 @@ public class valueButton  extends GameButton{
 	 * @param _height the height of the button
 	 * @param _lineSize the linesize
 	 * @param _textSize the textsize
+	 * @param _bold whether the text should be displayed bold or not
 	 */
-	public valueButton(Context context, int _value, String _caption, int _width, int _height, int _lineSize, int _textSize)
+	public valueButton(Context context, int _value, String _caption, int _width, int _height, int _lineSize, int _textSize, boolean _bold)
 	{
-		super(context, _caption, _width, _height, _lineSize, _textSize);
+		super(context, _caption, _width, _height, _lineSize, _textSize, _bold);
 		this.label = _caption;
 		this.value = _value;
 	}

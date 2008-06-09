@@ -71,27 +71,27 @@ public class SudokuMain extends Activity {
      */
     private void createButtons(){
     	newGameBt = new GameButton(this, getString(R.string.newGame), Config.optMenuBtWidth,
-        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize);
+        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize, false);
         
         
         contGameBt = new GameButton(this, getString(R.string.contGame), Config.optMenuBtWidth,
-        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize);
+        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize, false);
         
         
         settingsBt = new GameButton(this, getString(R.string.settings), Config.optMenuBtWidth,
-        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize);
+        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize, false);
         
         
         highscoreBt = new GameButton(this, getString(R.string.highscore), Config.optMenuBtWidth,
-        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize);
+        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize, false);
         
         
         helpBt = new GameButton(this, getString(R.string.help), Config.optMenuBtWidth,
-        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize);
+        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize, false);
         
         
         creditsBt = new GameButton(this, getString(R.string.credits), Config.optMenuBtWidth,
-        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize);
+        		Config.optMenuBtHeight, Config.lineSize, Config.FontSize, false);
         
     }
     
