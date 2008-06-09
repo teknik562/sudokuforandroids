@@ -2,12 +2,13 @@ package de.fhd.medien.mait.sfa;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ArrayAdapter;
 
 
@@ -21,8 +22,12 @@ import android.widget.ArrayAdapter;
  */
 public class UserList extends ListActivity
   {
+    // Name of the database
     private final String DB_NAME = "sudokuForAndroids";
-    private final String DB_USERTABLE = "sfa_user"; 
+    // Name of the user-table
+    private final String DB_USERTABLE = "sfa_user";
+    // identifier of the subactivity with the input-form
+    protected static final int INPUTFORM_ID = 4711; 
     
       /**
        * This onCreate-Event creates the Database and nessecary Table (if not allready exists)
@@ -75,12 +80,11 @@ public class UserList extends ListActivity
               
             }
           catch(FileNotFoundException e)
-            {
-              
-            } 
+            {} 
           finally
             {
-              if (db != null)
+              // close database if open
+              if(db != null)
                 {
                   db.close();
                 }
@@ -89,5 +93,24 @@ public class UserList extends ListActivity
           // write user-names to view
           this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results)); 
             
+        }
+      
+      public boolean onCreateOptionsMenu(final Menu menu) 
+        {
+          super.onCreateOptionsMenu(menu);
+          
+          menu.add(0, 1, "Neuen Benutzer erstellen");
+          
+          return true;
+        }
+      
+      public boolean onOptionsItemSelected(Menu.Item item)
+        {
+          if(item.getId() == 1)
+            {
+              Intent i = new Intent(this, UserForm.class);
+              startSubActivity(i, INPUTFORM_ID);
+            }
+          return true;
         }
   }
