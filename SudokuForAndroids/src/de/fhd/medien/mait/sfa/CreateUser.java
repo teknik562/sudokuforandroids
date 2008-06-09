@@ -37,12 +37,9 @@ public class CreateUser extends Activity
             
             // create table for userdatas if not already exists
             db.execSQL("INSERT INTO "+DB_USERTABLE+" (user_id, user_name) VALUES ('"+(date.getTime() / 1000L)+"', '"+this.getIntent().getExtra("USERNAME")+"')");
-                        
           }
         catch(FileNotFoundException e)
-          {
-            
-          } 
+          {} 
         finally
           {
             if (db != null)
