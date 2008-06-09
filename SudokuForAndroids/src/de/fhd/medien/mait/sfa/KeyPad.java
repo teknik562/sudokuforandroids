@@ -14,9 +14,12 @@ package de.fhd.medien.mait.sfa;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.AbsoluteLayout;
+import android.widget.Toast;
 import android.widget.AbsoluteLayout.LayoutParams;
 
 
@@ -27,6 +30,9 @@ public class KeyPad extends Activity {
 	valueButton[] candidate = new valueButton[6];
 	valueButton cmdBack, cmdClear;
 	AbsoluteLayout absLayout = new AbsoluteLayout(this);
+	//the code- arrays 
+	String codeV[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "010" };
+	String codeC[] = {"10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "110" };
 	 
 	private static final String TAG = "KeyPad ";
 	
@@ -82,15 +88,15 @@ public class KeyPad extends Activity {
 			
 		{
 			digitButtonWidth = Config.displayWidth/6;
-			digitButtonHeight = Config.displayHeight/7;
-			candidateButtonHeight = Config.displayHeight/10;
+			digitButtonHeight = Config.displayHeight/6;
+			candidateButtonHeight = Config.displayHeight/9;
 			candidateButtonWidth = (digitButtonWidth*3)/6;
 			cButtonTSize = candidateButtonWidth/2;
 			digitButtonTextSize = digitButtonHeight/2;
 			cmdBtnWidth = (digitButtonWidth * 3 )/2;
-			cmdBtnHeight = Config.displayHeight/10;
+			cmdBtnHeight = Config.displayHeight/9;
 			cmdBtnTsize = cmdBtnHeight /2;
-			offsetVert = Config.displayHeight/50;
+			offsetVert = Config.displayHeight/70;
 		}
 	}
 	
@@ -99,7 +105,7 @@ public class KeyPad extends Activity {
 		//the digit- buttons are being created
 		for(int i = 0; i < value.length; i++)
 		{
-			value[i] = new valueButton(this, i+1, Integer.toString(i+1), this.digitButtonWidth, this.digitButtonHeight, 3, this.digitButtonTextSize );
+			value[i] = new valueButton(this, i+1, Integer.toString(i+1), this.digitButtonWidth, this.digitButtonHeight, 3, this.digitButtonTextSize, false );
 		}
 		
 		absLayout.addView(value[0],new AbsoluteLayout.LayoutParams(this.digitButtonWidth, this.digitButtonHeight, this.digitButtonWidth*0 , this.candidateButtonHeight + offsetVert));
@@ -129,16 +135,16 @@ public class KeyPad extends Activity {
 		
 		for(int i= 0; i <candidate.length; i++)
 		{
-			candidate[i] = new valueButton(this, 0, "C" + Integer.toString(i+1), this.candidateButtonWidth, this.candidateButtonHeight, 2, this.cButtonTSize);
+			candidate[i] = new valueButton(this, 0, "C" + Integer.toString(i+1), this.candidateButtonWidth, this.candidateButtonHeight, 2, this.cButtonTSize, false);
 			absLayout.addView(candidate[i], new AbsoluteLayout.LayoutParams(this.candidateButtonWidth, this.candidateButtonHeight, i* this.candidateButtonWidth , 0));
 			candidate[i].setOnClickListener(candidateListener);
 		}
 		
-		cmdBack = new valueButton(this, 0, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
+		cmdBack = new valueButton(this, 0, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize, false );
 		absLayout.addView(cmdBack, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, 0, this.candidateButtonHeight + 3* this.digitButtonHeight+ 2*offsetVert));
 		cmdBack.setOnClickListener(backListener);
 		
-		cmdClear = new valueButton(this,0, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize );
+		cmdClear = new valueButton(this,0, "clear field",this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize, false );
 		absLayout.addView(cmdClear, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, this.cmdBtnWidth, this.candidateButtonHeight + 3* this.digitButtonHeight+ 2*offsetVert));
 		cmdClear.setOnClickListener(clearListener);
 			
@@ -157,6 +163,7 @@ public class KeyPad extends Activity {
 			{
 				deactivateCandidates();
 				deactivateValueButtons();
+				cmdClear.deactivate();
 			}
 			
 			else
@@ -172,6 +179,7 @@ public class KeyPad extends Activity {
 	};//end onClickListener
 	
 	
+	
 	/**
 	 * this is the onClickListener for the clear- button
 	 */
@@ -184,7 +192,7 @@ public class KeyPad extends Activity {
 			if(anyActiveCandidate())
 			{
 				valueButton actCandidate = findActiveCandidate();
-				actCandidate.setValue(0);
+				actCandidate.setValue(0, true);
 				deactivateCandidates();
 				deactivateValueButtons();
 				cmdClear.deactivate();
@@ -245,6 +253,168 @@ public class KeyPad extends Activity {
 	
 	
 	
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		super.onKeyDown(keyCode, event);
+		switch( keyCode)
+		{
+			case KeyEvent.KEYCODE_1:
+				if(anyActiveCandidate()  && !doesCandidateExist(1))
+				{
+					findActiveCandidate().setValue(1, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate()) 
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[1]);
+					KeyPad.this.finish();
+				}
+				break;
+				
+			case KeyEvent.KEYCODE_2:
+				if(anyActiveCandidate() && !doesCandidateExist(2))
+				{
+					findActiveCandidate().setValue(2, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[2]);
+					KeyPad.this.finish();
+				}
+				break;
+				
+			case KeyEvent.KEYCODE_3:
+				if(anyActiveCandidate() && !doesCandidateExist(3))
+				{
+					findActiveCandidate().setValue(3, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[3]);
+					KeyPad.this.finish();
+				}
+				break;
+				
+			case KeyEvent.KEYCODE_4:
+				if(anyActiveCandidate() && !doesCandidateExist(4))
+				{
+					findActiveCandidate().setValue(4, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[4]);
+					KeyPad.this.finish();
+				}
+				break;
+				
+			case KeyEvent.KEYCODE_5:
+				if(anyActiveCandidate() && !doesCandidateExist(5))
+				{
+					findActiveCandidate().setValue(5, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[5]);
+					KeyPad.this.finish();
+				}
+				
+				break;
+				
+			case KeyEvent.KEYCODE_6:
+				if(anyActiveCandidate() && !doesCandidateExist(6))
+				{
+					findActiveCandidate().setValue(6, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[6]);
+					KeyPad.this.finish();
+				}
+				
+				break;
+				
+			case KeyEvent.KEYCODE_7:
+				if(anyActiveCandidate() && !doesCandidateExist(7))
+				{
+					findActiveCandidate().setValue(7, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[7]);
+					KeyPad.this.finish();
+				}
+				
+				break;
+				
+			case KeyEvent.KEYCODE_8:
+				if(anyActiveCandidate()  && !doesCandidateExist(8) )
+				{
+					findActiveCandidate().setValue(8, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[8]);
+					KeyPad.this.finish();
+				}
+				
+				break;
+				
+			case KeyEvent.KEYCODE_9:
+				if(anyActiveCandidate() && !doesCandidateExist(9))
+				{
+					findActiveCandidate().setValue(9, true);
+					deactivateCandidates();
+					deactivateValueButtons();
+					cmdClear.deactivate();
+				}
+				
+				else if (!anyActiveCandidate())
+				{
+					KeyPad.this.setResult(RESULT_OK, codeV[9]);
+					KeyPad.this.finish();
+				}
+				
+				break;
+				
+		}
+		
+		return true;
+		
+	}
+	
+	
+	
 	/**
 	 * this onclicklistener returns the value of the pressed Button back to the
 	 * calling activity.
@@ -255,7 +425,7 @@ public class KeyPad extends Activity {
 	 */
 	OnClickListener cmdListener = new OnClickListener()
 	{
-
+		
 		//@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -277,7 +447,7 @@ public class KeyPad extends Activity {
 				//check, if the candidate with this value is already stored
 				if(doesCandidateExist(clickedButton.value()) == false)
 				{
-					activeCandidate.setValue(clickedButton.value());
+					activeCandidate.setValue(clickedButton.value(), true);
 					activeCandidate.deactivate();
 					//set all value- buttons to the default look
 					deactivateValueButtons();
@@ -302,6 +472,19 @@ public class KeyPad extends Activity {
 				
 		return returnButton;
 	}
+	
+	OnKeyListener digitKeyListener = new OnKeyListener()
+	{
+
+		//@Override
+		public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
+			
+			return false;
+		}
+		
+	};
+	
+	
 	
 	
 	private boolean anyActiveCandidate()
@@ -340,7 +523,11 @@ public class KeyPad extends Activity {
 	{
 		for(valueButton v: candidate)
 			if(v.value() == _value)
+			{
+				Toast.makeText(this, "candidate " + Integer.toString(_value)+ " already exists!",
+																				Toast.LENGTH_SHORT).show();
 				return true;
+			}
 		
 		return false;
 	}

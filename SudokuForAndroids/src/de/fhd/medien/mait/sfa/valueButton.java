@@ -68,16 +68,16 @@ public class valueButton  extends GameButton{
 	 * this method changes the value of the button and the shown text.
 	 * @param _newValue the new Value of the button
 	 */
-	public void setValue(int _newValue)
+	public void setValue(int _newValue, boolean _bold)
 	{
 		
 		this.value = _newValue;
 		
 		if(this.value == 0)
-			this.setCaption(this.label);
+			this.setCaption(this.label, !_bold);
 		
 		else
-			this.setCaption(Integer.toString(_newValue));
+			this.setCaption(Integer.toString(_newValue), _bold);
 			
 		
 	}
@@ -86,12 +86,12 @@ public class valueButton  extends GameButton{
 	 * Sets the Button active
 	 */
 	public void setAsActivated(){
-		redraw(fillDefaultActivated, textDefaultActivated, fillFocusedActivated, textFocusedActivated, fillPressedActivated, textPressedActivated);
+		redraw(fillDefaultActivated, textDefaultActivated, fillFocusedActivated, textFocusedActivated, fillPressedActivated, textPressedActivated, false);
 	}
 	
 	public void setAsDefault()
 	{
-		redraw();
+		redraw(false);
 	}
 	
 	public int value()
