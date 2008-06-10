@@ -81,6 +81,7 @@ public class SudokuMain extends Activity {
         helpBt.setOnClickListener(helpClick);
         creditsBt.setOnClickListener(creditsClick);
         newGameBt.setOnClickListener(dummyNewGameClick);
+        settingsBt.setOnClickListener(settingsClick);
         setContentView(absLayoutMenu);
         
         
@@ -217,6 +218,18 @@ public class SudokuMain extends Activity {
 			// TODO Auto-generated method stub
 				Intent showKeyPad = new Intent(SudokuMain.this, KeyPad.class);
 				startActivity(showKeyPad);
+		}
+    	
+    };
+    
+   
+    OnClickListener settingsClick = new OnClickListener(){
+
+		@Override
+		public void onClick(View arg0) {
+			Intent showSettings = new Intent(SudokuMain.this, Settings.class);
+			startActivity(showSettings);
+			
 		}
     	
     };
