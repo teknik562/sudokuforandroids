@@ -35,6 +35,7 @@ public class SudokuMain extends Activity {
 	Matrix picMatrix; 
 	int picWidth;
 	int picHeight;
+	int upperOffset;
 	
 	int picNeededWidth, picNeededHeight;
 	float picScaleFact;
@@ -53,17 +54,14 @@ public class SudokuMain extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
-        Log.v(TAG, "in onCreate!");
         
         // get the info from the display and calculate layout
         calculateProperties();
         
-        Log.v(TAG, "nach calculateProperties()");
-        
         picAndroidOrg = BitmapFactory.decodeResource(getResources(),
-				R.drawable.headgraphic);
+				R.drawable.icondroid);
         
-        Log.v(TAG, "bild laden fertig!");
+        
      
         //calculate the size and position for the logo depending on Config
         calculatePicProperties();
@@ -135,27 +133,27 @@ public class SudokuMain extends Activity {
     private void placeButtons(){
     absLayoutMenu.addView(newGameBt, 
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
-					Config.optMenuBtHeight, Config.menutStartXPos, 10 + picAndroidScaled.getHeight()));
+					Config.optMenuBtHeight, Config.menutStartXPos,  picAndroidScaled.getHeight() + upperOffset));
     
     absLayoutMenu.addView(contGameBt, 
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
-					Config.optMenuBtHeight, Config.menutStartXPos, 10 + 1 * Config.optMenuBtHeight + picAndroidScaled.getHeight()));
+					Config.optMenuBtHeight, Config.menutStartXPos,  1 * Config.optMenuBtHeight + picAndroidScaled.getHeight() + upperOffset));
     
     absLayoutMenu.addView(settingsBt, 
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
-					Config.optMenuBtHeight, Config.menutStartXPos, 10 + 2 * Config.optMenuBtHeight + picAndroidScaled.getHeight()));
+					Config.optMenuBtHeight, Config.menutStartXPos,  2 * Config.optMenuBtHeight + picAndroidScaled.getHeight()+ upperOffset));
     
     absLayoutMenu.addView(highscoreBt, 
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
-					Config.optMenuBtHeight, Config.menutStartXPos, 10 + 3 * Config.optMenuBtHeight + picAndroidScaled.getHeight()));
+					Config.optMenuBtHeight, Config.menutStartXPos,  3 * Config.optMenuBtHeight + picAndroidScaled.getHeight()+ upperOffset));
     
     absLayoutMenu.addView(helpBt, 
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
-					Config.optMenuBtHeight, Config.menutStartXPos, 10 + 4 * Config.optMenuBtHeight + picAndroidScaled.getHeight()));
+					Config.optMenuBtHeight, Config.menutStartXPos,  4 * Config.optMenuBtHeight + picAndroidScaled.getHeight()+ upperOffset));
     
     absLayoutMenu.addView(creditsBt, 
 			new AbsoluteLayout.LayoutParams(Config.optMenuBtWidth,
-					Config.optMenuBtHeight, Config.menutStartXPos, 10 + 5 * Config.optMenuBtHeight + picAndroidScaled.getHeight()));
+					Config.optMenuBtHeight, Config.menutStartXPos, 5 * Config.optMenuBtHeight + picAndroidScaled.getHeight()+ upperOffset));
     }
     
     
@@ -167,20 +165,18 @@ public class SudokuMain extends Activity {
     	
     	absLayoutMenu.addView(picAndroidView,
     			new AbsoluteLayout.LayoutParams(picAndroidScaled.getWidth(),
-    					picAndroidScaled.getHeight(), Config.displayWidth/2 - (int)(picAndroidOrg.getWidth()* picScaleFact)/2, 0));
+    					picAndroidScaled.getHeight(), Config.displayWidth/2 - (int)(picAndroidOrg.getWidth()* picScaleFact)/2, upperOffset));
     }
     
     private void calculatePicProperties()
     {
     	
-    	Log.v(TAG, "in calculatePicProperties");
     	
     	picHeight = picAndroidOrg.getHeight();
     	picWidth = picAndroidOrg.getWidth();
     	picNeededHeight = (Config.displayHeight - 6*Config.optMenuBtHeight - 
     									Config.displayHeight/20 - Config.displayHeight/7);
     	
-    	Log.v(TAG, "nach neededHeight");
     	
     	picScaleFact = (float) picNeededHeight / picHeight;
     	
@@ -188,7 +184,7 @@ public class SudokuMain extends Activity {
     	picMatrix = new Matrix();
     	picMatrix.postScale(picScaleFact, picScaleFact);
     	
-    	Log.v(TAG, "Matrix erstellt und skaliert");
+    	
     	
     	//a new and scaled Bitmap is created
     	picAndroidScaled = Bitmap.createBitmap(picAndroidOrg,
@@ -201,6 +197,9 @@ public class SudokuMain extends Activity {
     	Log.v(TAG, "picAndroidScaled erstellt");
     	
     	picAndroidDraw = new BitmapDrawable(picAndroidScaled); 
+    	
+    	//the offset between the upper screen border and the icon
+    	upperOffset = (Config.displayHeight - (picAndroidScaled.getHeight() + 6*Config.optMenuBtHeight))/4;
     	
     	
     }
@@ -272,6 +271,8 @@ public class SudokuMain extends Activity {
         		min / 2,						// optMenuBtWidth
         		(v.getWidth() / 2) - (min / 4)	// menutStartXPos						
         		);
+        
+       
     }
     
 }
