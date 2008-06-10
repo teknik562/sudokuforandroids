@@ -90,6 +90,7 @@ public class UserList extends ListActivity
               if(db != null)
                 {
                   db.close();
+         
                 }
             }
           
@@ -117,46 +118,52 @@ public class UserList extends ListActivity
           return true;
         }
       
+      /**
+       * This method inserts a new user.
+       * It's called when a subactivity is finished
+       */
       protected void onActivityResult(int requestCode, int resultCode, String data, Bundle extras) 
         {
           super.onActivityResult(requestCode, resultCode, data, extras);
-          // Here We identify the subActivity we starte
-          if(requestCode == INPUTFORM_ID)
+          // check if name is given
+          if(data.length() > 0)
             {
-              SQLiteDatabase db = null;
-              
-              try
+              // check if subactivity was input-form
+              if(requestCode == INPUTFORM_ID)
                 {
-                  this.createDatabase(DB_NAME, 1, MODE_PRIVATE, null);
+                  SQLiteDatabase db = null;
                   
-                  // open database an give reference to "db"
-                  db = this.openDatabase(DB_NAME, null);
-                  
-                  // create table for userdatas if not already exists
-                  db.execSQL("CREATE TABLE IF NOT EXISTS " + DB_USERTABLE +
-                              "( user_id INT PRIMARY KEY, " +
-                              "user_name VARCHAR)");
-
-                  // create a date-object for user-id
-                  Date date = new Date();
-                  
-                  // insert new user in usertable
-                  db.execSQL("INSERT INTO "+DB_USERTABLE+" (user_id, user_name) VALUES ('"+(date.getTime() / 1000L)+"', '"+data+"')");
-                  // add new item to list
-                  this.results.add(data);
-                  // update list
-                  this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.results)); 
-                }
-              catch(FileNotFoundException e)
-                {} 
-              finally
-                {
-                  if (db != null)
+                  try
                     {
-                      db.close();
+                      this.createDatabase(DB_NAME, 1, MODE_PRIVATE, null);
+                      
+                      // open database an give reference to "db"
+                      db = this.openDatabase(DB_NAME, null);
+                          
+                      // create a date-object for user-id
+                      Date date = new Date();
+                      
+                      // insert new user in usertable
+                      db.execSQL("INSERT INTO "+DB_USERTABLE+" (user_id, user_name) VALUES ('"+(date.getTime() / 1000L)+"', '"+data+"')");
+                      // add new item to list
+                      this.results.add(data);
+                      // update list
+                      this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.results)); 
+                    }
+                  catch(FileNotFoundException e)
+                    {} 
+                  finally
+                    {
+                      if (db != null)
+                        {
+                          db.close();
+                        }
                     }
                 }
-              
+            }
+          else
+            {
+              showAlert("Keine Eingabe", 1, "Bitte einen Namen eingeben!", "OK", false);
             }
         } 
      
