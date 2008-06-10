@@ -174,8 +174,12 @@ public class SudokuMain extends Activity {
     	
     	picHeight = picAndroidOrg.getHeight();
     	picWidth = picAndroidOrg.getWidth();
-    	picNeededHeight = (Config.displayHeight - 6*Config.optMenuBtHeight - 
-    									Config.displayHeight/20 - Config.displayHeight/7);
+    	
+    	if(Config.displayHeight > 340)
+    		picNeededHeight = (Config.displayHeight - 6*Config.optMenuBtHeight - Config.displayHeight/20 - Config.displayHeight/7) ;
+    		
+    	else
+    	picNeededHeight = (Config.displayHeight - 6*Config.optMenuBtHeight - Config.displayHeight/20) ;
     	
     	
     	picScaleFact = (float) picNeededHeight / picHeight;
