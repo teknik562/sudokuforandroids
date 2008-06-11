@@ -1,7 +1,10 @@
 package de.fhd.medien.mait.sfa;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout.LayoutParams;
 
@@ -40,14 +43,35 @@ public class Field extends Activity{
         // initiate the Layout
         fieldLayout.setLayoutParams(new AbsoluteLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 0, 0));
         
+        
+        
+        	
         // request a puzzle basing on the set difficulty
         
         // create the field
         createField();
         
+        for(int x = 0; x < buttonField.length;  x++)
+        	for(int y = 0; y < buttonField[x].length; y++)
+        		buttonField[x][y].setOnClickListener(fieldClick);
+        
         // make the field visible
         setContentView(fieldLayout);
     }
+    
+   
+    
+    OnClickListener fieldClick = new OnClickListener()
+    {
+
+		//@Override
+		public void onClick(View arg0) {
+			Intent startKeyPad = new Intent(Field.this, KeyPad.class);
+			startActivity(startKeyPad);
+			
+		}
+    	
+    };
     
     /**
      * Creates a Field to play on!
