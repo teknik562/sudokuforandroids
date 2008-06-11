@@ -230,8 +230,8 @@ public class SudokuMain extends Activity {
 		//@Override
 		public void onClick(View arg0) {
 			
-				Intent showKeyPad = new Intent(SudokuMain.this, KeyPad.class);
-				startActivity(showKeyPad);
+				Intent showField = new Intent(SudokuMain.this, Field.class);
+				startActivity(showField);
 		}
     	
     };
