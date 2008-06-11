@@ -99,21 +99,34 @@ public class UserList extends ListActivity
             
         }
       
+      /**
+       * This method creates the Otions-Menu
+       */
       public boolean onCreateOptionsMenu(final Menu menu) 
         {
           super.onCreateOptionsMenu(menu);
           
           menu.add(0, 1, "Neuen Benutzer erstellen");
+          menu.add(0, 2, "Highscore (temp)");
           
           return true;
         }
       
+      /**
+       * This method handles clicks on items of the options-menu
+       */
       public boolean onOptionsItemSelected(Menu.Item item)
         {
+          // go to input form
           if(item.getId() == 1)
             {
               Intent i = new Intent(this, UserForm.class);
               startSubActivity(i, INPUTFORM_ID);
+            }
+          if(item.getId() == 2)
+            {
+              Intent i = new Intent(this, Highscore.class);
+              startSubActivity(i, 4646);
             }
           return true;
         }
@@ -167,14 +180,18 @@ public class UserList extends ListActivity
             }
         } 
      
+      /**
+       * this method handles the clicks on liste-items
+       */
       protected void onListItemClick(ListView l, View v, int position, long id) 
         {
           // get username of klicked listitem
           String user = this.results.get(position);
           
           // create new intent with username as an extra
-          Intent next = new Intent(this, Field.class);
+          Intent next = new Intent(this, Algo.class);
           next.putExtra("userName", user);
           
-          super.startSubActivity(next, 4712);
+          super.startActivity(next);
+          this.finish();
     }  }
