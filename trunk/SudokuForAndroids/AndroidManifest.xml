@@ -9,6 +9,7 @@
             </intent-filter>
        </activity>
       	<activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
+      	<activity android:name=".Settings" android:theme="@android:style/Theme.Dialog" android:label="Settings"/>
         <activity android:name="Help" android:label="@string/helpTitle" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".UserList" android:label="@string/app_name"/>
         <activity android:name=".UserForm" android:label="@string/app_name"/>

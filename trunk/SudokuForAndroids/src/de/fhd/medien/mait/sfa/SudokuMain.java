@@ -31,14 +31,13 @@ public class SudokuMain extends Activity {
 	BitmapDrawable picAndroidDraw;
 	ImageView picAndroidView;
 	
-	//The scale- matrix which scales the android- logo
-	Matrix picMatrix; 
-	int picWidth;
+	//variables for the scaling and positioning of the android- icon
+	Matrix picMatrix; //the scaling- matrix
+	int picWidth; 	
 	int picHeight;
 	int upperOffset;
-	
 	int picNeededWidth, picNeededHeight;
-	float picScaleFact;
+	float picScaleFact;  //scale- factor
 	
 	
 	// Buttons
@@ -49,6 +48,10 @@ public class SudokuMain extends Activity {
 	GameButton helpBt;
 	GameButton creditsBt;
 	
+	//variable for the cheat- mode
+	boolean cheatModeActive = false;
+	
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle icicle) {
@@ -58,6 +61,7 @@ public class SudokuMain extends Activity {
         // get the info from the display and calculate layout
         calculateProperties();
         
+        //load the icon- picture from the res- directory and store it in a Bitmap
         picAndroidOrg = BitmapFactory.decodeResource(getResources(),
 				R.drawable.icondroid);
         
@@ -71,7 +75,7 @@ public class SudokuMain extends Activity {
         absLayoutMenu.setLayoutParams(new AbsoluteLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 0, 0));
         absLayoutMenu.setBackgroundColor(fillBgMenu);
 
-        // create & place Buttons on layout
+        // create & place Buttons & icon on layout
         placePicture();
         createButtons();
         placeButtons();
@@ -158,6 +162,10 @@ public class SudokuMain extends Activity {
     }
     
     
+    /**
+     * this method creates a new imageView and puts the android- icon onto it.
+     * The icon is scaled and positioned relatively to the display- sizes
+     */
     private void placePicture()
     {
     	picAndroidView = new ImageView(this);
@@ -169,29 +177,33 @@ public class SudokuMain extends Activity {
     					picAndroidScaled.getHeight(), Config.displayWidth/2 - (int)(picAndroidOrg.getWidth()* picScaleFact)/2, upperOffset));
     }
     
+    
+    /**
+     * this method calculates the properties of the picture. E.g. what size it needs to be depending on 
+     * the display- resolution. The method distinguishes between HVGA and QVGA and sets own size- information
+     * for both resolutions
+     */
     private void calculatePicProperties()
     {
-    	
-    	
-    	picHeight = picAndroidOrg.getHeight();
+    	picHeight = picAndroidOrg.getHeight(); //the height and Width of the original bitmap is stored in variables
     	picWidth = picAndroidOrg.getWidth();
     	
-    	if(Config.displayHeight > 340)
+    	if(Config.displayHeight > 340)   //is the display HVGA....
     		picNeededHeight = (Config.displayHeight - 6*Config.optMenuBtHeight - Config.displayHeight/20 - Config.displayHeight/7) ;
-    		
-    	else
+    									
+    	else							//...or smaller?
     	picNeededHeight = (Config.displayHeight - 6*Config.optMenuBtHeight - Config.displayHeight/20) ;
     	
+    	//the scaling- factor is calculated
+    	picScaleFact = (float) picNeededHeight / picHeight; 
     	
-    	picScaleFact = (float) picNeededHeight / picHeight;
-    	
-    	
+    	//a new scaling- matrix is created and is scaled with the scaling- factor
     	picMatrix = new Matrix();
     	picMatrix.postScale(picScaleFact, picScaleFact);
     	
     	
     	
-    	//a new and scaled Bitmap is created
+    	//with the help of the matrix a new and scaled Bitmap is created
     	picAndroidScaled = Bitmap.createBitmap(picAndroidOrg,
     											0,  //x- position
     											0,			// y- position
@@ -199,8 +211,8 @@ public class SudokuMain extends Activity {
     											picAndroidOrg.getHeight(), // the height
     											picMatrix,  //the matrix which scales the pic
     											true);  //filter
-    	Log.v(TAG, "picAndroidScaled erstellt");
     	
+    	//in order to be able to put it onto an image- view, a new drawable bitmap is created depending on the scaled bitmap
     	picAndroidDraw = new BitmapDrawable(picAndroidScaled); 
     	
     	//the offset between the upper screen border and the icon
@@ -209,13 +221,15 @@ public class SudokuMain extends Activity {
     	
     }
     
-    
+    /**
+     * this onClickListener starts the Keypad on testing- reasons
+     */
     OnClickListener dummyNewGameClick = new OnClickListener()
     {
 
 		//@Override
 		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
+			
 				Intent showKeyPad = new Intent(SudokuMain.this, KeyPad.class);
 				startActivity(showKeyPad);
 		}
@@ -223,6 +237,9 @@ public class SudokuMain extends Activity {
     };
     
    
+    /**
+     * this onClickListener launches the settings- screen
+     */
     OnClickListener settingsClick = new OnClickListener(){
 
 		@Override

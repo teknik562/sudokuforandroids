@@ -38,7 +38,7 @@ public class Settings extends Activity {
 		super.onCreate(icicle);
 		
 		btnWidth = Config.displayWidth/3;
-		btnHeight = Config.displayHeight/15;
+		btnHeight = Config.displayHeight/10;
 		
 		
 		upperOffset = Config.displayHeight/90;
@@ -52,20 +52,37 @@ public class Settings extends Activity {
 	     //instantiate the widgets
 	     cheatCheckBox = new CheckBox(this);
 	     cheatText = new TextView(this);
+	     cheatText.setText(R.string.cheatText);
+	     
+	     cheatText.setLayoutParams(new AbsoluteLayout.LayoutParams(assTextWidth, assTextHeight, leftOffset ,assCheckBoxHeight + upperOffset));
+	     
+	     if(Config.displayHeight <= 340)
+	     {
+	    	 
+	    	 cheatText.setTextSize(10);
+	     }
+	     
+	     if(Config.displayHeight <= 240)
+	    	 cheatText.setTextSize(8);
+	    	 
+	     
+	     
+	     
 	     cmdBack = new GameButton(this, "back", btnWidth, btnHeight, 3, btnHeight/2, false );
+	     
+	     cheatCheckBox.setText("Cheat- mode active");
+	     
+
 	     
 	     
 	     absLayoutSettings.addView(cheatCheckBox,new AbsoluteLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, leftOffset , upperOffset));
-	     absLayoutSettings.addView(cheatText,new AbsoluteLayout.LayoutParams(assTextWidth, assTextHeight, leftOffset ,assCheckBoxHeight + upperOffset));
-	     Log.v("settingsss: ", Integer.toString(cheatText.getMeasuredHeight()));
-	     absLayoutSettings.addView(cmdBack, new AbsoluteLayout.LayoutParams(btnWidth, btnHeight, (assTextWidth/2 - btnWidth/2) + Config.displayWidth/24  ,upperOffset + assCheckBoxHeight + assTextHeight));
-
+	     absLayoutSettings.addView(cheatText, new AbsoluteLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT , leftOffset, assCheckBoxHeight + upperOffset));
+	     absLayoutSettings.addView(cmdBack, new AbsoluteLayout.LayoutParams(btnWidth, btnHeight, leftOffset ,assCheckBoxHeight + upperOffset + assTextHeight));
 	     cmdBack.setOnClickListener(backClick);
 	     
-	     cheatCheckBox.setText("Cheat- mode active");
-	     cheatText.setText(R.string.cheatText);
 	     setContentView(absLayoutSettings);
-		
+	     
+	     Log.v("Settingss: ", "anzahl der linien " + cheatText.getLineCount());
 	}
 	
 	OnClickListener backClick = new OnClickListener()
