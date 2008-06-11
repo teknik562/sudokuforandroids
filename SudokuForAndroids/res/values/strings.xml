@@ -36,4 +36,17 @@ Dominik Lazarek\n\n
 <u>Professor:</u>\n
 Prof. Dr.-Ing. MSc. Markus Dahm
     </string>
+    
+     <string name="cheatText">
+     by activating the cheat- mode \na clicked field is solved instantly. \nBut be careful! The cheat- mode \nhas consequences on your \nhighscore!
+     </string>
+     
+     <string name="cheatTextsmall">
+     by activating the cheat-\nmode a clicked field is \nsolved instantly. But be \ncareful! The cheat- mode \nhas consequences on \nyour highscore!
+     </string>
+     
+     <string name="cheatTextLong">
+     by activating the cheat-mode a clicked\n field is solved instantly. But be \ncareful! The cheat- mode has \nconsequences on your highscore!
+    </string>
+    
 </resources>
