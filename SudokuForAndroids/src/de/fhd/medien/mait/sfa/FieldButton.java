@@ -55,6 +55,18 @@ public class FieldButton extends GameButton{
 			
 	}
 	
+	public void deleteCandidates()
+	{
+		for(int i = 0; i < candidateValues.length; i++)
+			candidateValues[i] = 0;
+	}
+	
+	
+	public void setAsNoCandidate()
+	{
+		redraw(false);
+	}
+	
 	/**
 	 * Makes the Button look like a Button having at least one candidate
 	 */
@@ -121,7 +133,20 @@ public class FieldButton extends GameButton{
 	public int getValue(){
 		return this.value;
 	}
-	
+	/**
+     * this method checks the field's candidate- values, if somethin is written in them
+     * @return is at least  one candidate != 0
+     */
+    public boolean checkCValues()
+    {
+    	for(int i: candidateValues)
+    	{
+    		if( i != 0)
+    			return true;
+    	}
+    	
+    	return false;
+    }
 	
 	/**
 	 * this method sets the value of the field. But first the method distinguishes
@@ -151,5 +176,11 @@ public class FieldButton extends GameButton{
 		}
 			
 	} // end method
+	
+	public void setCandidateValue(int _index, int _value)
+	{
+		this.candidateValues[_index] = _value;
+	}
+	
 	
 }//end class
