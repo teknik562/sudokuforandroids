@@ -75,7 +75,7 @@ public class valueButton  extends GameButton{
 		this.value = _newValue;
 		
 		if(this.value == 0)
-			this.setCaption(this.label, !_bold);
+			this.setCaption(this.label, false);
 		
 		else
 			this.setCaption(Integer.toString(_newValue), _bold);

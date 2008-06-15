@@ -25,16 +25,14 @@ import android.widget.AbsoluteLayout.LayoutParams;
 
 public class KeyPad extends Activity {
 
-	
+	Bundle canB = new Bundle();
 	valueButton[] value = new valueButton[9];
 	valueButton[] candidate = new valueButton[6];
 	valueButton cmdBack, cmdClear;
 	AbsoluteLayout absLayout = new AbsoluteLayout(this);
 	//the code- arrays 
-	String codeV[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "010" };
-	String codeC[] = {"10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "110" };
-	 
-	private static final String TAG = "KeyPad ";
+	String codeV[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+	
 	
 	int digitButtonWidth;
 	int digitButtonHeight;
@@ -59,7 +57,7 @@ public class KeyPad extends Activity {
 		
 		//the Buttons of the keypads are being assigned and initialized
 		initializeButtons();
-		
+		initializeCandidates();
 		
 	} //end onCreate
 	
@@ -142,9 +140,6 @@ public class KeyPad extends Activity {
 		candidate[4].setValue(b.getInt("C5"), true);
 		candidate[5].setValue(b.getInt("C6"), true);
 		
-		for(valueButton v : candidate)
-			if(v.value() == 0);
-		
 	}
 	
 	/**
@@ -191,8 +186,9 @@ public class KeyPad extends Activity {
 			
 			else
 			{
+				fillcanBundle();
 				// the value " 10 " is the code for "abort"
-				KeyPad.this.setResult(RESULT_OK, codeV[10]);
+				KeyPad.this.setResult(RESULT_OK, codeV[10], canB);
 				KeyPad.this.finish();
 			}
 				
@@ -223,8 +219,9 @@ public class KeyPad extends Activity {
 			
 			else
 			{
+				fillcanBundle();
 				//the value "0" is the code for "clear field"
-				KeyPad.this.setResult(RESULT_OK, codeV[0]);
+				KeyPad.this.setResult(RESULT_OK, codeV[0], canB);
 				KeyPad.this.finish();
 			}
 				
@@ -294,7 +291,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate()) 
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[1]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[1], canB);
 					KeyPad.this.finish();
 				}
 				break;
@@ -312,7 +310,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[2]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[2], canB);
 					KeyPad.this.finish();
 				}
 				break;
@@ -330,7 +329,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[3]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[3], canB);
 					KeyPad.this.finish();
 				}
 				break;
@@ -347,7 +347,8 @@ public class KeyPad extends Activity {
 								
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[4]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[4], canB);
 					KeyPad.this.finish();
 				}
 				break;
@@ -364,7 +365,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[5]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[5], canB);
 					KeyPad.this.finish();
 				}
 				
@@ -382,7 +384,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[6]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[6], canB);
 					KeyPad.this.finish();
 				}
 				
@@ -400,7 +403,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[7]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[7], canB);
 					KeyPad.this.finish();
 				}
 				
@@ -419,7 +423,8 @@ public class KeyPad extends Activity {
 				
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[8]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[8], canB);
 					KeyPad.this.finish();
 				}
 				
@@ -437,7 +442,8 @@ public class KeyPad extends Activity {
 							
 				else if (!anyActiveCandidate())
 				{
-					KeyPad.this.setResult(RESULT_OK, codeV[9]);
+					fillcanBundle();
+					KeyPad.this.setResult(RESULT_OK, codeV[9], canB);
 					KeyPad.this.finish();
 				}
 				
@@ -471,7 +477,8 @@ public class KeyPad extends Activity {
 			//if there is no active candidate
 			if(anyActiveCandidate() == false) 
 			{
-				KeyPad.this.setResult(RESULT_OK, codeV[clickedButton.value()]);
+				fillcanBundle();
+				KeyPad.this.setResult(RESULT_OK, codeV[clickedButton.value()], canB);
 				KeyPad.this.finish();
 			}
 			
@@ -509,18 +516,7 @@ public class KeyPad extends Activity {
 		return returnButton;
 	}
 	
-	OnKeyListener digitKeyListener = new OnKeyListener()
-	{
-
-		//@Override
-		public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
-			
-			return false;
-		}
 		
-	};
-	
-	
 	
 	
 	private boolean anyActiveCandidate()
@@ -604,4 +600,17 @@ public class KeyPad extends Activity {
 		
 		return null;
 	}
+	
+	private void fillcanBundle()
+	{
+		canB.putInt("C1", candidate[0].value());
+		canB.putInt("C2", candidate[1].value());
+		canB.putInt("C3", candidate[2].value());
+		canB.putInt("C4", candidate[3].value());
+		canB.putInt("C5", candidate[4].value());
+		canB.putInt("C6", candidate[5].value());
+	}
+	
+	
+	
 }//end class

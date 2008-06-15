@@ -157,6 +157,7 @@ public class Field extends Activity{
         }
     }
     
+    
     /**
      * this method searches for a clicked field an returns ist back
      * @return the clicked field
@@ -176,21 +177,37 @@ public class Field extends Activity{
     /**
      * this method is called when a subactivity is closed
      */
-    protected void onActivityResult(int requestCode,int resultCode, String data, Bundle extras)
+    protected void onActivityResult(int requestCode,int resultCode, String data, Bundle canB)
     {
-		//the value is being extracted from the string.
-		int value = Integer.parseInt(data.substring(1));
+    	FieldButton clickedField = getClickedField();
+    	
+    	clickedField.setCandidateValue(0, canB.getInt("C1"));
+    	clickedField.setCandidateValue(1, canB.getInt("C2"));
+    	clickedField.setCandidateValue(2, canB.getInt("C3"));
+    	clickedField.setCandidateValue(3, canB.getInt("C4"));
+    	clickedField.setCandidateValue(4, canB.getInt("C5"));
+    	clickedField.setCandidateValue(5, canB.getInt("C6"));
+    
+    	if(clickedField.checkCValues()==true)
+    		clickedField.setAsCandidate();
+    	
+    	else
+    		clickedField.setAsNoCandidate();
+    	
+    	//the value is being extracted from the string.
+		int value = Integer.parseInt(data);
 		
 		if(requestCode == KEYPAD_REQUEST_CODE)
 		{
 			if(resultCode == RESULT_OK)
 			{
-				if(data.startsWith("0"))
-				{
-					FieldButton clickedField = getClickedField();
 					clickedField.setValue(value);
+					
+					if(value != 10 && value != 0)
+						clickedField.deleteCandidates();
+					
 					clickedField.setNotClicked();
-				}
+				
 			} //end if inner
 		}//end if outer
     	    		
