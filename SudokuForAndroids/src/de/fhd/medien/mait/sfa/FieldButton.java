@@ -6,6 +6,15 @@ public class FieldButton extends GameButton{
 	
 	static final int maxNrCandidates = 6;
 	
+	//this boolean- variable marks the fieldButton as the Button,
+	//which was clicked, after the Keypad- activity returns to the field
+	private boolean clicked = false; 
+	
+	public boolean changable = true;
+	
+	
+	
+	private int value = 0;
 	private int[] candidateValues = new int[maxNrCandidates];
 	
 	// colors that are only used by Candidate Buttons
@@ -39,6 +48,7 @@ public class FieldButton extends GameButton{
 	 */
 	public FieldButton(Context context, String _value, int _size, int _lineSize, int _textSize, boolean _bold) {
 			super(context, _value, _size, _size, _lineSize, _textSize, _bold);
+			
 	}
 	
 	/**
@@ -50,10 +60,37 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
+	 * this method sets the "clicked"- variable to true
+	 */
+	public void setClicked()
+	{
+		this.clicked = true;
+	}
+	
+	/**
+	 * this method "deactivates" the button/ sets the "clicked"- variable to false again
+	 */
+	public void setNotClicked()
+	{
+		this.clicked = false;
+	}
+	
+	/**
+	 * 
+	 * @return was the field clicked before?
+	 */
+	public boolean isClicked()
+	{
+		return this.clicked;
+	}
+	
+	/**
 	 * 
 	 */
-	public void setAsNoChange(){
+	public void setAsNoChange()
+	{
 		redraw(fillDefaultNoChange, textDefaultNoChange, fillFocusedNoChange, textFocusedNoChange, fillPressedNoChange, textPressedNoChange, false);
+		this.changable = false;
 	}
 	
 	/**
@@ -78,7 +115,37 @@ public class FieldButton extends GameButton{
 	 * @return value of the Button
 	 */
 	public int getValue(){
-		return Integer.parseInt(getCaption());
+		return this.value;
 	}
 	
-}
+	
+	/**
+	 * this method sets the value of the field. But first the method distinguishes
+	 * between coded values like 0 or 10 or "real" values
+	 * @param _newValue the Value which will be written in the field
+	 */
+	public void setValue(int _newValue)
+	{
+		int oldValue = this.value;
+		if(_newValue == 10); //in this case: do nothing!
+		
+		else if(_newValue == 0 && this.changable == true)
+		{
+			this.value = 0;  //in the case of "10" the Field is cleared
+			this.setCaption("", false);
+		}
+		
+		//in any other cases the value can be stored directly
+		else
+		{
+			if(this.changable == true)
+			{
+				this.value = _newValue;
+				this.setCaption(Integer.toString(value), false);
+			}
+			
+		}
+			
+	} // end method
+	
+}//end class
