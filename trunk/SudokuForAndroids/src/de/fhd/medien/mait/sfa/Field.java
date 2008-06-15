@@ -47,7 +47,8 @@ public class Field extends Activity{
                
                for(int x = 0; x < buttonField.length;  x++)
                	for(int y = 0; y < buttonField[x].length; y++)
-               		buttonField[x][y].setOnClickListener(fieldClick);
+               		if(buttonField[x][y].changeable == true)
+               			buttonField[x][y].setOnClickListener(fieldClick);
                
                //when done
         	   pd.dismiss(); 
@@ -69,14 +70,9 @@ public class Field extends Activity{
         
         	
         // request a puzzle basing on the set difficulty
+
         
-        // create the field
-        createField();
         
-        for(int x = 0; x < buttonField.length;  x++)
-        	for(int y = 0; y < buttonField[x].length; y++)
-        		if(buttonField[x][y].changeable == true)
-        			buttonField[x][y].setOnClickListener(fieldClick);
 
         // make the field visible
         setContentView(fieldLayout);
