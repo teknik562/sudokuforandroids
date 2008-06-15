@@ -84,17 +84,39 @@ public class Field extends Activity{
     
    
     
+    /**
+     * this is the onClickListener for each field. The values of the candidates are 
+     * put into a bundle 
+     */
     OnClickListener fieldClick = new OnClickListener()
     {
 
 		//@Override
 		public void onClick(View v) {
 			FieldButton clickedField = (FieldButton) v;
-			clickedField.setClicked();
 			
-			Intent startKeyPad = new Intent(Field.this, KeyPad.class);
-			startSubActivity(startKeyPad, KEYPAD_REQUEST_CODE);
-			
+			if(clickedField.changeable == true)
+			{
+				clickedField.setClicked();
+				
+				Bundle b = new Bundle();
+				
+				b.putInt("C1", clickedField.getCandidate(0));
+				b.putInt("C2", clickedField.getCandidate(1));
+				b.putInt("C3", clickedField.getCandidate(2));
+				b.putInt("C4", clickedField.getCandidate(3));
+				b.putInt("C5", clickedField.getCandidate(4));
+				b.putInt("C6", clickedField.getCandidate(5));
+				
+				
+				
+				Intent startKeyPad = new Intent(Field.this, KeyPad.class);
+				startKeyPad.putExtras(b);
+				
+				startSubActivity(startKeyPad, KEYPAD_REQUEST_CODE);
+				
+			}
+				
 		}
     	
     };

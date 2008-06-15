@@ -127,6 +127,29 @@ public class KeyPad extends Activity {
 	}
 	
 	
+	/**
+	 * this method initializes the candidates with the extras, that are overgiven
+	 * by the field
+	 */
+	private void initializeCandidates()
+	{
+		Bundle b = this.getIntent().getExtras();
+		
+		candidate[0].setValue(b.getInt("C1"), true);
+		candidate[1].setValue(b.getInt("C2"), true);
+		candidate[2].setValue(b.getInt("C3"), true);
+		candidate[3].setValue(b.getInt("C4"), true);
+		candidate[4].setValue(b.getInt("C5"), true);
+		candidate[5].setValue(b.getInt("C6"), true);
+		
+		for(valueButton v : candidate)
+			if(v.value() == 0);
+		
+	}
+	
+	/**
+	 * this is where the Buttons within the Keypad are being initialized 
+	 */
 	private void initializeButtons()
 	{
 

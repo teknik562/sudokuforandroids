@@ -49,6 +49,10 @@ public class FieldButton extends GameButton{
 	public FieldButton(Context context, String _value, int _size, int _lineSize, int _textSize, boolean _bold) {
 			super(context, _value, _size, _size, _lineSize, _textSize, _bold);
 			
+			for(int i = 0; i < candidateValues.length; i++)
+				candidateValues[i] = 0;
+				
+			
 	}
 	
 	/**
