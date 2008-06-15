@@ -75,7 +75,7 @@ public class Field extends Activity{
         
         for(int x = 0; x < buttonField.length;  x++)
         	for(int y = 0; y < buttonField[x].length; y++)
-        		if(buttonField[x][y].changable == true)
+        		if(buttonField[x][y].changeable == true)
         			buttonField[x][y].setOnClickListener(fieldClick);
 
         // make the field visible
