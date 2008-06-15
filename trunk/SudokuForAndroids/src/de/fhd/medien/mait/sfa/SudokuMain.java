@@ -1,13 +1,14 @@
 package de.fhd.medien.mait.sfa;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,7 +21,6 @@ import android.widget.LinearLayout.LayoutParams;
 public class SudokuMain extends Activity {
 	/** Background color */
 	private static final int fillBgMenu = 0x1007C024;
-	private static final String TAG = "SudokuMain: ";
 	
 	// Main layout
 	AbsoluteLayout absLayoutMenu;
@@ -57,7 +57,6 @@ public class SudokuMain extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
-        
         // get the info from the display and calculate layout
         calculateProperties();
         
@@ -84,7 +83,7 @@ public class SudokuMain extends Activity {
         // set the onClickListeners
         helpBt.setOnClickListener(helpClick);
         creditsBt.setOnClickListener(creditsClick);
-        newGameBt.setOnClickListener(dummyNewGameClick);
+        newGameBt.setOnClickListener(newGameClick);
         settingsBt.setOnClickListener(settingsClick);
         setContentView(absLayoutMenu);
         
@@ -236,17 +235,34 @@ public class SudokuMain extends Activity {
     	
     };
     
+    DialogInterface.OnClickListener newGame = new DialogInterface.OnClickListener(){
+    	public void onClick(DialogInterface dialoginterface, int i) {
+    		Intent showField = new Intent(SudokuMain.this, Field.class);
+			startActivity(showField);
+		}
+    };
+    
+    private void openNewGameDialog() {
+    		new AlertDialog.Builder(this).setTitle(R.string.newGame)
+    				.setItems(R.array.difficulty, newGame).show();
+    }
+    
+    /** When clicked on Help a new View is opened where the user is shown how to use this app */
+    OnClickListener newGameClick = new OnClickListener(){
+    	public void onClick(View v) {
+    		openNewGameDialog();
+    	}
+    };
+   
    
     /**
      * this onClickListener launches the settings- screen
      */
     OnClickListener settingsClick = new OnClickListener(){
-
 		@Override
 		public void onClick(View arg0) {
 			Intent showSettings = new Intent(SudokuMain.this, Settings.class);
-			startActivity(showSettings);
-			
+			startActivity(showSettings);	
 		}
     	
     };
