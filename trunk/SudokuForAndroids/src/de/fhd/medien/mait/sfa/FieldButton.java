@@ -10,7 +10,7 @@ public class FieldButton extends GameButton{
 	//which was clicked, after the Keypad- activity returns to the field
 	private boolean clicked = false; 
 	
-	public boolean changable = true;
+	public boolean changeable = true;
 	
 	
 	
@@ -90,7 +90,7 @@ public class FieldButton extends GameButton{
 	public void setAsNoChange()
 	{
 		redraw(fillDefaultNoChange, textDefaultNoChange, fillFocusedNoChange, textFocusedNoChange, fillPressedNoChange, textPressedNoChange, false);
-		this.changable = false;
+		this.changeable = false;
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class FieldButton extends GameButton{
 		int oldValue = this.value;
 		if(_newValue == 10); //in this case: do nothing!
 		
-		else if(_newValue == 0 && this.changable == true)
+		else if(_newValue == 0 && this.changeable == true)
 		{
 			this.value = 0;  //in the case of "10" the Field is cleared
 			this.setCaption("", false);
@@ -138,7 +138,7 @@ public class FieldButton extends GameButton{
 		//in any other cases the value can be stored directly
 		else
 		{
-			if(this.changable == true)
+			if(this.changeable == true)
 			{
 				this.value = _newValue;
 				this.setCaption(Integer.toString(value), false);
