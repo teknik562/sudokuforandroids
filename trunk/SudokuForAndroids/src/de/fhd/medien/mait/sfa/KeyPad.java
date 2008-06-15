@@ -169,7 +169,7 @@ public class KeyPad extends Activity {
 			else
 			{
 				// the value " 10 " is the code for "abort"
-				KeyPad.this.setResult(RESULT_OK, Integer.toString(10));
+				KeyPad.this.setResult(RESULT_OK, codeV[10]);
 				KeyPad.this.finish();
 			}
 				
@@ -201,7 +201,7 @@ public class KeyPad extends Activity {
 			else
 			{
 				//the value "0" is the code for "clear field"
-				KeyPad.this.setResult(RESULT_OK, Integer.toString(0));
+				KeyPad.this.setResult(RESULT_OK, codeV[0]);
 				KeyPad.this.finish();
 			}
 				
@@ -448,7 +448,7 @@ public class KeyPad extends Activity {
 			//if there is no active candidate
 			if(anyActiveCandidate() == false) 
 			{
-				KeyPad.this.setResult(RESULT_OK, Integer.toString(clickedButton.value()));
+				KeyPad.this.setResult(RESULT_OK, codeV[clickedButton.value()]);
 				KeyPad.this.finish();
 			}
 			

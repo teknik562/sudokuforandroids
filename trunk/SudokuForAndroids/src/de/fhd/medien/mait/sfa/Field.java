@@ -1,8 +1,10 @@
 package de.fhd.medien.mait.sfa;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
@@ -13,6 +15,10 @@ import android.widget.LinearLayout.LayoutParams;
  * Here the Field will be displayed, a Sudoku puzzle will be requested...
  */
 public class Field extends Activity{
+	
+	//the code to identify the Keypad, when it returns to this activity
+	private static final int KEYPAD_REQUEST_CODE = 0;
+	
 	// Layout for the field
 	private AbsoluteLayout fieldLayout = new AbsoluteLayout(this);
 	private static final int length = 9;
@@ -53,7 +59,8 @@ public class Field extends Activity{
         
         for(int x = 0; x < buttonField.length;  x++)
         	for(int y = 0; y < buttonField[x].length; y++)
-        		buttonField[x][y].setOnClickListener(fieldClick);
+        		if(buttonField[x][y].changable == true)
+        			buttonField[x][y].setOnClickListener(fieldClick);
         
         // make the field visible
         setContentView(fieldLayout);
@@ -65,9 +72,12 @@ public class Field extends Activity{
     {
 
 		//@Override
-		public void onClick(View arg0) {
+		public void onClick(View v) {
+			FieldButton clickedField = (FieldButton) v;
+			clickedField.setClicked();
+			
 			Intent startKeyPad = new Intent(Field.this, KeyPad.class);
-			startActivity(startKeyPad);
+			startSubActivity(startKeyPad, KEYPAD_REQUEST_CODE);
 			
 		}
     	
@@ -112,5 +122,45 @@ public class Field extends Activity{
         	}
         }
     }
+    
+    /**
+     * this method searches for a clicked field an returns ist back
+     * @return the clicked field
+     */
+    private FieldButton getClickedField()
+    {
+    	//the 2- dimensional array of fieldButtons is searched for an active one
+    	for(int x = 0; x < buttonField.length; x++)
+    		for(int y = 0; y < buttonField[x].length; y++)
+    			if(buttonField[x][y].isClicked())
+    				return buttonField[x][y];
+    	
+    				//null is returned, if there is no clicked field
+    				return null;
+    }
+    
+    /**
+     * this method is called when a subactivity is closed
+     */
+    protected void onActivityResult(int requestCode,int resultCode, String data, Bundle extras)
+    {
+		//the value is being extracted from the string.
+		int value = Integer.parseInt(data.substring(1));
+		
+		if(requestCode == KEYPAD_REQUEST_CODE)
+		{
+			if(resultCode == RESULT_OK)
+			{
+				if(data.startsWith("0"))
+				{
+					FieldButton clickedField = getClickedField();
+					clickedField.setValue(value);
+					clickedField.setNotClicked();
+				}
+			} //end if inner
+		}//end if outer
+    	    		
+	}//end method
+}//end class
 
-}
+
