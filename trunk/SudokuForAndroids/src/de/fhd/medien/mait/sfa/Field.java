@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
@@ -212,6 +213,39 @@ public class Field extends Activity{
 		}//end if outer
     	    		
 	}//end method
-}//end class
+
+    /**
+     * This method creates the Otions-Menu
+     */
+    public boolean onCreateOptionsMenu(final Menu menu) 
+      {
+        super.onCreateOptionsMenu(menu);
+        
+        menu.add(0, 1, "Spiel speichern");
+        menu.add(0, 2, "Spiel fertig");
+        
+        return true;
+      }
+
+    /**
+     * This method handles clicks on items of the options-menu
+     */
+    public boolean onOptionsItemSelected(Menu.Item item)
+      {
+        // go to input form
+        if(item.getId() == 1)
+          {
+          }
+        if(item.getId() == 2)
+          {
+            Intent next = new Intent(this, Highscore.class);
+            next.putExtra("time", 22);
+            startSubActivity(next, 4646);
+          }
+        return true;
+      }
+}
+
+//end class
 
 
