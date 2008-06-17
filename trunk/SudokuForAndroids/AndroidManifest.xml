@@ -8,13 +8,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
        </activity>
-      	<activity android:name=".KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
+      	<activity android:name="KeyPad" android:theme="@android:style/Theme.Dialog" android:label="Key Pad"/>
       	<activity android:name="Field" android:label="Field"/>
-      	<activity android:name=".Settings" android:theme="@android:style/Theme.Dialog" android:label="Settings"/>
-        <activity android:name="Help" android:label="@string/helpTitle" android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".UserList" android:label="@string/app_name"/>
-        <activity android:name=".UserForm" android:label="@string/app_name"/>
-        <activity android:name=".CreateUser" android:label="@string/app_name"/>
-        <activity android:name="Credits" android:theme="@android:style/Theme.Dialog" android:label="@string/creditsTitle" /> 	
+     	<activity android:name="Settings" android:theme="@android:style/Theme.Dialog" android:label="Settings"/>
+      <activity android:name="Help" android:label="@string/helpTitle" android:theme="@android:style/Theme.Dialog" />
+      <activity android:name="UserList" android:label="@string/app_name"/>
+      <activity android:name="UserForm" android:label="@string/app_name"/>
+      <activity android:name="Highscore" android:label="@string/app_name"/>
+      <activity android:name="MainMenu" android:label="@string/app_name"/>
+      <activity android:name="Algo" android:label="@string/app_name"/>
+      <activity android:name="Credits" android:theme="@android:style/Theme.Dialog" android:label="@string/creditsTitle" /> 	
     </application>
 </manifest> 
