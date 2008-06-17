@@ -37,6 +37,8 @@ public class Config {
 	public static int optMenuBtWidth = 11;
 	/** Calculated start x of the menu button */
 	public static int menutStartXPos = 12;
+	/** saves the name of the player */
+	public static String playerName = "";
 	
 	
 	/** Best linesize to draw buttons */
@@ -45,7 +47,7 @@ public class Config {
 	public static void initiate(int _displayWidth, int _displayHeight, int _minScreenAttr,
 			int _optFieldBtSize, int _optFieldPadding, int _optFieldLine, int _fieldLength,
 			int _fieldStartXPos, int _fieldStartYPos , int _FontSize, int _optMenuBtHeight,
-			int _optMenuBtWidth, int _menutStartXPos){
+			int _optMenuBtWidth, int _menutStartXPos, String _playerName){
 		displayWidth = _displayWidth;
 		displayHeight = _displayHeight;
 		minScreenAttr = _minScreenAttr;
@@ -59,6 +61,7 @@ public class Config {
 		optMenuBtHeight = _optMenuBtHeight;
 		optMenuBtWidth = _optMenuBtWidth;
 		menutStartXPos = _menutStartXPos;
+		playerName = _playerName;
 	}
 	
 }
