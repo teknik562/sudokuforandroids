@@ -39,7 +39,8 @@ public class Config {
 	public static int menutStartXPos = 12;
 	/** saves the name of the player */
 	public static String playerName = "";
-	
+	/** Saves the chosen difficulty */
+	public static int difficulty;
 	
 	/** Best linesize to draw buttons */
 	public static final int lineSize = 2;
