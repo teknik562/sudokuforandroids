@@ -294,6 +294,16 @@ public class MainMenu extends Activity {
         else
           FBfontSize = 16;
         
+        
+        String playerName;
+        // get PlayerName if there is an fitting Intent-Extra
+        if(getIntent().getStringExtra("playerName") != null)
+          playerName = getIntent().getStringExtra("playerName");
+        // get Player Name if there is no Intent-Extra (from config)
+        else
+          playerName = Config.playerName;
+        
+        
         Config.initiate(v.getWidth(),     // displayWidth
             v.getHeight() - 50,       // displayHeight
             min,              // minScreenAttr
@@ -306,7 +316,8 @@ public class MainMenu extends Activity {
             FBfontSize,           // FontSize
             min / 8,            // optMenuBtHeight
             min / 2,            // optMenuBtWidth
-            (v.getWidth() / 2) - (min / 4)  // menutStartXPos           
+            (v.getWidth() / 2) - (min / 4),  // menutStartXPos
+            playerName
             );
         
        
