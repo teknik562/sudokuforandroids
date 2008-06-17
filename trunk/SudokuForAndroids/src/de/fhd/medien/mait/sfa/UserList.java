@@ -107,7 +107,6 @@ public class UserList extends ListActivity
           super.onCreateOptionsMenu(menu);
           
           menu.add(0, 1, "Neuen Benutzer erstellen");
-          menu.add(0, 2, "Highscore (temp)");
           
           return true;
         }
@@ -122,11 +121,6 @@ public class UserList extends ListActivity
             {
               Intent i = new Intent(this, UserForm.class);
               startSubActivity(i, INPUTFORM_ID);
-            }
-          if(item.getId() == 2)
-            {
-              Intent i = new Intent(this, Highscore.class);
-              startSubActivity(i, 4646);
             }
           return true;
         }
@@ -189,8 +183,8 @@ public class UserList extends ListActivity
           String user = this.results.get(position);
           
           // create new intent with username as an extra
-          Intent next = new Intent(this, Algo.class);
-          next.putExtra("userName", user);
+          Intent next = new Intent(this, MainMenu.class);
+          next.putExtra("playerName", user);
           
           super.startActivity(next);
           this.finish();
