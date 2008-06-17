@@ -31,7 +31,7 @@ public class Highscore extends ListActivity
         
         // Create empty database-object
         SQLiteDatabase db = null;
-        String userName = getIntent().getStringExtra("userName");
+        String userName = Config.playerName;
         
         try
           {
@@ -164,7 +164,7 @@ public class Highscore extends ListActivity
         // got to mainmenu
         if(item.getId() == 3)
           {
-            Intent in_mainmenu = new Intent(this, UserList.class);
+            Intent in_mainmenu = new Intent(this, MainMenu.class);
             this.startActivity(in_mainmenu);
             this.finish();
           }
