@@ -259,8 +259,8 @@ public class SudokuMain extends Activity {
      * this onClickListener launches the settings- screen
      */
     OnClickListener settingsClick = new OnClickListener(){
-		@Override
-		public void onClick(View arg0) {
+		public void onClick(View arg0) 
+		{
 			Intent showSettings = new Intent(SudokuMain.this, Settings.class);
 			startActivity(showSettings);	
 		}
@@ -322,7 +322,8 @@ public class SudokuMain extends Activity {
         		(v.getWidth() / 2) - (min / 4)	// menutStartXPos						
         		);
         
-       
+      Intent i = new Intent(this, UserList.class);
+      this.startActivity(i);
+      this.finish();
     }
-    
 }
