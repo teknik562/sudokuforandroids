@@ -224,6 +224,8 @@ public class MainMenu extends Activity {
     
     DialogInterface.OnClickListener newGame = new DialogInterface.OnClickListener(){
       public void onClick(DialogInterface dialoginterface, int i) {
+    	  // Save the chosen dificulty
+    	  Config.difficulty = ++i;
         Intent showField = new Intent(MainMenu.this, Field.class);
       startActivity(showField);
     }
