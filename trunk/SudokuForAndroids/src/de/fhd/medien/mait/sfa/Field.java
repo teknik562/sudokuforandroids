@@ -5,12 +5,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.os.Handler;
 
 /**
  * This is where the magic will happen ;)
@@ -45,7 +46,6 @@ public class Field extends Activity{
         	   // request a puzzle basing on the set difficulty
         	   // create the field
                createField();
-               
                for(int x = 0; x < buttonField.length;  x++)
                	for(int y = 0; y < buttonField[x].length; y++)
                		if(buttonField[x][y].changeable == true)
@@ -68,7 +68,7 @@ public class Field extends Activity{
                 "Please wait...", "Generating Sudoku", true);
         Handler handler = new Handler(); 
         handler.post(t);
-        
+        Log.d("Chosen difficulty", Integer.toString(Config.difficulty));
         	
         // request a puzzle basing on the set difficulty
 
@@ -77,6 +77,7 @@ public class Field extends Activity{
 
         // make the field visible
         setContentView(fieldLayout);
+        
     }
     
    
