@@ -449,6 +449,13 @@ public class KeyPad extends Activity {
 				
 				break;
 				
+			case KeyEvent.KEYCODE_BACK:
+				
+				fillcanBundle();
+				KeyPad.this.setResult(RESULT_OK, codeV[10], canB);
+				KeyPad.this.finish();
+				
+				break;
 		}
 		
 		return false;
