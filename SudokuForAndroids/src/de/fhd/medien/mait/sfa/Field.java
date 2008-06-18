@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -118,6 +119,87 @@ public class Field extends Activity{
 		}
     	
     };
+    
+    /**
+     * this method reacts on Keyevents.
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		super.onKeyDown(keyCode, event);
+		
+		if(isAnyFieldFocused())
+		{
+			FieldButton focusedField = focusedField();
+			
+			switch( keyCode)
+			{
+				case KeyEvent.KEYCODE_0:
+					focusedField.setValue(0);
+					focusedField.deleteCandidates();
+					focusedField.refreshDrawableState();
+					
+					break;
+				
+				case KeyEvent.KEYCODE_1:
+					focusedField.setValue(1);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_2:
+					focusedField.setValue(2);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_3:
+					focusedField.setValue(3);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_4:
+					focusedField.setValue(4);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_5:
+					focusedField.setValue(5);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_6:
+					focusedField.setValue(6);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_7:
+					focusedField.setValue(7);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_8:
+					focusedField.setValue(8);
+					
+					focusedField.refreshDrawableState();
+					break;
+					
+				case KeyEvent.KEYCODE_9:
+					focusedField.setValue(9);
+					
+					focusedField.refreshDrawableState();
+					break;
+			}// end switch
+		}//end method
+		
+		
+		return false;
+	}
+    
     
     /**
      * Creates a Field to play on!
@@ -245,8 +327,36 @@ public class Field extends Activity{
           }
         return true;
       }
-}
-
-//end class
+   
+ /**
+  * this method gives information, if there is at least one field, on which the 
+  * focus lays at the moment
+  * @return is there any focused field
+  */
+ private boolean isAnyFieldFocused()
+ {
+	 for(int x = 0; x < buttonField.length; x++)
+		 for(int y = 0; y < buttonField[x].length; y++)
+			 if(buttonField[x][y].hasFocus())
+				 return true;
+	 
+	 return false;
+ }
+ 
+ /**
+  * this method gives back the field, which has focus explicitly
+  * @return the field with focus
+  */
+ private FieldButton focusedField()
+ {
+	 for(int x = 0; x < buttonField.length; x++)
+		 for(int y = 0; y < buttonField[x].length; y++)
+			 if(buttonField[x][y].hasFocus())
+				 return buttonField[x][y];
+	 
+	 return null;
+ }
+    
+}//end class
 
 
