@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="choose">Choose Player or create a new one</string>
     <string name="app_name">Sudoku for Android(s)</string>
     <string name="newGame">New Game</string>
     <string name="contGame">Continue / Load</string>
