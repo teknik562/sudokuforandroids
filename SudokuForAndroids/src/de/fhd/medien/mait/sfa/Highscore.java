@@ -42,7 +42,7 @@ public class Highscore extends ListActivity
             
             // create table for userdatas if not already exists
             db.execSQL("CREATE TABLE IF NOT EXISTS " + DB_HIGHSCORETABLE +
-                        "(hs_id INT PRIMARY KEY, " +
+                        "(hs_id INTEGER PRIMARY KEY, " +
                         "hs_user_name VARCHAR, " +
                         "hs_score)");
             
@@ -54,11 +54,13 @@ public class Highscore extends ListActivity
                          "(hs_id, hs_user_name, hs_score) VALUES" +
                          "('"+(date.getTime() / 1000L)+"', '"+userName+"', '"+this.points+"')");
             
-            // Create a Cursor with all user-names from the database
-            Cursor c = db.rawQuery("SELECT hs_user_name, hs_score " +
+            // Create a Cursor with all user-names and scores from the database
+/*            Cursor c = db.rawQuery("SELECT hs_score, hs_user_name " +
             		                   " FROM "+DB_HIGHSCORETABLE+
-            		                   " ORDER BY hs_score DESC, hs_user_name ASC ", null);
-            
+            		                   " ORDER BY hs_score DESC", null);
+*/            
+            Cursor c = db.query(DB_HIGHSCORETABLE, new String[] {"hs_user_name", "hs_score"},null, null, null, null, "hs_score DESC");
+
             // get the column-index of the user-name-column
             int nameColumnIndex = c.getColumnIndex("hs_user_name");
             // get the column-index of the score-column
@@ -67,6 +69,7 @@ public class Highscore extends ListActivity
             // check if the database-cursor references not to "null"
             if(c != null)
               {
+                
                 // check if the database-cursor is not empty
                 if(c.first())
                   {
@@ -185,7 +188,7 @@ public class Highscore extends ListActivity
         int points = 0;
 
         // get all neccasary datas
-        int level = getIntent().getIntExtra("level", 2);
+        int level = Config.difficulty;
         int cheats = getIntent().getIntExtra("cheats", 0);
         int time = getIntent().getIntExtra("time", 100);
         
