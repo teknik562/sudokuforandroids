@@ -240,7 +240,7 @@ public class Field extends Activity{
         if(item.getId() == 2)
           {
             Intent next = new Intent(this, Highscore.class);
-            next.putExtra("time", 22);
+            next.putExtra("time", 10);
             startSubActivity(next, 4646);
           }
         return true;
