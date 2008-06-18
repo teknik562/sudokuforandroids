@@ -1,7 +1,6 @@
 package de.fhd.medien.mait.sfa;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 
