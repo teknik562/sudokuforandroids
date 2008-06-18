@@ -85,6 +85,7 @@ public class MainMenu extends Activity {
         creditsBt.setOnClickListener(creditsClick);
         newGameBt.setOnClickListener(newGameClick);
         settingsBt.setOnClickListener(settingsClick);
+        highscoreBt.setOnClickListener(highscoreClick);
         setContentView(absLayoutMenu);
 
     }
@@ -255,7 +256,15 @@ public class MainMenu extends Activity {
     }
       
     };
-    
+
+    /** When clicked on Help a new View is opened where the user is shown how to use this app */
+    OnClickListener highscoreClick = new OnClickListener(){
+      public void onClick(View v) {
+        Intent in_highscore = new Intent(MainMenu.this, Highscore.class);
+        startActivity(in_highscore);
+      }
+    };
+
     /** When clicked on Credits a new View is opened where the participants are shown */
     OnClickListener creditsClick = new OnClickListener(){
         //@Override
