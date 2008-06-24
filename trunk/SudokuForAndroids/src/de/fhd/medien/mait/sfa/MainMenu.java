@@ -86,6 +86,7 @@ public class MainMenu extends Activity {
         newGameBt.setOnClickListener(newGameClick);
         settingsBt.setOnClickListener(settingsClick);
         highscoreBt.setOnClickListener(highscoreClick);
+        contGameBt.setOnClickListener(loadClick);
         setContentView(absLayoutMenu);
 
     }
@@ -236,6 +237,14 @@ public class MainMenu extends Activity {
         new AlertDialog.Builder(this).setTitle(R.string.newGame)
             .setItems(R.array.difficulty, newGame).show();
     }
+    
+    /** When clicked on Help a new View is opened where the user is shown how to use this app */
+    OnClickListener loadClick = new OnClickListener(){
+      public void onClick(View v) {
+        Intent loadGame = new Intent(MainMenu.this, Load.class);
+        startActivity(loadGame);
+      }
+    };
     
     /** When clicked on Help a new View is opened where the user is shown how to use this app */
     OnClickListener newGameClick = new OnClickListener(){
