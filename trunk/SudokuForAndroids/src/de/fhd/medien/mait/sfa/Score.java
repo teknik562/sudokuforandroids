@@ -12,9 +12,10 @@ public class Score implements Serializable {
 	private int sumTime = 0;
 	
 	private int[][] solvedField = null;
-	private FieldButton[][] userManipulatedField = null;
+	private int[][] userManipulatedField = null;
+	private int[][][] candidates = null;
 	
-	Score(String _userName, int _level, int _cheatCount, int _sumTime, int[][] _solvedField, FieldButton[][] _userManipulatedField){
+	Score(String _userName, int _level, int _cheatCount, int _sumTime, int[][] _solvedField, int[][] _userManipulatedField, int[][][] _candidates){
 		userName = _userName;
 		level = _level;
 		cheatCount = _cheatCount;
@@ -22,6 +23,7 @@ public class Score implements Serializable {
 		
 		solvedField = _solvedField;
 		userManipulatedField = _userManipulatedField;
+		candidates = _candidates;
 	}
 	
 	
