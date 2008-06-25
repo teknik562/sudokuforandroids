@@ -18,6 +18,9 @@ public class Algo
     // maximum tries to generate a unique number before going one step back
     private int max_tries = 40;
     
+    static final int LEVEL_BASE = 50;
+    static final int LEVEL_MULTIPLICATOR = 10;
+    
     /**
      * this method fills a sudoku-field with new (random) numbers
      */
@@ -134,7 +137,7 @@ public class Algo
     private void generate_mask(int _level)
       {
         // calculate number of given fields
-        int num = 50-10*(_level-1);
+        int num = LEVEL_BASE-LEVEL_MULTIPLICATOR*(_level-1);
         int x, y;
         // create random-object
         Random rand = new Random();
