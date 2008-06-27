@@ -4,6 +4,8 @@ import android.content.Context;
 
 public class FieldButton extends GameButton{
 	
+	static final long serialVersionUID = 1;
+	
 	static final int maxNrCandidates = 6;
 	
 	//this boolean- variable marks the fieldButton as the Button,
@@ -28,13 +30,13 @@ public class FieldButton extends GameButton{
 	static final int textPressedCandidate = 0xffffffff;
 	
 	// colors that are only used by Not Changeable Buttons
-	static final int fillDefaultNoChange = 0xa00534a9; 
+	static final int fillDefaultNoChange = 0xa03463d7; 
 	static final int textDefaultNoChange = 0xffffffff; 
 	
-	static final int fillFocusedNoChange = 0xa03463d7; 
+	static final int fillFocusedNoChange = 0xa00534a9; 
 	static final int textFocusedNoChange = 0xffffffff;
 	
-	static final int fillPressedNoChange = 0xa03463d7; 
+	static final int fillPressedNoChange = 0xa00534a9; 
 	static final int textPressedNoChange = 0xffffffff;
 	
 	/**
@@ -53,6 +55,10 @@ public class FieldButton extends GameButton{
 				candidateValues[i] = 0;
 				
 			
+	}
+	
+	public void setCandidates(int[] newCandidates){
+		this.candidateValues = newCandidates;
 	}
 	
 	public void deleteCandidates()
