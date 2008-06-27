@@ -229,6 +229,7 @@ public class MainMenu extends Activity {
     	  // Save the chosen dificulty
     	  Config.difficulty = ++i;
         Intent showField = new Intent(MainMenu.this, Field.class);
+        showField.putExtra("starter", "NORMAL");
       startActivity(showField);
     }
     };
