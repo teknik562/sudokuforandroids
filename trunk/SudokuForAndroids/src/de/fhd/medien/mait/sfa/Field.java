@@ -39,12 +39,20 @@ public class Field extends Activity{
 	private static final int length = 9;
 	private static final int nrCandidates = 6;
 	private FieldButton[][] buttonField = new FieldButton[length][length];
-	/** represents the Field with non changeable values */
+	/** 
+	 * represents the Field with non changeable values
+	 * Comes from the Algo as maskedField() 
+	 */
 	int[][] originalField = new int[length][length];
-	/** represents the Field with the right solution */
+	/** 
+	 * represents the Field with the right solution 
+	 */
 	private int[][] solvedField = new int[length][length];
 	/** 
 	 * represents the Field the user has manipulated.
+	 * Is only set when the game was loaded. For the purpose of
+	 * checking if the game was solved correctly it has to be
+	 * calculated.
 	 * If this field is equal to solvedField, the game is over.
 	 */
 	private int[][] userManipulatedField = new int[length][length];
@@ -88,8 +96,10 @@ public class Field extends Activity{
         	   String solvedFieldString = getIntent().getStringExtra("sfs");
         	   String originalFieldString = getIntent().getStringExtra("ofs");
         	   String userManipulatedFieldString = getIntent().getStringExtra("umfs");
+
         	   Log.d("OFS", originalFieldString);
         	   int counter = 0;
+
         	   for(int i = 0; i < length; i++)
         		   for(int j = 0; j < length; j++){
         			   solvedField[i][j] = Character.getNumericValue(solvedFieldString.charAt(counter));
@@ -102,12 +112,27 @@ public class Field extends Activity{
         	   // request a puzzle basing on the set difficulty
         	   // create the field
                createField();
+               
+        	   String candidateString = getIntent().getStringExtra("cs");
+        	   int candidateCounter = 0;
+        	   boolean hasCandidates = false;
+               
                for(int x = 0; x < buttonField.length;  x++)
                	for(int y = 0; y < buttonField[x].length; y++){
                		buttonField[x][y].setValue(userManipulatedField[x][y]);
                		if(buttonField[x][y].changeable == true){
                			buttonField[x][y].setOnClickListener(fieldClick);
                		}
+               		hasCandidates = false;
+               		for(int c = 0; c < nrCandidates; c++){
+               			int actCandidate = Character.getNumericValue(candidateString.charAt(candidateCounter));
+               			buttonField[x][y].setCandidateValue(c, actCandidate);
+               			if(actCandidate != 0)
+               				hasCandidates = true;
+               			candidateCounter++;
+               		}
+               		if(hasCandidates)
+               			buttonField[x][y].setAsCandidate();
                	}
                
                //when done
