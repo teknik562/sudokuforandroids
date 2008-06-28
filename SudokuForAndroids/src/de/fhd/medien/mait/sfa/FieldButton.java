@@ -161,7 +161,6 @@ public class FieldButton extends GameButton{
 	 */
 	public void setValue(int _newValue)
 	{
-		int oldValue = this.value;
 		if(_newValue == 10); //in this case: do nothing!
 		
 		else if(_newValue == 0 && this.changeable == true)
