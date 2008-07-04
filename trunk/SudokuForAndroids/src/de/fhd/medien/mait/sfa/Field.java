@@ -538,7 +538,7 @@ public class Field extends Activity{
     	try{
         	Date d = new Date();
         	// Date looks like: 12.28.08
-        	String date = DateFormat.format("MM.dd.yy",d.getTime()).toString();
+        	String date = DateFormat.format("yy.MM.dd",d.getTime()).toString();
         	String diff = "";
         	switch(Config.difficulty){
         	case 1: diff = " E"; break;
