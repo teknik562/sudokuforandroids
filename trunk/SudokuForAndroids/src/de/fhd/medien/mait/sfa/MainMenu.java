@@ -18,6 +18,26 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 
+
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.AbsoluteLayout;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout.LayoutParams;
+
 public class MainMenu extends Activity {
   /** Background color */
   private static final int fillBgMenu = 0x1007C024;
@@ -48,9 +68,10 @@ public class MainMenu extends Activity {
   GameButton helpBt;
   GameButton creditsBt;
   
-  //variable for the cheat- mode
-  boolean cheatModeActive = false;
   
+  
+  //a random value is stored to identify the requestcode of the Settings- activity later on
+  final int SETTINGSKEY = 765;
   
     /** Called when the activity is first created. */
     @Override
@@ -89,6 +110,27 @@ public class MainMenu extends Activity {
         contGameBt.setOnClickListener(loadClick);
         setContentView(absLayoutMenu);
 
+    } //end onCreate
+    
+    
+    
+    /**
+     * within the onActivityResult- method, the different requestcodes are checked to determine, which subActivity has returned back to
+     * the Main menue
+     */
+    @Override
+    	protected void onActivityResult(int requestCode, int resultCode, String data, Bundle extras) 
+    {
+       	super.onActivityResult(requestCode, resultCode, data, extras);
+       	
+       	//check, if the MainMenue is resumed from the Settings- screen
+       	if(requestCode == SETTINGSKEY)
+       	{
+       		if(resultCode == RESULT_OK)
+       			//the data- String can either be "true" or "false", so this value is parsed and then stored in the global
+       			//cheat mode- variable
+       			Config.cheatModeActive = Boolean.parseBoolean(data);
+       	}
     }
     
     /**
@@ -256,13 +298,21 @@ public class MainMenu extends Activity {
    
    
     /**
-     * this onClickListener launches the settings- screen
+     * this onClickListener launches the settings- screen with the current status of the cheat mode
      */
     OnClickListener settingsClick = new OnClickListener(){
 
     public void onClick(View arg0) {
-      Intent showSettings = new Intent(MainMenu.this, Settings.class);
-      startActivity(showSettings);  
+      
+    	Intent showSettings = new Intent(MainMenu.this, Settings.class);
+    	Bundle b = new Bundle();
+    	
+    	//the current status of the cheat mode is put into the bundle
+    	b.putBoolean("cheatMode", Config.cheatModeActive);
+    	
+    	showSettings.putExtras(b);
+    	
+      startSubActivity(showSettings, SETTINGSKEY);  
     }
       
     };

@@ -5,6 +5,7 @@
 
 package de.fhd.medien.mait.sfa;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,7 +83,12 @@ public class Settings extends Activity {
 	     
 	     setContentView(absLayoutSettings);
 	     
-	     Log.v("Settingss: ", "anzahl der linien " + cheatText.getLineCount());
+	     //the bundle, which called the activity is fetched
+	     Bundle b = this.getIntent().getExtras();
+	     
+	     boolean cheatMode = b.getBoolean("cheatMode");
+	     cheatCheckBox.setChecked(cheatMode);
+	     
 	}
 	
 	OnClickListener backClick = new OnClickListener()
@@ -109,3 +115,4 @@ public class Settings extends Activity {
 	
 	
 }
+
