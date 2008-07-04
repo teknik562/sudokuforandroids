@@ -1,5 +1,6 @@
 package de.fhd.medien.mait.sfa;
 
+
 /**
  * This class provides several information calculated for layout use 
  * depending on the display's properties. 
@@ -47,6 +48,10 @@ public class Config {
 	static long neededTime = 0;
 	/** Best linesize to draw buttons */
 	static final int lineSize = 2;
+	
+	
+	//variable for the cheat- mode
+	static boolean cheatModeActive = false;
 	
 	static void initiate(int _displayWidth, int _displayHeight, int _minScreenAttr,
 			int _optFieldBtSize, int _optFieldPadding, int _optFieldLine, int _fieldLength,
