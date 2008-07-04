@@ -26,6 +26,8 @@ import android.widget.LinearLayout.LayoutParams;
  * Here the Field will be displayed, a Sudoku puzzle will be requested...
  */
 public class Field extends Activity{
+
+	private static final int SETTINGS_REQUEST_CODE = 334;
 	
 	//the code to identify the Keypad, when it returns to this activity
 	private static final int KEYPAD_REQUEST_CODE = 0;
@@ -642,6 +644,7 @@ public class Field extends Activity{
         
         menu.add(0, 1, "Save Game");
         menu.add(0, 2, "Spiel fertig");
+        menu.add(0, 3, "Settings");
         
         return true;
       }
@@ -662,6 +665,14 @@ public class Field extends Activity{
             next.putExtra("time", 10);
             startSubActivity(next, 4646);
           }
+        if(item.getId() == 3)
+        {
+        	Intent showSettings = new Intent(this, Settings.class);
+        	Bundle b = new Bundle();
+        	b.putBoolean("cheatMode", Config.cheatModeActive);
+        	showSettings.putExtras(b);
+        	startSubActivity(showSettings, SETTINGS_REQUEST_CODE);
+        }
         return true;
       }
    
@@ -704,7 +715,6 @@ public class Field extends Activity{
 		Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
  }
 	
-
     
 }//end class
 
