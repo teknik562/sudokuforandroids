@@ -556,7 +556,7 @@ public class Field extends Activity{
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
         	String[] directory = g.list();
-        	// Only savegames by the player will be shown, others are hided
+        	// Only savegames by the player will be shown, others are hidden
         	ArrayList<String> tempDirectory = new ArrayList<String>();
         	for(String element : directory){
         		// Savegames to be displayed must start with "Playername "
