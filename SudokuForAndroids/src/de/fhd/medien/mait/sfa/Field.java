@@ -4,6 +4,7 @@ package de.fhd.medien.mait.sfa;
 
 import java.io.File;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Activity;
@@ -538,7 +539,13 @@ public class Field extends Activity{
         	Date d = new Date();
         	// Date looks like: 12.28.08
         	String date = DateFormat.format("MM.dd.yy",d.getTime()).toString();
-        	String fileName = Config.playerName + "   " + date;
+        	String diff = "";
+        	switch(Config.difficulty){
+        	case 1: diff = " E"; break;
+        	case 2: diff = " M"; break;
+        	case 3: diff = " H"; break;
+        	}
+        	String fileName = Config.playerName + "   " + date + diff;
         	
         	if(gameWasLoaded){
         		fileName = fileNameloaded;
@@ -549,7 +556,16 @@ public class Field extends Activity{
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
         	String[] directory = g.list();
-        	for(String s : directory){
+        	// Only savegames by the player will be shown, others are hided
+        	ArrayList<String> tempDirectory = new ArrayList<String>();
+        	for(String element : directory){
+        		// Savegames to be displayed must start with "Playername "
+        		if(element.startsWith(Config.playerName + " "))
+        			tempDirectory.add(element);
+        	}
+        	String[] userDirectory = new String[tempDirectory.size()];
+        	tempDirectory.toArray(userDirectory);
+        	for(String s : userDirectory){
         		if(s.equals(fileName)){
         			Log.d("First check on File", "exists already: " + fileName);
         			fileExists = true;
@@ -564,7 +580,7 @@ public class Field extends Activity{
         		fileEnding = "(" + Integer.toString(i) + ")";
         		Log.d("File", "Changed fileName to: ..." + fileEnding);
         		boolean found = false;
-        		for(String s : directory){
+        		for(String s : userDirectory){
             		if(s.endsWith(fileEnding)){
             			Log.d("File", "exists already: ..." + fileEnding);
             			fileExists = true;
