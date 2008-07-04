@@ -1,6 +1,8 @@
 package de.fhd.medien.mait.sfa;
 
+
 import android.content.Context;
+import android.widget.Toast;
 
 public class FieldButton extends GameButton{
 	
@@ -14,6 +16,7 @@ public class FieldButton extends GameButton{
 	
 	public boolean changeable = true;
 	
+	private Field parent;
 	
 	
 	private int value = 0;
@@ -47,9 +50,12 @@ public class FieldButton extends GameButton{
 	 * @param _lineSize Width of the brush. '2' is best.
 	 * @param _textSize Size of the text. 10 ~ 25 is best.
 	 * @param _bold whether the text should be displayed bold or not
+	 * @param _parent a reference on the Field in which the fieldButton lies
 	 */
-	public FieldButton(Context context, String _value, int _size, int _lineSize, int _textSize, boolean _bold) {
+	public FieldButton(Context context, String _value, int _size, int _lineSize, int _textSize, boolean _bold, Field _parent) {
 			super(context, _value, _size, _size, _lineSize, _textSize, _bold);
+			
+			parent = _parent;
 			
 			for(int i = 0; i < candidateValues.length; i++)
 				candidateValues[i] = 0;
@@ -188,4 +194,58 @@ public class FieldButton extends GameButton{
 	}
 	
 	
+	/**
+	 * this method adds a candidate to the field's candidate- array
+	 * @param _value the value to be added
+	 * @return "true" if there was a free slot and the value could be stored in the field; "false" if every slot is full.
+	 */
+	public void addCandidateValue(int _value)
+	{
+		int freeIndex = 0;
+		boolean done = false;
+		
+		for(int i = 0; i < this.candidateValues.length; i++)
+		{
+			if(candidateValues[i] == 0)
+			{
+				freeIndex = i;
+				done = true;
+				break;
+			}
+		}
+		if(done == false)
+			//false is returned, if there is no free candidate-slot
+			parent.makeMyToast("no free candidate-slot");
+		
+		else
+		{
+			if(isCandidateStored(_value)== false)
+			{
+				candidateValues[freeIndex] = _value;
+				this.setAsCandidate();
+				parent.makeMyToast("candidate " + Integer.toString(_value) + " stored!");
+			}
+			else
+			{
+				parent.makeMyToast("candidate is already stored");
+			}
+			
+			
+		}
+		
+	}//end addCandidateValue()
+	
+	/**
+	 * this method checks, if a value is already stored in the candidateValue- array
+	 * @param _value the value, about which the array should be checked
+	 * @return true, if the value is already stored; false if the value is not yet stored
+	 */
+	private boolean isCandidateStored(int _value)
+	{
+		for(int i: this.candidateValues)
+			if(i == _value)
+				return true;
+		
+		return false;
+	}
 }//end class

@@ -1,6 +1,7 @@
 package de.fhd.medien.mait.sfa;
 
 
+
 import java.io.File;
 import java.io.OutputStreamWriter;
 import java.util.Date;
@@ -33,6 +34,9 @@ public class Field extends Activity{
 	private boolean gameWasLoaded = false; 
 	// File Name of the loaded File
 	private String fileNameloaded = "";
+	
+	//this variable can be changed by pressing the "*"- button
+	private boolean writeCandidate = false;
 	
 	// Layout for the field
 	private AbsoluteLayout fieldLayout = new AbsoluteLayout(this);
@@ -200,23 +204,31 @@ public class Field extends Activity{
 			
 			if(clickedField.changeable == true)
 			{
-				clickedField.setClicked();
-				
-				Bundle b = new Bundle();
-				
-				b.putInt("C1", clickedField.getCandidate(0));
-				b.putInt("C2", clickedField.getCandidate(1));
-				b.putInt("C3", clickedField.getCandidate(2));
-				b.putInt("C4", clickedField.getCandidate(3));
-				b.putInt("C5", clickedField.getCandidate(4));
-				b.putInt("C6", clickedField.getCandidate(5));
-				
-				
-				
-				Intent startKeyPad = new Intent(Field.this, KeyPad.class);
-				startKeyPad.putExtras(b);
-				
-				startSubActivity(startKeyPad, KEYPAD_REQUEST_CODE);
+				//check, if the cheat mode is NOT activated!!
+				if(Config.cheatModeActive == false)
+				{
+					clickedField.setClicked();
+					
+					Bundle b = new Bundle();
+					
+					b.putInt("C1", clickedField.getCandidate(0));
+					b.putInt("C2", clickedField.getCandidate(1));
+					b.putInt("C3", clickedField.getCandidate(2));
+					b.putInt("C4", clickedField.getCandidate(3));
+					b.putInt("C5", clickedField.getCandidate(4));
+					b.putInt("C6", clickedField.getCandidate(5));
+					
+					
+					
+					Intent startKeyPad = new Intent(Field.this, KeyPad.class);
+					startKeyPad.putExtras(b);
+					
+					startSubActivity(startKeyPad, KEYPAD_REQUEST_CODE);
+				}
+				else
+				{
+					//TODO add cheat-mode behavior of the Field
+				}
 				
 			}
 				
@@ -237,63 +249,153 @@ public class Field extends Activity{
 			
 			switch( keyCode)
 			{
-				case KeyEvent.KEYCODE_0:
-					focusedField.setValue(0);
-					focusedField.deleteCandidates();
-					focusedField.refreshDrawableState();
+				case KeyEvent.KEYCODE_COMMA:
+					writeCandidate = true;
+					Toast.makeText(this, "write candidate",	Toast.LENGTH_SHORT).show();
 					
 					break;
+			
+				case KeyEvent.KEYCODE_0:
+					
+						focusedField.setValue(0);
+						focusedField.deleteCandidates();
+						focusedField.refreshDrawableState();
+						break;
 				
 				case KeyEvent.KEYCODE_1:
-					focusedField.setValue(1);
+					
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(1);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(1);	
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_2:
-					focusedField.setValue(2);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(2);
+						focusedField.deleteCandidates();
+						
+					}
+					else
+					{
+						focusedField.addCandidateValue(2);	
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_3:
-					focusedField.setValue(3);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(3);
+						focusedField.deleteCandidates();
+						
+					}
+					else
+					{
+						focusedField.addCandidateValue(3);		
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_4:
-					focusedField.setValue(4);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(4);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(4);	
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_5:
-					focusedField.setValue(5);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(5);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(5);	
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_6:
-					focusedField.setValue(6);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(6);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(6);		
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_7:
-					focusedField.setValue(7);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(7);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(7);
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_8:
-					focusedField.setValue(8);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(8);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(8);	
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
 					
 				case KeyEvent.KEYCODE_9:
-					focusedField.setValue(9);
+					if(writeCandidate == false)
+					{
+						focusedField.setValue(9);
+						focusedField.deleteCandidates();
+					}
+					else
+					{
+						focusedField.addCandidateValue(9);	
+						writeCandidate = false;
+					}
 					
 					focusedField.refreshDrawableState();
 					break;
@@ -325,7 +427,7 @@ public class Field extends Activity{
         		String caption = "";
         		if(originalField[i][j] != 0)
         			caption = Integer.toString(originalField[i][j]);
-        		buttonField[i][j] = new FieldButton(this, caption, Config.optFieldBtSize, 2, Config.FontSize, false);
+        		buttonField[i][j] = new FieldButton(this, caption, Config.optFieldBtSize, 2, Config.FontSize, false, this);
         		// when there's a ressource from the algo here will be a 
         		// decision whether the button is a normal button or a noChangeButton
         		if(originalField[i][j] != 0)
@@ -596,6 +698,13 @@ public class Field extends Activity{
 	 
 	 return null;
  }
+
+ public void makeMyToast(String content)
+ {
+		Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
+ }
+	
+
     
 }//end class
 
