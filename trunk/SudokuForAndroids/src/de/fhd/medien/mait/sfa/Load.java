@@ -99,6 +99,8 @@ public class Load extends ListActivity{
     	 this.finish();
      } catch(Exception e){
     	 Log.d("Loading", "Loading failed");
+    	 Toast.makeText(this, "Can't load this file.\n" +
+    	 		"Choose another one and delete this file.", Toast.LENGTH_SHORT).show();
      }
      
     }
