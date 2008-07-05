@@ -264,4 +264,18 @@ public class FieldButton extends GameButton{
 	{
 		return this.hasCandidates;
 	}
+	
+	
+	/**
+	 * this method returns the candidate-value at the overgiven index as String
+	 * @param _pos the index in the cnadidate- array
+	 * @return the Candidate as String, if the candidate is 0 than "" is returned
+	 */
+	public String getCandidateAsString(int _pos)
+	{
+		if(this.candidateValues[_pos] != 0)
+			return Integer.toString(candidateValues[_pos]) + " ";
+		
+		return "";
+	}
 }//end class

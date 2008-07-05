@@ -157,7 +157,7 @@ public class KeyPad extends Activity {
 			candidate[i].setOnClickListener(candidateListener);
 		}
 		
-		cmdBack = new valueButton(this, 0, "back", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize, false );
+		cmdBack = new valueButton(this, 0, "OK", this.cmdBtnWidth, this.cmdBtnHeight, 2, this.cButtonTSize, false );
 		absLayout.addView(cmdBack, new AbsoluteLayout.LayoutParams(this.cmdBtnWidth, this.cmdBtnHeight, 0, this.candidateButtonHeight + 3* this.digitButtonHeight+ 2*offsetVert));
 		cmdBack.setOnClickListener(backListener);
 		
@@ -218,7 +218,7 @@ public class KeyPad extends Activity {
 			
 			else
 			{
-				fillcanBundle();
+				emptyCanBundle();
 				//the value "0" is the code for "clear field"
 				KeyPad.this.setResult(RESULT_OK, codeV[0], canB);
 				KeyPad.this.finish();
@@ -605,6 +605,17 @@ public class KeyPad extends Activity {
 				return v;
 		
 		return null;
+	}
+	
+	
+	private void emptyCanBundle()
+	{
+		canB.putInt("C1", 0);
+		canB.putInt("C2", 0);
+		canB.putInt("C3", 0);
+		canB.putInt("C4", 0);
+		canB.putInt("C5", 0);
+		canB.putInt("C6", 0);
 	}
 	
 	private void fillcanBundle()

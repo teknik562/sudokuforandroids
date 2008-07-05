@@ -250,14 +250,34 @@ public class Field extends Activity{
 		{
 			FieldButton focusedField = focusedField();
 			
-			switch( keyCode)
+			switch(keyCode)
 			{
-				case KeyEvent.KEYCODE_COMMA:
+				case KeyEvent.KEYCODE_SPACE:
 					writeCandidate = true;
 					Toast.makeText(this, "write candidate",	Toast.LENGTH_SHORT).show();
 					
 					break;
 			
+				
+				case  KeyEvent.KEYCODE_COMMA:
+					if(focusedField.changeable == true)
+					{
+					if(focusedField.hasCandidates())
+					{
+						Toast.makeText(this, "candidates here: " + focusedField.getCandidateAsString(0)
+								    + focusedField.getCandidateAsString(1) 
+									+ focusedField.getCandidateAsString(2) 
+									+ focusedField.getCandidateAsString(3) 
+									+ focusedField.getCandidateAsString(4) 
+									+ focusedField.getCandidateAsString(5) , Toast.LENGTH_SHORT).show();
+					}
+					else
+					{
+						Toast.makeText(this, "no candidates stored here!", Toast.LENGTH_SHORT).show();
+					}
+					}
+					break;
+				
 				case KeyEvent.KEYCODE_0:
 					
 						focusedField.setValue(0);
@@ -413,12 +433,8 @@ public class Field extends Activity{
 					focusedField.refreshDrawableState();
 					break;
 				
-				case KeyEvent.KEYCODE_ALT:
+				
 					
-					//if(focusedField.i)
-					
-					Toast.makeText(this, "candidates are: ", Toast.LENGTH_SHORT);
-					break;
 			}// end switch
 		}//end method
 		
