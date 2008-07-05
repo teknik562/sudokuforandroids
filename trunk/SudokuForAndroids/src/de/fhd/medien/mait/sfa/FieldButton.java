@@ -14,6 +14,8 @@ public class FieldButton extends GameButton{
 	//which was clicked, after the Keypad- activity returns to the field
 	private boolean clicked = false; 
 	
+	private boolean hasCandidates = false;
+	
 	public boolean changeable = true;
 	
 	private Field parent;
@@ -77,6 +79,7 @@ public class FieldButton extends GameButton{
 	public void setAsNoCandidate()
 	{
 		redraw(false);
+		hasCandidates = false;
 	}
 	
 	/**
@@ -84,6 +87,7 @@ public class FieldButton extends GameButton{
 	 */
 	public void setAsCandidate(){
 		deleteCaption();
+		hasCandidates = true;
 		redraw(fillDefaultCandidate, textDefaultCandidate, fillFocusedCandidate, textFocusedCandidate, fillPressedCandidate, textPressedCandidate, false);
 	}
 	
@@ -204,33 +208,36 @@ public class FieldButton extends GameButton{
 		int freeIndex = 0;
 		boolean done = false;
 		
-		for(int i = 0; i < this.candidateValues.length; i++)
+		if (this.changeable == true)
 		{
-			if(candidateValues[i] == 0)
+			for(int i = 0; i < this.candidateValues.length; i++)
 			{
-				freeIndex = i;
-				done = true;
-				break;
+				if(candidateValues[i] == 0)
+				{
+					freeIndex = i;
+					done = true;
+					break;
+				}
 			}
-		}
-		if(done == false)
-			//false is returned, if there is no free candidate-slot
-			parent.makeMyToast("no free candidate-slot");
-		
-		else
-		{
-			if(isCandidateStored(_value)== false)
-			{
-				candidateValues[freeIndex] = _value;
-				this.setAsCandidate();
-				parent.makeMyToast("candidate " + Integer.toString(_value) + " stored!");
-			}
+			if(done == false)
+				//false is returned, if there is no free candidate-slot
+				parent.makeMyToast("no free candidate-slot");
+			
 			else
 			{
-				parent.makeMyToast("candidate is already stored");
+				if(isCandidateStored(_value)== false)
+				{
+					candidateValues[freeIndex] = _value;
+					this.setAsCandidate();
+					parent.makeMyToast("candidate " + Integer.toString(_value) + " stored!");
+				}
+				else
+				{
+					parent.makeMyToast("candidate " + Integer.toString(_value) + " is already stored here!");
+				}
+				
+				
 			}
-			
-			
 		}
 		
 	}//end addCandidateValue()
@@ -247,5 +254,14 @@ public class FieldButton extends GameButton{
 				return true;
 		
 		return false;
+	}
+	
+	/**
+	 * has the field candidates stored or not?
+	 * @return true if the field has candidates stored; false if the field has no candidates stored yet
+	 */
+	public boolean hasCandidates()
+	{
+		return this.hasCandidates;
 	}
 }//end class

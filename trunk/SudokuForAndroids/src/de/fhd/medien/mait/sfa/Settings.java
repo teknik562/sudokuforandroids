@@ -83,11 +83,8 @@ public class Settings extends Activity {
 	     
 	     setContentView(absLayoutSettings);
 	     
-	     //the bundle, which called the activity is fetched
-	     Bundle b = this.getIntent().getExtras();
 	     
-	     boolean cheatMode = b.getBoolean("cheatMode");
-	     cheatCheckBox.setChecked(cheatMode);
+	     cheatCheckBox.setChecked(Config.cheatModeActive);
 	     
 	}
 	
@@ -96,23 +93,16 @@ public class Settings extends Activity {
 
 		//@Override
 		public void onClick(View arg0) {
-			if(cheatCheckBox.isChecked())
-			{
+		
+				Config.cheatModeActive = cheatCheckBox.isChecked();
+		
 				Settings.this.setResult(RESULT_OK, "true");
 				Settings.this.finish();
-			}
-			
-			else
-			{
-				Settings.this.setResult(RESULT_OK, "false");
-				Settings.this.finish();
-			}
 				
-			
-		}
 		
 	};
 	
 	
-}
+};
+}//end class
 

@@ -275,6 +275,7 @@ public class Field extends Activity{
 					else
 					{
 						focusedField.addCandidateValue(1);	
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -291,6 +292,7 @@ public class Field extends Activity{
 					else
 					{
 						focusedField.addCandidateValue(2);	
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -301,12 +303,14 @@ public class Field extends Activity{
 					if(writeCandidate == false)
 					{
 						focusedField.setValue(3);
+						if(focusedField.changeable == true)
 						focusedField.deleteCandidates();
 						
 					}
 					else
 					{
-						focusedField.addCandidateValue(3);		
+						focusedField.addCandidateValue(3);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -321,7 +325,8 @@ public class Field extends Activity{
 					}
 					else
 					{
-						focusedField.addCandidateValue(4);	
+						focusedField.addCandidateValue(4);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -336,7 +341,8 @@ public class Field extends Activity{
 					}
 					else
 					{
-						focusedField.addCandidateValue(5);	
+						focusedField.addCandidateValue(5);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -351,7 +357,8 @@ public class Field extends Activity{
 					}
 					else
 					{
-						focusedField.addCandidateValue(6);		
+						focusedField.addCandidateValue(6);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -367,6 +374,7 @@ public class Field extends Activity{
 					else
 					{
 						focusedField.addCandidateValue(7);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -381,7 +389,8 @@ public class Field extends Activity{
 					}
 					else
 					{
-						focusedField.addCandidateValue(8);	
+						focusedField.addCandidateValue(8);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
@@ -396,11 +405,19 @@ public class Field extends Activity{
 					}
 					else
 					{
-						focusedField.addCandidateValue(9);	
+						focusedField.addCandidateValue(9);
+						if(focusedField.changeable == true)
 						writeCandidate = false;
 					}
 					
 					focusedField.refreshDrawableState();
+					break;
+				
+				case KeyEvent.KEYCODE_ALT:
+					
+					if(focusedField.i)
+					
+					Toast.makeText(this, "candidates are: ", Toast.LENGTH_SHORT);
 					break;
 			}// end switch
 		}//end method
@@ -472,37 +489,47 @@ public class Field extends Activity{
      */
     protected void onActivityResult(int requestCode,int resultCode, String data, Bundle canB)
     {
-    	FieldButton clickedField = getClickedField();
     	
-    	clickedField.setCandidateValue(0, canB.getInt("C1"));
-    	clickedField.setCandidateValue(1, canB.getInt("C2"));
-    	clickedField.setCandidateValue(2, canB.getInt("C3"));
-    	clickedField.setCandidateValue(3, canB.getInt("C4"));
-    	clickedField.setCandidateValue(4, canB.getInt("C5"));
-    	clickedField.setCandidateValue(5, canB.getInt("C6"));
-    
-    	if(clickedField.checkCValues()==true)
-    		clickedField.setAsCandidate();
-    	
-    	else
-    		clickedField.setAsNoCandidate();
-    	
-    	//the value is being extracted from the string.
-		int value = Integer.parseInt(data);
-		
-		if(requestCode == KEYPAD_REQUEST_CODE)
+    	if(requestCode == KEYPAD_REQUEST_CODE)
 		{
 			if(resultCode == RESULT_OK)
 			{
-					clickedField.setValue(value);
-					
-					if(value != 10 && value != 0)
-						clickedField.deleteCandidates();
-					
-					clickedField.setNotClicked();
+    	    	FieldButton clickedField = getClickedField();
+		    	
+		    	clickedField.setCandidateValue(0, canB.getInt("C1"));
+		    	clickedField.setCandidateValue(1, canB.getInt("C2"));
+		    	clickedField.setCandidateValue(2, canB.getInt("C3"));
+		    	clickedField.setCandidateValue(3, canB.getInt("C4"));
+		    	clickedField.setCandidateValue(4, canB.getInt("C5"));
+		    	clickedField.setCandidateValue(5, canB.getInt("C6"));
+		    
+		    	if(clickedField.checkCValues()==true)
+		    		clickedField.setAsCandidate();
+		    	
+		    	else
+		    		clickedField.setAsNoCandidate();
+		    	
+		    	//the value is being extracted from the string.
+				int value = Integer.parseInt(data);
+				
+				
+							clickedField.setValue(value);
+							
+							if(value != 10 && value != 0)
+								clickedField.deleteCandidates();
+							
+							clickedField.setNotClicked();
 				
 			} //end if inner
 		}//end if outer
+    	
+    	else if(requestCode == SETTINGS_REQUEST_CODE)
+    	{
+    		if(resultCode == RESULT_OK)
+    		{
+    			
+    		}
+    	}
     	    		
 	}//end method
 
@@ -732,6 +759,8 @@ public class Field extends Activity{
  }
 	
     
+
+ 
 }//end class
 
 
