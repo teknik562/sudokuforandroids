@@ -415,7 +415,7 @@ public class Field extends Activity{
 				
 				case KeyEvent.KEYCODE_ALT:
 					
-					if(focusedField.i)
+					//if(focusedField.i)
 					
 					Toast.makeText(this, "candidates are: ", Toast.LENGTH_SHORT);
 					break;
