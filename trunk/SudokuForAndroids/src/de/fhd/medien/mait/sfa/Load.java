@@ -2,6 +2,7 @@ package de.fhd.medien.mait.sfa;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -97,10 +98,13 @@ public class Load extends ListActivity{
     	 Log.d("Loading", "Loading successful");
     	 startActivity(loadGame);
     	 this.finish();
+     } catch(FileNotFoundException fnf){
+    	 Toast.makeText(this, "File not found, is allready deleted.\n" +
+      	 		"Delete it or reload.", Toast.LENGTH_SHORT).show(); 
      } catch(Exception e){
     	 Log.d("Loading", "Loading failed");
-    	 Toast.makeText(this, "Can't load this file.\n" +
-    	 		"Choose another one and delete this file.", Toast.LENGTH_SHORT).show();
+    	 Toast.makeText(this, "There's a problem with this file. " +
+    	 		"Please go back to main menu", Toast.LENGTH_SHORT).show();
      }
      
     }
