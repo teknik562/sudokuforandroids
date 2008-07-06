@@ -245,7 +245,7 @@ public class Field extends Activity{
     public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		
-		
+    	super.onKeyDown(keyCode, event);
 		if(isAnyFieldFocused())
 		{
 			FieldButton focusedField = focusedField();
@@ -442,7 +442,7 @@ public class Field extends Activity{
 			
 		
 			
-			//super.onKeyDown(keyCode, event);
+			
 		}//end method
 		
 		
