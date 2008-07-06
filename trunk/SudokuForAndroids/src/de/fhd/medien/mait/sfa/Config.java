@@ -53,6 +53,8 @@ public class Config {
 	//variable for the cheat- mode
 	static boolean cheatModeActive = false;
 	
+	
+	
 	static void initiate(int _displayWidth, int _displayHeight, int _minScreenAttr,
 			int _optFieldBtSize, int _optFieldPadding, int _optFieldLine, int _fieldLength,
 			int _fieldStartXPos, int _fieldStartYPos , int _FontSize, int _optMenuBtHeight,
