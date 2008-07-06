@@ -29,6 +29,7 @@ public class Load extends ListActivity{
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle); 
     String[] directory;   
+    try{
 	File f = new File("/data/data/de.fhd.medien.mait.sfa/files");
 	directory = f.list();
 	
@@ -56,6 +57,10 @@ public class Load extends ListActivity{
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userDirectory);
 		this.setListAdapter(adapter);
 	}
+    }
+    catch(Exception ex){
+    	Toast.makeText(this, "There are no savegames from you", Toast.LENGTH_SHORT).show();
+    }
     }
     
     
