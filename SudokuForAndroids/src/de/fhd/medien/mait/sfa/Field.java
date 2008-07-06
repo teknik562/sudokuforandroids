@@ -244,7 +244,7 @@ public class Field extends Activity{
      */
     public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
-		super.onKeyDown(keyCode, event);
+		
 		
 		if(isAnyFieldFocused())
 		{
@@ -252,30 +252,33 @@ public class Field extends Activity{
 			
 			switch(keyCode)
 			{
-				case KeyEvent.KEYCODE_SPACE:
+				case KeyEvent.KEYCODE_COMMA:
 					writeCandidate = true;
 					Toast.makeText(this, "write candidate",	Toast.LENGTH_SHORT).show();
 					
 					break;
 			
 				
-				case  KeyEvent.KEYCODE_COMMA:
-					if(focusedField.changeable == true)
-					{
-					if(focusedField.hasCandidates())
-					{
-						Toast.makeText(this, "candidates here: " + focusedField.getCandidateAsString(0)
-								    + focusedField.getCandidateAsString(1) 
-									+ focusedField.getCandidateAsString(2) 
-									+ focusedField.getCandidateAsString(3) 
-									+ focusedField.getCandidateAsString(4) 
-									+ focusedField.getCandidateAsString(5) , Toast.LENGTH_SHORT).show();
-					}
-					else
-					{
-						Toast.makeText(this, "no candidates stored here!", Toast.LENGTH_SHORT).show();
-					}
-					}
+					
+				case  KeyEvent.KEYCODE_SPACE:
+					focusedField = focusedField();
+					
+						if(focusedField.changeable == true)
+						{
+							if(focusedField.hasCandidates())
+							{
+								Toast.makeText(this, "candidates here: " + focusedField.getCandidateAsString(0)
+										    + focusedField.getCandidateAsString(1) 
+											+ focusedField.getCandidateAsString(2) 
+											+ focusedField.getCandidateAsString(3) 
+											+ focusedField.getCandidateAsString(4) 
+											+ focusedField.getCandidateAsString(5) , Toast.LENGTH_SHORT).show();
+							}
+							else
+								Toast.makeText(this, "no candidate- values here!", Toast.LENGTH_SHORT).show();
+						}
+					
+					
 					break;
 				
 				case KeyEvent.KEYCODE_0:
@@ -436,6 +439,10 @@ public class Field extends Activity{
 				
 					
 			}// end switch
+			
+		
+			
+			//super.onKeyDown(keyCode, event);
 		}//end method
 		
 		
@@ -729,6 +736,7 @@ public class Field extends Activity{
         	Intent showSettings = new Intent(this, Settings.class);
         	Bundle b = new Bundle();
         	b.putBoolean("cheatMode", Config.cheatModeActive);
+        	
         	showSettings.putExtras(b);
         	startSubActivity(showSettings, SETTINGS_REQUEST_CODE);
         }

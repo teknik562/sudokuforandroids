@@ -106,10 +106,8 @@ public class MainMenu extends Activity {
        	//check, if the MainMenue is resumed from the Settings- screen
        	if(requestCode == SETTINGSKEY)
        	{
-       		if(resultCode == RESULT_OK)
-       			//the data- String can either be "true" or "false", so this value is parsed and then stored in the global
-       			//cheat mode- variable
-       			Config.cheatModeActive = Boolean.parseBoolean(data);
+       		if(resultCode == RESULT_OK);
+       			
        	}
     }
     
