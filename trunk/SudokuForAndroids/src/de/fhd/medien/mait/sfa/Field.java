@@ -238,6 +238,7 @@ public class Field extends Activity{
 					{
 						clickedField.setValue(getSolvedValue(clickedField));
 						Config.cheatCount++;
+						finishGameIfFinished();
 					}
 				}
 				
@@ -302,6 +303,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(1);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -318,6 +320,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(2);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 						
 					}
 					else
@@ -336,6 +339,7 @@ public class Field extends Activity{
 						focusedField.setValue(3);
 						if(focusedField.changeable == true)
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 						
 					}
 					else
@@ -353,6 +357,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(4);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -369,6 +374,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(5);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -385,6 +391,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(6);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -401,6 +408,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(7);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -417,6 +425,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(8);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -433,6 +442,7 @@ public class Field extends Activity{
 					{
 						focusedField.setValue(9);
 						focusedField.deleteCandidates();
+						finishGameIfFinished();
 					}
 					else
 					{
@@ -550,6 +560,7 @@ public class Field extends Activity{
 								clickedField.deleteCandidates();
 							
 							clickedField.setNotClicked();
+							finishGameIfFinished();
 				
 			} //end if inner
 		}//end if outer
@@ -558,7 +569,7 @@ public class Field extends Activity{
     	{
     		if(resultCode == RESULT_OK)
     		{
-    			
+    			//do nothing
     		}
     	}
     	    		
@@ -732,12 +743,13 @@ public class Field extends Activity{
       {
         super.onCreateOptionsMenu(menu);
         
-        menu.add(0, 1, "save Game").setIcon(R.drawable.savegame);
-        menu.add(0, 2, "I'm ready");
-        menu.add(0, 3, "settings").setIcon(R.drawable.settings);
         menu.add(1, 4, "main menu").setIcon(R.drawable.mainmenu);
+        menu.add(0, 3, "settings").setIcon(R.drawable.settings);
+        menu.add(1, 6, "help").setIcon(R.drawable.help);       
+        
+        menu.add(0, 1, "save Game").setIcon(R.drawable.savegame);
         menu.add(1, 5, "load game").setIcon(R.drawable.load);
-        menu.add(1, 6, "help").setIcon(R.drawable.help);
+      
         
         return true;
       }
@@ -751,12 +763,6 @@ public class Field extends Activity{
         if(item.getId() == 1)
           {
         	saveGame();
-          }
-        if(item.getId() == 2)
-          {
-            Intent next = new Intent(this, Highscore.class);
-            next.putExtra("time", (int)(((new Date().getTime()/1000L)-Config.startTime)/60));
-            startSubActivity(next, 4646);
           }
         if(item.getId() == 3)
         {
@@ -847,6 +853,63 @@ public class Field extends Activity{
 	 
 	 return solvedField[x][y];
  }
+
+
+ /**
+  * the method checks, if the sudoku- field is fully filled
+  * @return true if the field is fully filled, false if it is not
+  */
+private boolean isFieldFilled()
+{
+	for(int i = 0; i < buttonField.length; i++)
+		for(int j = 0; j < buttonField[i].length; j++)
+			if(buttonField[i][j].hasValue() == false)
+				return false;
+	
+	return true;
+}
+
+
+/**
+ * this method checks, if the sudoku- field is filled with the correct values
+ * @return true if it is correct, false if it is not
+ */
+private boolean isFieldCorrect()
+{
+	
+		for(int i = 0; i < solvedField.length; i++)
+			for(int j = 0; j < solvedField[i].length; j++)
+				if(buttonField[i][j].changeable == true)
+					if(solvedField[i][j] != buttonField[i][j].getValue())
+						return false;
+		
+		return true;				
+}
+
+/**
+ * this method closes the game and launches the highscore-screen.
+ */
+private void finishGameIfFinished()
+{
+	Log.d("check Field....", "Field filled: " + Boolean.toString(isFieldFilled()));
+	
+	if(isFieldFilled())
+	{
+		if(isFieldCorrect())
+		{
+			Toast.makeText(this, "Congratulations! You've mastered Sudoku for Android(s)!", Toast.LENGTH_LONG).show();
+			Intent next = new Intent(this, Highscore.class);
+		    next.putExtra("time", (int)(((new Date().getTime()/1000L)-Config.startTime)/60));
+		    startSubActivity(next, 4646);
+		}
+		else
+			Toast.makeText(this, "Sorry! your Sudoku- field is incorrect!", Toast.LENGTH_SHORT).show();
+	}
+	
+	
+}
+
+
 
  
 }//end class

@@ -278,4 +278,21 @@ public class FieldButton extends GameButton{
 		
 		return "";
 	}
+	
+	/**
+	 * this method checks, if the Field as a value != 0 stored
+	 * @return true, if the field has a value stored, false if the field has no value stored yet
+	 */
+	public boolean hasValue()
+	{
+		if(this.changeable == false)
+				return true;
+		else
+		{
+			if(this.value != 0)
+				return true;
+		
+			return false;
+		}
+	}
 }//end class
