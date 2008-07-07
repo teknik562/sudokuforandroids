@@ -704,7 +704,7 @@ public class Field extends Activity{
     		fw.append((char)Character.LINE_SEPARATOR);
     		// write time needed until now
     		int now =(int) new Date().getTime()/1000;
-    		int needed = (now - Config.startTime) / 60;
+    		int needed = ((now - Config.startTime) / 60) + Config.neededTime;
     		fw.append(Integer.toString(needed));
     		// separate lines
     		fw.append((char)Character.LINE_SEPARATOR);
