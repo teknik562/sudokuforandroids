@@ -121,7 +121,7 @@ public class Load extends ListActivity{
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
         
-        menu.add(0, 1, "Delete selected savegame");
+        menu.add(0, 1, "Delete selected savegame").setIcon(R.drawable.delete);
         
         return true;
     }
