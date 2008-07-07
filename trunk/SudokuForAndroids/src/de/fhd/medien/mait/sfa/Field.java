@@ -159,7 +159,7 @@ public class Field extends Activity{
         super.onCreate(icicle); 
         
         // set the start time
-        Config.startTime =(int) new Date().getTime() / 1000;
+        Config.startTime =(int)(new Date().getTime() / 1000L);
         
         String starter = "NORMAL";
         try{
@@ -703,8 +703,10 @@ public class Field extends Activity{
     		// separate lines
     		fw.append((char)Character.LINE_SEPARATOR);
     		// write time needed until now
-    		int now =(int) new Date().getTime()/1000;
+    		int now = (int)( new Date().getTime()/1000L);
     		int needed = ((now - Config.startTime) / 60) + Config.neededTime;
+    		Config.startTime = now;
+    		Config.neededTime += needed;
     		fw.append(Integer.toString(needed));
     		// separate lines
     		fw.append((char)Character.LINE_SEPARATOR);
@@ -899,8 +901,8 @@ private void finishGameIfFinished()
 		{
 			Toast.makeText(this, "Congratulations! You've mastered Sudoku for Android(s)!", Toast.LENGTH_LONG).show();
 			Intent next = new Intent(this, Highscore.class);
-		    next.putExtra("time", (int)(((new Date().getTime()/1000L)-Config.startTime)/60));
-		    startSubActivity(next, 4646);
+		  next.putExtra("time", (int)(((new Date().getTime()/1000L)-Config.startTime)/60));
+		  startSubActivity(next, 4646);
 		}
 		else
 			Toast.makeText(this, "Sorry! your Sudoku- field is incorrect!", Toast.LENGTH_SHORT).show();
