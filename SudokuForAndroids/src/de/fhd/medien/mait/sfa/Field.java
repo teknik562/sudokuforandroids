@@ -72,9 +72,11 @@ public class Field extends Activity{
     {
            public void run()
            {
+        	   // reset cheatCount...you never know...hrhrhrhr
+        	   Config.cheatCount = 0;
         	   // request a puzzle basing on the set difficulty
-        	   Algo normal = new Algo();
-        	   normal.Algo(Config.difficulty);
+        	   Algo normal = new Algo(Config.difficulty);
+        	   
         	   userManipulatedField = normal.getMaskedField();
         	   originalField = normal.getMaskedField();
         	   solvedField = normal.getFilledField();
