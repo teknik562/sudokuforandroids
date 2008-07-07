@@ -155,7 +155,7 @@ public class Field extends Activity{
         super.onCreate(icicle); 
         
         // set the start time
-        Config.startTime = new Date().getTime();
+        Config.startTime = new Date().getTime() / 1000L;
         
         String starter = "NORMAL";
         try{
@@ -709,7 +709,7 @@ public class Field extends Activity{
         super.onCreateOptionsMenu(menu);
         
         menu.add(0, 1, "Save Game");
-        menu.add(0, 2, "Spiel fertig");
+        menu.add(0, 2, "I'm ready");
         menu.add(0, 3, "Settings");
         
         return true;
@@ -728,7 +728,7 @@ public class Field extends Activity{
         if(item.getId() == 2)
           {
             Intent next = new Intent(this, Highscore.class);
-            next.putExtra("time", 10);
+            next.putExtra("time", (int)(((new Date().getTime()/1000L)-Config.startTime)/60));
             startSubActivity(next, 4646);
           }
         if(item.getId() == 3)
