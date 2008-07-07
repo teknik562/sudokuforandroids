@@ -624,8 +624,7 @@ public class Field extends Activity{
         	int i = 1;
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
-        	// try notwendig da Verzeichnis auch nicht vorhanden sein kannijbi
-
+        	// try neccessary because of possible NullPointerException caused by empty folder
         	try {
         	String[] directory = g.list();
         	
