@@ -726,9 +726,12 @@ public class Field extends Activity{
       {
         super.onCreateOptionsMenu(menu);
         
-        menu.add(0, 1, "Save Game");
+        menu.add(0, 1, "save Game");
         menu.add(0, 2, "I'm ready");
-        menu.add(0, 3, "Settings");
+        menu.add(0, 3, "settings");
+        menu.add(1, 4, "main menu");
+        menu.add(1, 5, "load game");
+        menu.add(1, 6, "help");
         
         return true;
       }
@@ -758,6 +761,24 @@ public class Field extends Activity{
         	showSettings.putExtras(b);
         	startSubActivity(showSettings, SETTINGS_REQUEST_CODE);
         }
+        
+        if(item.getId() == 4)
+        {
+        	Intent showMainMenu = new Intent(this, MainMenu.class);
+        	startActivity(showMainMenu);
+        }
+        if(item.getId() == 5)
+        {
+        	Intent loadGame = new Intent(this, Load.class);
+            startActivity(loadGame);
+        }
+        if(item.getId() == 6)
+        {
+        	Intent showHelp = new Intent(this, Help.class);
+            startActivity(showHelp);
+        }
+        
+        
         return true;
       }
    
