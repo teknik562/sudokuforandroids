@@ -43,9 +43,9 @@ public class Config {
 	/** Saves the chosen difficulty */
 	static int difficulty;
 	/** stores the time the game was started */
-	static long startTime = 0;
+	static int startTime = 0;
 	/** stores the time needed until now*/
-	static long neededTime = 0;
+	static int neededTime = 0;
 	/** Best linesize to draw buttons */
 	static final int lineSize = 2;
 	
