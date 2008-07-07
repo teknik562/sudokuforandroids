@@ -186,5 +186,5 @@ public class UserList extends ListActivity
           next.putExtra("playerName", user);
           
           super.startActivity(next);
-          this.finish();
-    }  }
+    } 
+}
