@@ -285,7 +285,7 @@ public class Highscore extends ListActivity
           }
         
         // subtract time
-        points -= time*10 + Config.neededTime;
+        points -= (time*10) + Config.neededTime;
         
         // subtract cheats
         points -= 20*cheats;
