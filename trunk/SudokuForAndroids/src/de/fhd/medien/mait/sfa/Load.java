@@ -84,6 +84,7 @@ public class Load extends ListActivity{
     	 String nameString = br.readLine();
     	 String levelString = br.readLine();
     	 String sumTimeString = br.readLine();
+    	 Config.cheatCount = Integer.parseInt(br.readLine());
     	 
     	 br.close();
     	 //Config.loadedScore = loadedObject;
