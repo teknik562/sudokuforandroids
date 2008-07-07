@@ -102,7 +102,7 @@ public class Field extends Activity{
            {
         	   Config.playerName = getIntent().getStringExtra("ns");
         	   Config.difficulty = Integer.parseInt(getIntent().getStringExtra("ls"));
-        	   Config.neededTime = Long.parseLong(getIntent().getStringExtra("sts"));
+        	   Config.neededTime = Integer.parseInt(getIntent().getStringExtra("sts"));
         	   String solvedFieldString = getIntent().getStringExtra("sfs");
         	   String originalFieldString = getIntent().getStringExtra("ofs");
         	   String userManipulatedFieldString = getIntent().getStringExtra("umfs");
@@ -159,7 +159,7 @@ public class Field extends Activity{
         super.onCreate(icicle); 
         
         // set the start time
-        Config.startTime = new Date().getTime() / 1000L;
+        Config.startTime =(int) new Date().getTime() / 1000;
         
         String starter = "NORMAL";
         try{
@@ -703,9 +703,9 @@ public class Field extends Activity{
     		// separate lines
     		fw.append((char)Character.LINE_SEPARATOR);
     		// write time needed until now
-    		long now = new Date().getTime();
-    		long needed = now - Config.startTime;
-    		fw.append(Long.toString(needed));
+    		int now =(int) new Date().getTime()/1000;
+    		int needed = (now - Config.startTime) / 60;
+    		fw.append(Integer.toString(needed));
     		// separate lines
     		fw.append((char)Character.LINE_SEPARATOR);
     		// write cheatcount
