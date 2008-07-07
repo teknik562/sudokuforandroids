@@ -230,8 +230,11 @@ public class Field extends Activity{
 				}
 				else
 				{
-					clickedField.setValue(getSolvedValue(clickedField));
-					Config.cheatCount++;
+					if(clickedField.changeable == true)
+					{
+						clickedField.setValue(getSolvedValue(clickedField));
+						Config.cheatCount++;
+					}
 				}
 				
 			}
