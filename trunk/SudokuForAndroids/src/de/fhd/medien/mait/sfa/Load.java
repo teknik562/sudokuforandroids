@@ -45,7 +45,7 @@ public class Load extends ListActivity{
 	
 	// If there are no savegames, a message will be shown
 	if (userDirectory.length == 0){
-		Toast.makeText(this, "There are no savegames from you", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "No savegames yet", Toast.LENGTH_SHORT).show();
 		try{
 			this.wait(Toast.LENGTH_SHORT);
 			finish();
@@ -59,7 +59,7 @@ public class Load extends ListActivity{
 	}
     }
     catch(Exception ex){
-    	Toast.makeText(this, "There are no savegames from you", Toast.LENGTH_SHORT).show();
+    	Toast.makeText(this, "No savegames yet", Toast.LENGTH_SHORT).show();
     }
     }
     
