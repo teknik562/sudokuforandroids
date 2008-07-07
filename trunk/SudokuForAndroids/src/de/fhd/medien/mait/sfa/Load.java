@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,6 +117,25 @@ public class Load extends ListActivity{
      
     }
     
+    public void reload(){
+    	String[] directory;   
+    	File f = new File("/data/data/de.fhd.medien.mait.sfa/files");
+    	directory = f.list();
+    	
+    	// Only savegames by the player will be shown, others are hided
+    	ArrayList<String> tempDirectory = new ArrayList<String>();
+    	for(String element : directory){
+    		// Savegames to be displayed must start with "Playername "
+    		if(element.startsWith(Config.playerName + " "))
+    			tempDirectory.add(element);
+    	}
+    	String[] userDirectory = new String[tempDirectory.size()];
+    	tempDirectory.toArray(userDirectory);
+    	
+    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userDirectory);
+    	this.setListAdapter(adapter);
+    }
+    
     /**
      * This method creates the Otions-Menu
      */
@@ -133,32 +154,37 @@ public class Load extends ListActivity{
         
         if(item.getId() == 1){
         	try{
-        		String chosenFile = this.getListView().getSelectedItem().toString();
-        		if (deleteFile(chosenFile))
-        			Toast.makeText(this, chosenFile + " deleted", Toast.LENGTH_SHORT).show();
-        		else
-        			Toast.makeText(this, "Can't delete that file", Toast.LENGTH_SHORT).show();
+        		
+        		new AlertDialog.Builder(this)
+        		.setTitle("Delete")
+        		.setMessage("Are you sure you want to delete that file?")
+        		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				String chosenFile = Load.this.getListView().getSelectedItem().toString();
+                		if (deleteFile(chosenFile)){
+                			Toast.makeText(Load.this, chosenFile + " deleted", Toast.LENGTH_SHORT).show();
+                			Load.this.reload();
+                		}
+                		else
+                			Toast.makeText(Load.this, "Can't delete that file", Toast.LENGTH_SHORT).show();
+        			}
+        		})
+        		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+
+        			}
+        		})
+        		.show();
+        		
+        		
+        		
         	}catch(Exception e){
         		Toast.makeText(this, "You need to choose a file first", Toast.LENGTH_SHORT).show();
-        	}
-        }
+        	} 
+        } 
         
-        String[] directory;   
-    	File f = new File("/data/data/de.fhd.medien.mait.sfa/files");
-    	directory = f.list();
-    	
-    	// Only savegames by the player will be shown, others are hided
-    	ArrayList<String> tempDirectory = new ArrayList<String>();
-    	for(String element : directory){
-    		// Savegames to be displayed must start with "Playername "
-    		if(element.startsWith(Config.playerName + " "))
-    			tempDirectory.add(element);
-    	}
-    	String[] userDirectory = new String[tempDirectory.size()];
-    	tempDirectory.toArray(userDirectory);
-    	
-    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userDirectory);
-    	this.setListAdapter(adapter);
+        
+        
 
         return true;
     }
