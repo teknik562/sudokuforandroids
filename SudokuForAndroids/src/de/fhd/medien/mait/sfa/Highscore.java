@@ -191,7 +191,7 @@ public class Highscore extends ListActivity
 
         // get all neccasary datas
         int level = Config.difficulty;
-        int cheats = getIntent().getIntExtra("cheats", 0);
+        int cheats = Config.cheatCount;
         int time = getIntent().getIntExtra("time", 100);
         
         // played games on level "easy"
