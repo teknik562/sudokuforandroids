@@ -689,6 +689,10 @@ public class Field extends Activity{
     		long now = new Date().getTime();
     		long needed = now - Config.startTime;
     		fw.append(Long.toString(needed));
+    		// separate lines
+    		fw.append((char)Character.LINE_SEPARATOR);
+    		// write cheatcount
+    		fw.append(Integer.toString(Config.cheatCount));
     		fw.flush();
     		fw.close();
     	
