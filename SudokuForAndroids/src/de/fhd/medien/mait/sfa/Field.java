@@ -563,6 +563,7 @@ public class Field extends Activity{
 	}//end method
 
     private void saveGame(){
+    	gameWasLoaded = true;
     	int[][][] candidates = getCandidates();
 
     	String solvedFieldString = "";
