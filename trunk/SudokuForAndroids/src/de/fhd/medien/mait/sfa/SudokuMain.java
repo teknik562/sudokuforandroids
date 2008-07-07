@@ -12,5 +12,6 @@ public class SudokuMain extends Activity
         
         Intent next = new Intent(this, UserList.class);
         this.startActivity(next);
+        this.finish();
       }
   }
