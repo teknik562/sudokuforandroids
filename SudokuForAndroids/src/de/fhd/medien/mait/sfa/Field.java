@@ -105,6 +105,7 @@ public class Field extends Activity{
         	   String solvedFieldString = getIntent().getStringExtra("sfs");
         	   String originalFieldString = getIntent().getStringExtra("ofs");
         	   String userManipulatedFieldString = getIntent().getStringExtra("umfs");
+        	   fileNameloaded = getIntent().getStringExtra("fileName");
 
         	   Log.d("OFS", originalFieldString);
         	   int counter = 0;
@@ -594,7 +595,7 @@ public class Field extends Activity{
 
     	try{
         	Date d = new Date();
-        	// Date looks like: 12.28.08
+        	// Date looks like: 08.12.28
         	String date = DateFormat.format("yy.MM.dd",d.getTime()).toString();
         	String diff = "";
         	switch(Config.difficulty){
@@ -603,13 +604,12 @@ public class Field extends Activity{
         	case 3: diff = " H"; break;
         	}
         	String fileName = Config.playerName + "   " + date + diff;
-        	Log.d("Saving...", fileName);
+
         	if(gameWasLoaded){
         		fileName = fileNameloaded;
         		Log.d("File", "no need to rename, it was loaded");
         	}
         	else{
-       		gameWasLoaded = true;
         	int i = 1;
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
@@ -662,9 +662,10 @@ public class Field extends Activity{
         	}
         	
         	}//hinterstes else
+        	Log.d("Saving...", "vor OSW");
     		OutputStreamWriter fw = new OutputStreamWriter(
 					openFileOutput(fileName, MODE_WORLD_READABLE));
-    		
+    		Log.d("Saving...", "nach OSW");
     		// write solved field
     		fw.write(solvedFieldString);
     		// separate lines
@@ -699,7 +700,9 @@ public class Field extends Activity{
     		fw.append(Integer.toString(Config.cheatCount));
     		fw.flush();
     		fw.close();
-    	
+       		gameWasLoaded = true;
+       		fileNameloaded = fileName;
+       	Log.d("Saving...", "as: " + fileName);	
     	Log.d("Saving...", "Passed");
     	Toast.makeText(this, "Game saved", Toast.LENGTH_SHORT).show();
     	} catch(Exception ex){
