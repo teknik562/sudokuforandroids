@@ -19,16 +19,20 @@ which are the following:\n
 By starting a game a field is created according to the selected difficulty level. The fields 
 that can't be changed are blue. All other Fields can be edited.\n
 Fields can be edited either by simply clicking a number or by clicking the submit button.\n
-After clicing the submit button a keypad is shown where the numbers can be chosen.
-Additionally, candidates for the fields can be chosen by clicking a candidate field on the keypad and afterwards clicking a number.\n
+After clicing the submit button a keypad is shown where the numbers can be chosen.\n
+Another way to edit numbers is to simply press the according number on your phone\'s pad.\n
+By clicking the comma on your pad you activate the candidate mode. The number you press the next will be saved as candidate. \n
+You can display candidates by pressing spacebar.\n
+Additionally, candidates for the fields can be chosen by clicking a candidate field on the keypad and afterwards pressing a number.\n
 Fields that contain candidates are displayed green.\n
-The game can be saved by choosing <i>Save Game</i> in the game menu and can be loaded by choosing <i>Load Game</i> in the main menu.\n\n
-The online highscore can be accessed via sudoku-for-androids.de.vu and can be submitted in the highscore menu.
+The game can be saved by choosing <i>Save Game</i> in the game menu and can be loaded by choosing <i>Load Game</i>.\n\n
+The online highscore can be accessed via sudoku-for-androids.de.vu and can be submitted in the highscore menu.\n\n
+By activating the cheat mode each field you press will be solved immediately. Be careful! Cheating effects your highscore!
 </string>
     
     <string name="creditsTitle">Credits</string>
     <string name="creditsText"><b>Sudoku for Android(s)</b> was developed by students of the
-    University for applied science in Düsseldorf(Germany) as their first computer science project.
+    University of Applied Science in Düsseldorf(Germany) as their first computer science project.
     \n\n<u>Participants:</u>\n
 Jan Monschke\n
 Abdelhak El-Boubsi\n
