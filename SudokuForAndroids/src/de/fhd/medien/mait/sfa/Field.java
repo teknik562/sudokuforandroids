@@ -596,7 +596,7 @@ public class Field extends Activity{
         	case 3: diff = " H"; break;
         	}
         	String fileName = Config.playerName + "   " + date + diff;
-        	
+        	Log.d("Saving...", fileName);
         	if(gameWasLoaded){
         		fileName = fileNameloaded;
         		Log.d("File", "no need to rename, it was loaded");
@@ -605,7 +605,10 @@ public class Field extends Activity{
         	int i = 1;
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
+        	// try notwendig da Verzeichnis auch nicht vorhanden sein kann
+        	try {
         	String[] directory = g.list();
+        	
         	// Only savegames by the player will be shown, others are hidden
         	ArrayList<String> tempDirectory = new ArrayList<String>();
         	for(String element : directory){
@@ -646,9 +649,14 @@ public class Field extends Activity{
         		
         	}
         	fileName += fileEnding;
+        	} catch(NullPointerException npe){
+        		Log.d("Saving...", "Directory not yet set");
         	}
+        	
+        	}//hinterstes else
     		OutputStreamWriter fw = new OutputStreamWriter(
 					openFileOutput(fileName, MODE_WORLD_READABLE));
+    		
     		// write solved field
     		fw.write(solvedFieldString);
     		// separate lines
