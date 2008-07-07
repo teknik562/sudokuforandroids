@@ -1,7 +1,6 @@
 package de.fhd.medien.mait.sfa;
 
 
-
 import java.io.File;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -616,9 +615,6 @@ public class Field extends Activity{
         	case 3: diff = " H"; break;
         	}
         	String fileName = Config.playerName + "   " + date + diff;
-
-        	Log.d("Saving...", fileName);
-
         	
         	if(gameWasLoaded){
         		fileName = fileNameloaded;
@@ -628,7 +624,8 @@ public class Field extends Activity{
         	int i = 1;
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
-        	// try
+        	// try notwendig da Verzeichnis auch nicht vorhanden sein kannijbi
+
         	try {
         	String[] directory = g.list();
         	
