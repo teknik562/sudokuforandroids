@@ -74,6 +74,7 @@ public class Field extends Activity{
            {
         	   // reset cheatCount...you never know...hrhrhrhr
         	   Config.cheatCount = 0;
+        	   Config.neededTime = 0;
         	   // request a puzzle basing on the set difficulty
         	   Algo normal = new Algo(Config.difficulty);
         	   
