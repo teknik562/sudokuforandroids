@@ -563,7 +563,7 @@ public class Field extends Activity{
 	}//end method
 
     private void saveGame(){
-    	gameWasLoaded = true;
+    	
     	int[][][] candidates = getCandidates();
 
     	String solvedFieldString = "";
@@ -609,6 +609,7 @@ public class Field extends Activity{
         		Log.d("File", "no need to rename, it was loaded");
         	}
         	else{
+       		gameWasLoaded = true;
         	int i = 1;
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
