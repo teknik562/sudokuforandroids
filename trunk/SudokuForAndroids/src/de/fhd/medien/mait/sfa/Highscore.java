@@ -48,7 +48,8 @@ public class Highscore extends ListActivity
             // create a date-object for user-id
             Date date = new Date();
 
-            if(userName != null && getIntent().getStringExtra("fromMenu") != "1")
+            
+            if(userName != null && getIntent().getIntExtra("fromMenu", 0) != 1)
               db.execSQL("INSERT INTO " + DB_HIGHSCORETABLE +
                          "(hs_id, hs_user_name, hs_score) VALUES" +
                          "('"+(date.getTime() / 1000L)+"', '"+userName+"', '"+this.points+"')");
