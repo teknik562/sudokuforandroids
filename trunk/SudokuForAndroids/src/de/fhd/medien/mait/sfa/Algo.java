@@ -260,7 +260,7 @@ public class Algo
      * 
      * @param _level is the degree of difficulty (1 = easy, 2 = normal, 3 = hard)
      */
-    public void Algo(int _level)
+    public Algo(int _level)
       {
         // try to generate a field as often as it needs to
         // get a complete filled field
