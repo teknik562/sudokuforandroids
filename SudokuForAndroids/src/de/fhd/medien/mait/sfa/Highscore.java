@@ -48,7 +48,7 @@ public class Highscore extends ListActivity
             // create a date-object for user-id
             Date date = new Date();
 
-            if(userName != null)
+            if(userName != null && getIntent().getStringExtra("fromMenu") != "1")
               db.execSQL("INSERT INTO " + DB_HIGHSCORETABLE +
                          "(hs_id, hs_user_name, hs_score) VALUES" +
                          "('"+(date.getTime() / 1000L)+"', '"+userName+"', '"+this.points+"')");
@@ -58,8 +58,10 @@ public class Highscore extends ListActivity
             		                   " FROM "+DB_HIGHSCORETABLE+
             		                   " ORDER BY hs_score DESC", null);
 */            
-            Cursor c = db.query(DB_HIGHSCORETABLE, new String[] {"hs_user_name", "hs_score"},null, null, null, null, "hs_score DESC");
+            Cursor c = db.query(DB_HIGHSCORETABLE, new String[] {"hs_id", "hs_user_name", "hs_score"},null, null, null, null, "hs_score DESC");
 
+            // get the column-index of the id-column
+            int idColumnIndex = c.getColumnIndex("hs_id");
             // get the column-index of the user-name-column
             int nameColumnIndex = c.getColumnIndex("hs_user_name");
             // get the column-index of the score-column
