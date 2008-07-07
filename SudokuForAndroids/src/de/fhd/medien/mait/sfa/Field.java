@@ -726,12 +726,12 @@ public class Field extends Activity{
       {
         super.onCreateOptionsMenu(menu);
         
-        menu.add(0, 1, "save Game");
+        menu.add(0, 1, "save Game").setIcon(R.drawable.savegame);
         menu.add(0, 2, "I'm ready");
-        menu.add(0, 3, "settings");
-        menu.add(1, 4, "main menu");
-        menu.add(1, 5, "load game");
-        menu.add(1, 6, "help");
+        menu.add(0, 3, "settings").setIcon(R.drawable.settings);
+        menu.add(1, 4, "main menu").setIcon(R.drawable.mainmenu);
+        menu.add(1, 5, "load game").setIcon(R.drawable.load);
+        menu.add(1, 6, "help").setIcon(R.drawable.help);
         
         return true;
       }
