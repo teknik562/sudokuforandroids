@@ -105,7 +105,7 @@ public class UserList extends ListActivity
         {
           super.onCreateOptionsMenu(menu);
           
-          menu.add(0, 1, "New Player");
+          menu.add(0, 1, "New Player").setIcon(R.drawable.adduser);
           
           return true;
         }
