@@ -49,6 +49,8 @@ public class Config {
 	/** Best linesize to draw buttons */
 	static final int lineSize = 2;
 	
+	//the variable for the times the user cheats
+	static int cheatCount = 0;
 	
 	//variable for the cheat- mode
 	static boolean cheatModeActive = false;

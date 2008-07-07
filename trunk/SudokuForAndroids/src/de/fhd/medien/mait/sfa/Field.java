@@ -230,7 +230,8 @@ public class Field extends Activity{
 				}
 				else
 				{
-					//TODO add cheat-mode behavior of the Field
+					clickedField.setValue(getSolvedValue(clickedField));
+					Config.cheatCount++;
 				}
 				
 			}
@@ -790,7 +791,26 @@ public class Field extends Activity{
 		Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
  }
 	
-    
+ /**
+  * this method retruns the solved value of the overgiven fieldButton
+  * @param clickedButton the FieldButton which has been clicked
+  * @return the solved value
+  */
+ private int getSolvedValue(FieldButton clickedButton)
+ {
+	 int x = 0;
+	 int y = 0;
+	 
+	 for(int i = 0; i < buttonField.length; i++)
+		 for(int j = 0; j < buttonField[i].length; j++)
+			 if(buttonField[i][j] == clickedButton)
+			 {
+				 x = i;
+				 y = j;
+			 }
+	 
+	 return solvedField[x][y];
+ }
 
  
 }//end class
