@@ -617,6 +617,9 @@ public class Field extends Activity{
         	}
         	String fileName = Config.playerName + "   " + date + diff;
 
+        	Log.d("Saving...", fileName);
+
+        	
         	if(gameWasLoaded){
         		fileName = fileNameloaded;
         		Log.d("File", "no need to rename, it was loaded");
@@ -625,7 +628,7 @@ public class Field extends Activity{
         	int i = 1;
         	boolean fileExists = false;
         	File g = new File("/data/data/de.fhd.medien.mait.sfa/files");
-        	// try notwendig da Verzeichnis auch nicht vorhanden sein kann
+        	// try
         	try {
         	String[] directory = g.list();
         	
