@@ -295,12 +295,15 @@ public class MainMenu extends Activity {
       
     };
 
-    /** When clicked on Help a new View is opened where the user is shown how to use this app */
-    OnClickListener highscoreClick = new OnClickListener(){
-      public void onClick(View v) {
-        Intent in_highscore = new Intent(MainMenu.this, Highscore.class);
-        startActivity(in_highscore);
-      }
+    /** When clicked on "Highscore" a new View is opened where the Highscore is shown */
+    OnClickListener highscoreClick = new OnClickListener()
+      {
+        public void onClick(View v) 
+          {
+            Intent in_highscore = new Intent(MainMenu.this, Highscore.class);
+            in_highscore.putExtra("fromMenu", 1);
+            startActivity(in_highscore);
+          }
     };
 
     /** When clicked on Credits a new View is opened where the participants are shown */
