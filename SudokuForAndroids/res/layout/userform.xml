@@ -14,6 +14,6 @@
     <Button android:id="@+id/userform_btn"
 		         android:layout_width="fill_parent"
 		         android:layout_height="wrap_content"
-		         android:text="Profil erzeugen" />
+		         android:text="Add Player" />
 		         
 </LinearLayout>
