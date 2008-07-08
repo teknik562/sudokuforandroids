@@ -10,7 +10,11 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.graphics.Path.Direction;
 import android.widget.Button;
-	
+
+/**
+ * Creates buttons especially built for the use in menus or fields.
+ * Its Caption can contain numbers and text as well. 
+ */
 public class GameButton extends Button{
 
 	static final int stateDefault = 0;
@@ -45,7 +49,7 @@ public class GameButton extends Button{
 	private String caption;
 	
 	/**
-	 * Creates a simple Button holding a caption
+	 * Creates a simple Button with a caption
 	 * @param context in best case 'this'
 	 * @param _caption caption to be displayed
 	 * @param _width width of the button
@@ -151,6 +155,9 @@ public class GameButton extends Button{
 	    canvas.drawText(caption, textXPos, textYPos, paintText);
 	}
 	
+	/**
+	 * Changes bitmaps on user action
+	 */
 	@Override
 	protected void onDraw(Canvas canvas) {
 		switch (mState) {
@@ -165,7 +172,10 @@ public class GameButton extends Button{
 			break;
 		}
 	}
-	         
+
+	/**
+	 * Changes state on user action
+	 */
 	@Override
 	protected void drawableStateChanged() {
 		if (isPressed()) {
@@ -175,8 +185,6 @@ public class GameButton extends Button{
 		} else {
 			mState = stateDefault;
 		}
-		// force the redraw of the image
-		// onDraw() will be called
 		invalidate();
 	}
 	

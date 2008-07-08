@@ -2,11 +2,13 @@ package de.fhd.medien.mait.sfa;
 
 
 import android.content.Context;
-import android.widget.Toast;
 
+/**
+ * A more complex Button used for the field.
+ * Holds information about its candidates and numeric value.
+ * This button can be specified as non changeable or as candidate button. 
+ */
 public class FieldButton extends GameButton{
-	
-	static final long serialVersionUID = 1;
 	
 	static final int maxNrCandidates = 6;
 	
@@ -65,17 +67,26 @@ public class FieldButton extends GameButton{
 			
 	}
 	
+	/**
+	 * Sets the candidates to the given values
+	 * @param newCandidates new candidate values for this button
+	 */
 	public void setCandidates(int[] newCandidates){
 		this.candidateValues = newCandidates;
 	}
 	
+	/**
+	 * Sets all candidate values to zero
+	 */
 	public void deleteCandidates()
 	{
 		for(int i = 0; i < candidateValues.length; i++)
 			candidateValues[i] = 0;
 	}
 	
-	
+	/**
+	 * Sets the button back to a normal button
+	 */
 	public void setAsNoCandidate()
 	{
 		redraw(false);
@@ -83,7 +94,7 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
-	 * Makes the Button look like a Button having at least one candidate
+	 * Makes the Button look like a Button containing candidates
 	 */
 	public void setAsCandidate(){
 		deleteCaption();
@@ -117,7 +128,7 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
-	 * 
+	 * Makes the button look & act as a non changeable button. One can not edit this button. 
 	 */
 	public void setAsNoChange()
 	{
@@ -126,7 +137,7 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
-	 * 
+	 * Gives a certain value of this button
 	 * @param index index of the requested Candidate
 	 * @return The candidate at the specified index
 	 */
@@ -135,7 +146,7 @@ public class FieldButton extends GameButton{
 	}
 	
 	/**
-	 * 
+	 * Gives all Candidates of this button
 	 * @return An array with the cadidates
 	 */
 	public int[] getCandidates(){
@@ -192,6 +203,11 @@ public class FieldButton extends GameButton{
 			
 	} // end method
 	
+	/**
+	 * Sets the value at a specific index
+	 * @param _index index of the candidate [0 - 5]
+	 * @param _value what should be the value of this candidate
+	 */
 	public void setCandidateValue(int _index, int _value)
 	{
 		this.candidateValues[_index] = _value;

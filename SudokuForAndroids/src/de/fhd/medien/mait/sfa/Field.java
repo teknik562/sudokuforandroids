@@ -46,16 +46,16 @@ public class Field extends Activity{
 	private static final int nrCandidates = 6;
 	private FieldButton[][] buttonField = new FieldButton[length][length];
 	/** 
-	 * represents the Field with non changeable values
-	 * Comes from the Algo as maskedField() 
+	 * Represents the Field with non changeable values.
+	 * Comes from the Algo as maskedField().
 	 */
 	int[][] originalField = new int[length][length];
 	/** 
-	 * represents the Field with the right solution 
+	 * Represents the Field with the right solution 
 	 */
 	private int[][] solvedField = new int[length][length];
 	/** 
-	 * represents the Field the user has manipulated.
+	 * Represents the Field the user has manipulated.
 	 * Is only set when the game was loaded. For the purpose of
 	 * checking if the game was solved correctly it has to be
 	 * calculated.
@@ -152,7 +152,8 @@ public class Field extends Activity{
     }; 
     
 	
-	/** Called when the activity is first created. */
+	/** Called when the activity is first created.
+	 * Initiates a new Thread with calculation of a puzzle and creation of visual elements */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle); 
@@ -472,9 +473,7 @@ public class Field extends Activity{
     
     
     /**
-     * Creates a Field to play on!
-     * At the moment there's only a dummy field but when the first example puzzles
-     * are there, this method will build up a working field! 
+     * Creates visual elements according to the requested puzzle!
      */
     private void createField(){
     	// counts how often vertical padding is set (each 3 lines)
@@ -578,6 +577,9 @@ public class Field extends Activity{
     	    		
 	}//end method
 
+    /**
+     * Saves the game in a file.
+     */
     private void saveGame(){
     	
     	int[][][] candidates = getCandidates();
@@ -728,6 +730,10 @@ public class Field extends Activity{
     	}
     }
     
+    /**
+     * Gives all candidate values
+     * @return a 3D array holding the chosen candidates. Empty fields are represented as '0'
+     */
     private int[][][] getCandidates(){
     	int[][][] candidates = new int[length][length][nrCandidates];
     	for(int i = 0; i < length; i++){

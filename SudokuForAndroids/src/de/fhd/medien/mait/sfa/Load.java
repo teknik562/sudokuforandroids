@@ -19,14 +19,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
- * This activity displays all savegames by the user and lets him choose one to go on playing.
+ * This activity displays all savegames by the user and lets him choose one.
  * If there's no savegame by the player only a message will be shown.
  * @author thedeftone
  *
  */
 public class Load extends ListActivity{
 
-	/** Called when the activity is first created. */
+	/** Called when the activity is first created. 
+	 * Initially loads all savegames by the certain user.*/
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle); 
@@ -65,7 +66,9 @@ public class Load extends ListActivity{
     }
     }
     
-    
+    /**
+     * Listens to clicks on the list and loads clicked elements.
+     */
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
      super.onListItemClick(l, v, position, id); 
@@ -117,6 +120,9 @@ public class Load extends ListActivity{
      
     }
     
+    /**
+     * Reloads the view so that changes can be displayed.
+     */
     public void reload(){
     	String[] directory;   
     	File f = new File("/data/data/de.fhd.medien.mait.sfa/files");
@@ -137,7 +143,7 @@ public class Load extends ListActivity{
     }
     
     /**
-     * This method creates the Otions-Menu
+     * This method creates the Otions-Menu in which the user can choose to delete a savegame.
      */
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -148,7 +154,8 @@ public class Load extends ListActivity{
     }
     
     /**
-     * This method handles clicks on items of the options-menu
+     * This method handles clicks on items of the options-menu.
+     * An alert will be shown when the user presses "delete".
      */
     public boolean onOptionsItemSelected(Menu.Item item){
         
@@ -175,9 +182,7 @@ public class Load extends ListActivity{
         			}
         		})
         		.show();
-        		
-        		
-        		
+
         	}catch(Exception e){
         		Toast.makeText(this, "You need to choose a file first", Toast.LENGTH_SHORT).show();
         	} 
