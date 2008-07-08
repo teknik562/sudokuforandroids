@@ -899,9 +899,10 @@ private void finishGameIfFinished()
 	{
 		if(isFieldCorrect())
 		{
-			Toast.makeText(this, "Congratulations! You've mastered Sudoku for Android(s)!", Toast.LENGTH_LONG).show();
+      Config.time = (int)(((new Date().getTime()/1000L)-Config.startTime)/60);
+      
+			Toast.makeText(this, "Congratulations! You've mastered Sudoku for Android(s)! \nYour Score: "+Highscore.score(), Toast.LENGTH_LONG).show();
 			Intent next = new Intent(this, Highscore.class);
-		  next.putExtra("time", (int)(((new Date().getTime()/1000L)-Config.startTime)/60));
 		  startSubActivity(next, 4646);
 		}
 		else
