@@ -167,17 +167,21 @@ public class Field extends Activity{
         	Toast.makeText(this, e.getClass().toString(), Toast.LENGTH_SHORT).show();
         }
 
-        pd = ProgressDialog.show(Field.this,     
-                "Please wait...", "Generating Sudoku", true);    
+            
     
         // initiate the Layout
         fieldLayout.setLayoutParams(new AbsoluteLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 0, 0));
         
         Handler handler = new Handler(); 
         
-        if(starter.equals("NORMAL"))
+        if(starter.equals("NORMAL")){
+        	pd = ProgressDialog.show(Field.this,     
+                    "Please wait...", "Generating Sudoku", true);
         	handler.post(normal);
+        }
         else{
+        	pd = ProgressDialog.show(Field.this,     
+                    "Please wait...", "Loading Game", true);
         	fileNameloaded = getIntent().getStringExtra("fileName");
         	gameWasLoaded = true;
         	handler.post(loaded);
