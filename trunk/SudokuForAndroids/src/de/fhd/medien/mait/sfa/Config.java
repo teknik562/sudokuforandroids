@@ -3,7 +3,7 @@ package de.fhd.medien.mait.sfa;
 
 /**
  * This class provides several information calculated for layout use 
- * depending on the display's properties. 
+ * depending on the display's properties and values needed for Activities. 
  * 
  * One can access information like this:
  * 
@@ -46,19 +46,19 @@ public class Config {
 	static int startTime = 0;
 	/** stores the time needed until now*/
 	static int neededTime = 0;
-  /** Time the actual session has taken */
-  static int time = 0;
+	/** Time the actual session has taken */
+	static int time = 0;
 	/** Best linesize to draw buttons */
 	static final int lineSize = 2;
 	
-	//the variable for the times the user cheats
+	/** Represents the number of cheats of the actual game */
 	static int cheatCount = 0;
 	
-	//variable for the cheat- mode
+	/** Is cheat mode activated? */
 	static boolean cheatModeActive = false;
 	
 	
-	
+	/** Sets a lot of basic values needed for layout calculation */
 	static void initiate(int _displayWidth, int _displayHeight, int _minScreenAttr,
 			int _optFieldBtSize, int _optFieldPadding, int _optFieldLine, int _fieldLength,
 			int _fieldStartXPos, int _fieldStartYPos , int _FontSize, int _optMenuBtHeight,

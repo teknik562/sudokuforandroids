@@ -18,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 
+/**
+ * This activity displays the main menu which allows the user 
+ * perform basic interactions.
+ */
 public class MainMenu extends Activity {
   /** Background color */
   private static final int fillBgMenu = 0x1007C024;
@@ -53,7 +57,8 @@ public class MainMenu extends Activity {
   //a random value is stored to identify the requestcode of the Settings- activity later on
   final int SETTINGSKEY = 765;
   
-    /** Called when the activity is first created. */
+    /** Called when the activity is first created.
+     * Displays an Image and Buttons. */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
