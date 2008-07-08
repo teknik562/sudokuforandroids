@@ -97,6 +97,9 @@ public class KeyPad extends Activity {
 		}
 	}
 	
+	/**
+	 * the value Buttins are instanciated and added to the layout. The onClickListener is also assigned to to the new Buttons
+	 */
 	private void initializeValueButtons()
 	{
 		//the digit- buttons are being created
@@ -272,6 +275,9 @@ public class KeyPad extends Activity {
 	
 	
 	
+	/**
+	 * this method is automatically called by Android, if a key is pressed
+	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		super.onKeyDown(keyCode, event);
@@ -509,6 +515,11 @@ public class KeyPad extends Activity {
 		
 	};//end cmdListener
 	
+	
+	/**
+	 * this method searches the candidate- array for an active candidate and returns the reference to the active candidate afterwards
+	 * @return the active candidate if a candidate is active; if not, the first element of the candidate- array is returned
+	 */
 	private valueButton findActiveCandidate()
 	{
 		valueButton returnButton = candidate[0];
@@ -524,7 +535,10 @@ public class KeyPad extends Activity {
 	
 		
 	
-	
+	/**
+	 * this method searches the candidate- array for at least one active candidate.
+	 * @return true, if there is at least one active candidate; false if there is no active candidate
+	 */
 	private boolean anyActiveCandidate()
 	{
 		boolean returnValue = false;
@@ -571,24 +585,38 @@ public class KeyPad extends Activity {
 	}
 	
 	
+	/**
+	 * all value buttons are activated
+	 */
 	private void activateValueButtons()
 	{
 		for(valueButton b : value)
 			b.activate();
 	}
 	
+	/**
+	 * all valueButtons are deactivated
+	 */
 	private void deactivateValueButtons()
 	{
 		for(valueButton b : value)
 			b.deactivate();
 	}
 	
+	
+	/**
+	 * all candidates are deactivated
+	 */
 	private void deactivateCandidates()
 	{
 		for(valueButton b: candidate)
 			b.deactivate();
 	}
 	
+	/**
+	 * the method checks, if there is at least one focused candidate
+	 * @return true if there is at least one focused candidate; false if no candidate is focused
+	 */
 	private boolean anyFocusedCandidate()
 	{
 		for(valueButton v: candidate)
@@ -598,6 +626,11 @@ public class KeyPad extends Activity {
 		return false;
 	}
 	
+	
+	/**
+	 * the method returns a reference to the focused candidate
+	 * @return the focused candidate, if there is one; "null" if there is no
+	 */
 	private valueButton getFocusedCandidate()
 	{
 		for(valueButton v: candidate)
@@ -607,7 +640,9 @@ public class KeyPad extends Activity {
 		return null;
 	}
 	
-	
+	/**
+	 * this method sets all Candidates in the canBundle to "0"
+	 */
 	private void emptyCanBundle()
 	{
 		canB.putInt("C1", 0);
@@ -618,6 +653,9 @@ public class KeyPad extends Activity {
 		canB.putInt("C6", 0);
 	}
 	
+	/**
+	 * this method sets all Candidates in the canBundle to the values of the candidate- array
+	 */
 	private void fillcanBundle()
 	{
 		canB.putInt("C1", candidate[0].value());
