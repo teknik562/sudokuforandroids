@@ -46,6 +46,8 @@ public class Config {
 	static int startTime = 0;
 	/** stores the time needed until now*/
 	static int neededTime = 0;
+  /** Time the actual session has taken */
+  static int time = 0;
 	/** Best linesize to draw buttons */
 	static final int lineSize = 2;
 	
