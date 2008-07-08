@@ -62,14 +62,8 @@ public class Highscore extends ListActivity
                          "('"+(date.getTime() / 1000L)+"', '"+userName+"', '"+this.points+"')");
             
             // Create a Cursor with all user-names and scores from the database
-/*            Cursor c = db.rawQuery("SELECT hs_score, hs_user_name " +
-            		                   " FROM "+DB_HIGHSCORETABLE+
-            		                   " ORDER BY hs_score DESC", null);
-*/            
             Cursor c = db.query(DB_HIGHSCORETABLE, new String[] {"hs_id", "hs_user_name", "hs_score"},null, null, null, null, "hs_score DESC");
 
-            // get the column-index of the id-column
-            int idColumnIndex = c.getColumnIndex("hs_id");
             // get the column-index of the user-name-column
             int nameColumnIndex = c.getColumnIndex("hs_user_name");
             // get the column-index of the score-column
@@ -78,20 +72,47 @@ public class Highscore extends ListActivity
             // check if the database-cursor references not to "null"
             if(c != null)
               {
+                String[][] highscoreList = new String[c.count()][2];
                 
                 // check if the database-cursor is not empty
                 if(c.first())
                   {
                     int i = 0;
 
-                    // write user-names to the array-list 
+                    // write user-names and score to the array
                     do
                       {
+                        highscoreList[i][0] = c.getString(nameColumnIndex);
+                        highscoreList[i][1] = c.getString(scoreColumnIndex);
+                        
                         i++;
-                        // Concatinate username and score to string
-                        String user_name = c.getString(nameColumnIndex)+": "+c.getString(scoreColumnIndex); 
-                        this.results.add(user_name);
+                        
                       }while(c.next());
+
+                    // Sort Highscore by Score (SQLite can't sort by Integer...)
+                    for(int k = 0; k < highscoreList.length; k++)
+                      for(int j = 0; j < highscoreList.length-1; j++)
+                        {
+                          if(Integer.parseInt(highscoreList[j][1]) < Integer.parseInt(highscoreList[j+1][1]))
+                            {
+                              String tempName = highscoreList[j+1][0];
+                              String tempScore = highscoreList[j+1][1];
+                              
+                              highscoreList[j+1][0] = highscoreList[j][0]; 
+                              highscoreList[j+1][1] = highscoreList[j][1];
+                              
+                              highscoreList[j][0] = tempName; 
+                              highscoreList[j][1] = tempScore; 
+                            }
+                        }
+                    
+                    // Concatinate username and score to string
+                    for(int k = 0; k < highscoreList.length; k++)
+                      {
+                        String user_name = highscoreList[k][0]+": "+highscoreList[k][1]; 
+                        this.results.add(user_name);
+                      }
+                    
                   }
               }
             
