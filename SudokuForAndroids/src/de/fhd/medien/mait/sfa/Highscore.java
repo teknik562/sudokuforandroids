@@ -139,7 +139,7 @@ public class Highscore extends ListActivity
       {
         super.onCreateOptionsMenu(menu);
         
-        menu.add(0, 1, "Upload highscore").setIcon(R.drawable.savegame);
+        menu.add(0, 1, "Upload highscore").setIcon(R.drawable.online);
         menu.add(0, 2, "Delete highscore").setIcon(R.drawable.delete);
         menu.add(0, 3, "Main menu").setIcon(R.drawable.mainmenu);
         
