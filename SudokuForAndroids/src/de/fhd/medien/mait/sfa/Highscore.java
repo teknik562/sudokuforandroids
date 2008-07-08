@@ -277,7 +277,7 @@ public class Highscore extends ListActivity
      * 
      * @return number of total points (integer)
      */
-    private int score()
+    public static int score()
       {
         // Initial points = 0
         int points = 0;
@@ -285,7 +285,7 @@ public class Highscore extends ListActivity
         // get all neccasary datas
         int level = Config.difficulty;
         int cheats = Config.cheatCount;
-        int time = getIntent().getIntExtra("time", 100);
+        int time = Config.time;
         
         // played games on level "easy"
         if(level == 1)
