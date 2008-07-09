@@ -1,7 +1,3 @@
-/**
- * This class represents the settings- screen of sudoku for android(s), in which the cheat-mode can
- * be activated 
- */
 
 package de.fhd.medien.mait.sfa;
 
@@ -17,7 +13,10 @@ import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
 
-
+/**
+ * This class represents the settings- screen of sudoku for android(s), in which the cheat-mode can
+ * be activated 
+ */
 public class Settings extends Activity {
 
 	

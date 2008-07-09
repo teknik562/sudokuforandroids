@@ -7,6 +7,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText; 
 
+/**
+ * This is the Form where the player can add Users
+ * @author Dominik
+ *
+ */
 public class UserForm extends Activity
   {
     protected final int SUCCESS_RETURN_CODE = 1;

@@ -19,6 +19,12 @@ import android.view.Menu;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 
+
+/**
+ * This is the class providing functionality to calculate and display the highscore after finishing the game
+ * @author Dominik
+ *
+ */
 public class Highscore extends ListActivity
   {
     // Name of the database
