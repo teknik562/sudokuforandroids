@@ -132,6 +132,8 @@ public class UserList extends ListActivity
         {
           super.onActivityResult(requestCode, resultCode, data, extras);
           // check if name is given
+          if(data != null)
+          {
           if(data.length() > 0)
             {
               // check if subactivity was input-form
@@ -171,6 +173,7 @@ public class UserList extends ListActivity
             {
               showAlert("Keine Eingabe", 1, "Bitte einen Namen eingeben!", "OK", false);
             }
+          }
         } 
      
       /**
