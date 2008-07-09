@@ -6,6 +6,12 @@ import android.app.ListActivity;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+
+/**
+ * this class manages the connection to the SQLite- Database
+ * @author Dominik
+ *
+ */
 public class DatabaseConnect extends ListActivity
   {
     private final String DB_NAME = "sudokuForAndroids";

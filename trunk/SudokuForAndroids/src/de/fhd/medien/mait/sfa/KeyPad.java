@@ -1,13 +1,4 @@
-/**
- * this class is an input- device in order to write values into a sudoku- field.
- * this keypad is called by pressing a field- button. within the keypad
- * there are 9 buttons to choose a value from 1 to 9, six buttons for candidate-
- * values, an abort- and a "clear field" - Button.
- * The keypad's layout is defined within the keypad.xml- file and is displayed
- * in the dialog- theme.
- * By using this keypad, the user is able to change the field's value, an candidate's
- * value and to clear the field.
- */
+
 
 package de.fhd.medien.mait.sfa;
 
@@ -22,6 +13,17 @@ import android.widget.Toast;
 import android.widget.AbsoluteLayout.LayoutParams;
 
 
+
+/**
+ * this class is an input- device in order to write values into a sudoku- field.
+ * this keypad is called by pressing a field- button. within the keypad
+ * there are 9 buttons to choose a value from 1 to 9, six buttons for candidate-
+ * values, an abort- and a "clear field" - Button.
+ * The keypad's layout is defined within the keypad.xml- file and is displayed
+ * in the dialog- theme.
+ * By using this keypad, the user is able to change the field's value, an candidate's
+ * value and to clear the field.
+ */
 public class KeyPad extends Activity {
 
 	Bundle canB = new Bundle();

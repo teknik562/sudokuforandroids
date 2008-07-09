@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+/**
+ * this class displays and sends the highscore to the internet-server
+ * @author Dominik
+ *
+ */
 public class OnlineHighscore extends Activity
   {
     public void onCreate(Bundle icicle)
