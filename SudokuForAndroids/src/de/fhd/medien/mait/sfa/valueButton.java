@@ -1,15 +1,16 @@
-/**
- * This class represents a candidate- value of a field. This Button
- * is used within the Keypad. Therefore a Button is needed to change the 
- * candidate-values. This specific Button- type can store a value (similar
- * to the FieldButton) and has also information weather it is active or not.
- */
+
 
 package de.fhd.medien.mait.sfa;
 
 import android.content.Context;
 import android.graphics.Color;
 
+/**
+ * This class represents a candidate- value of a field. This Button
+ * is used within the Keypad. Therefore a Button is needed to change the 
+ * candidate-values. This specific Button- type can store a value (similar
+ * to the FieldButton) and has also information weather it is active or not.
+ */
 public class valueButton  extends GameButton{
 	
 	//color for focused button
