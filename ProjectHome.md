@@ -1,0 +1,3 @@
+Our aim is to set up a Java based version of Sudoku on Google's mobile platform Android. One basic point is to make it run well on all cellphones running Android either they're VGA, QVGA or else.
+
+**At the moment there's no support for SDK 1.0 but there'll be an update in the future. Then there will also be an app file available for download so that you can run it on your phone without the use of a compiler.**
